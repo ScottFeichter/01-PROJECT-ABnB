@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
+      firstName: { // added at 2nd migro
+        type: DataTypes.STRING,
+      },
+      lastName: { // added at 2nd migro
+        type: DataTypes.STRING,
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
