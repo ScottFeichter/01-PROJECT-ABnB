@@ -1,0 +1,210 @@
+☁  PREP [main] cd ..
+☁  01-PROJECT [main] git add .
+☁  01-PROJECT [main] git commit -m "not pushing"
+On branch main
+Your branch is ahead of 'origin/main' by 19 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+☁  01-PROJECT [main] git push
+Enumerating objects: 133, done.
+Counting objects: 100% (133/133), done.
+Delta compression using up to 10 threads
+Compressing objects: 100% (119/119), done.
+Writing objects: 100% (131/131), 105.39 MiB | 20.74 MiB/s, done.
+Total 131 (delta 38), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (38/38), done.
+remote: error: Trace: be6246c08ac2269f97461016f576f854be60a7f3ad32a743cdd90b16fe6ed066
+remote: error: See https://gh.io/lfs for more information.
+remote: error: File PREP/postman_setup_updated.mp4 is 228.99 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+To https://github.com/ScottFeichter/01-PROJECT.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/ScottFeichter/01-PROJECT.git'
+☁  01-PROJECT [main] git push
+Enumerating objects: 133, done.
+Counting objects: 100% (133/133), done.
+Delta compression using up to 10 threads
+Compressing objects: 100% (119/119), done.
+Writing objects: 100% (131/131), 105.39 MiB | 19.74 MiB/s, done.
+Total 131 (delta 38), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (38/38), done.
+remote: error: Trace: c3b6ea6145a9c918554058bd00197ce3b432f2db6639fbec6242ffea191a3bbd
+remote: error: See https://gh.io/lfs for more information.
+remote: error: File PREP/postman_setup_updated.mp4 is 228.99 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+To https://github.com/ScottFeichter/01-PROJECT.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/ScottFeichter/01-PROJECT.git'
+☁  01-PROJECT [main] git add .
+☁  01-PROJECT [main] ⚡  git commit -m "wtf"
+[main 3234664] wtf
+ 1 file changed, 2 deletions(-)
+☁  01-PROJECT [main] git push
+Enumerating objects: 136, done.
+Counting objects: 100% (136/136), done.
+Delta compression using up to 10 threads
+Compressing objects: 100% (121/121), done.
+Writing objects: 100% (134/134), 105.39 MiB | 20.84 MiB/s, done.
+Total 134 (delta 38), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (38/38), done.
+remote: error: Trace: 03168f8125701a2c7db876e841a7694584ae92d3f9bd36d2d52b9e0e343bc146
+remote: error: See https://gh.io/lfs for more information.
+remote: error: File PREP/postman_setup_updated.mp4 is 228.99 MB; this exceeds GitHub's file size limit of 100.00 MB
+remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.
+To https://github.com/ScottFeichter/01-PROJECT.git
+ ! [remote rejected] main -> main (pre-receive hook declined)
+error: failed to push some refs to 'https://github.com/ScottFeichter/01-PROJECT.git'
+☁  01-PROJECT [main] c
+
+
+
+
+
+
+
+
+☁  01-PROJECT [main] git log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+commit 32346644473fbc2c8f2c23d9bc4acb17a7116ab5 (HEAD -> main)
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 03:46:41 2024 -0700
+
+    wtf
+
+commit 6e11599ff7cefa4e055a6d18f5f14434072e4b83
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 03:37:09 2024 -0700
+
+    gave up on .gitignore .mp4 and removed
+
+commit 51d13d55ee2c3a9bc9759c4ee48e427710f1399b
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 03:36:28 2024 -0700
+
+    trying to .gitignore .mp4
+
+commit 8406ecce9312bd0c2bc5f3387592c6f2cf9ebee0
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 03:35:45 2024 -0700
+
+    trying to .gitignore .mp4
+
+commit ca3aad66c53c18c0ac0ceccc8e166f0ff1637c14
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 03:31:24 2024 -0700
+
+    Add error-handling middleware for common errors and debugging
+
+commit bf6e67a72fe36ff21851bccf1debec13adf0aaf0
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 03:12:44 2024 -0700
+
+    Add an API router
+
+commit 140425bee45221664da283ab72c0b3ecb1fcef68
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 02:54:17 2024 -0700
+
+    phase 0 complete: Initialize Express and Sequelize with CSRF protection
+
+commit af02f6bdad18ae445fa5f77618bafc1ba6f3fd10
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 02:51:42 2024 -0700
+
+    commented out test route, added csrf/restore
+
+commit 4ad1d56c96812886166365128a74e2ed6e86f890
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 02:47:13 2024 -0700
+
+    test server success
+
+commit 7d4ee4e4eb2126c8543e6dff7da0f428a9b6ff38
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 02:44:17 2024 -0700
+
+    bin/www complete
+
+commit 3697e2f86d2f9ffb29b934b45e32232bfb7b988e
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 02:41:56 2024 -0700
+
+    routes complete
+
+commit 31dd96cf8a46e38f8039b80ad7ac2b3cd0b141f7
+Author: Scott Feichter <scottfeichter@gmail.com>
+Date:   Fri Jun 21 02:39:40 2024 -0700
+
+    express setup complete
+:
