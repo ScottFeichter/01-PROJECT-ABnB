@@ -50,7 +50,8 @@ correct role(s) or permission(s).
 Returns the information about the current user that is logged in.
 
 * Security
-  * Require Auth-ENTICA-tion: false
+  * Require Auth-ENTICA-tion: true
+    * User must be logged in
   * Require Auth-ORIZA-tion: false
 
 * Request
