@@ -8,6 +8,8 @@
 
 ## API Documentation
 
+## API Documentation
+
 ## USER AUTHENTICATION/AUTHORIZATION
 
 ### All endpoints that require authentication
@@ -49,11 +51,7 @@ correct role(s) or permission(s).
 
 Returns the information about the current user that is logged in.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: GET
   * URL: /api/session
@@ -94,10 +92,7 @@ Returns the information about the current user that is logged in.
 Logs in a current user with valid credentials and returns the current user's
 information.
 
-* Security
-  * Require Auth-ENTICA-tion: false
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: POST
   * URL: /api/session
@@ -163,10 +158,7 @@ information.
 Creates a new user, logs them in as the current user, and returns the current
 user's information.
 
-* Security
-  * Require Auth-ENTICA-tion: false
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: POST
   * URL: /api/users
@@ -256,10 +248,7 @@ user's information.
 
 Returns all the spots.
 
-* Security
-  * Require Auth-ENTICA-tion: false
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: GET
   * URL: /api/spots
@@ -299,10 +288,7 @@ Returns all the spots.
 
 Returns all the spots owned (created) by the current user.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-  * Require Auth-ORIZA-tion: TBD
-
+* Require Authentication: true
 * Request
   * Method: GET
   * URL: /api/spots/current
@@ -342,10 +328,7 @@ Returns all the spots owned (created) by the current user.
 
 Returns the details of a spot specified by its id.
 
-* Security
-  * Require Auth-ENTICA-tion: false
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: GET
   * URL: /api/spots/:spotId
@@ -410,10 +393,7 @@ Returns the details of a spot specified by its id.
 
 Creates and returns a new spot.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-  * Require Auth-ORIZA-tion: TBD
-
+* Require Authentication: true
 * Request
   * Method: POST
   * URL: /api/spots
@@ -486,12 +466,8 @@ Creates and returns a new spot.
 
 Create and return a new image for a spot specified by id.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Spot must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Spot must belong to the current user
 * Request
   * Method: POST
   * URL: /api/spots/:spotId/images
@@ -536,12 +512,8 @@ Create and return a new image for a spot specified by id.
 
 Updates and returns an existing spot.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Spot must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Spot must belong to the current user
 * Request
   * Method: PUT
   * URL: /api/spots/:spotId
@@ -626,12 +598,8 @@ Updates and returns an existing spot.
 
 Deletes an existing spot.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Spot must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
   * URL: /api/spots/:spotId
@@ -667,11 +635,7 @@ Deletes an existing spot.
 
 Returns all the reviews written by the current user.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: true
 * Request
   * Method: GET
   * URL: /api/reviews/current
@@ -727,10 +691,7 @@ Returns all the reviews written by the current user.
 
 Returns all the reviews that belong to a spot specified by id.
 
-* Security
-  * Require Auth-ENTICA-tion: false
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: GET
   * URL: /api/spots/:spotId/reviews
@@ -785,11 +746,7 @@ Returns all the reviews that belong to a spot specified by id.
 
 Create and return a new review for a spot specified by id.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: true
 * Request
   * Method: POST
   * URL: /api/spots/:spotId/reviews
@@ -866,12 +823,8 @@ Create and return a new review for a spot specified by id.
 
 Create and return a new image for a review specified by id.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Review must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
 * Request
   * Method: POST
   * URL: /api/reviews/:reviewId/images
@@ -927,14 +880,8 @@ Create and return a new image for a review specified by id.
 
 Update and return an existing review.
 
-
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Review must belong to the current user
-
-
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
 * Request
   * Method: PUT
   * URL: /api/reviews/:reviewId
@@ -999,12 +946,8 @@ Update and return an existing review.
 
 Delete an existing review.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Review must belong to current user
-
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
 * Request
   * Method: DELETE
   * URL: /api/reviews/:reviewId
@@ -1040,11 +983,7 @@ Delete an existing review.
 
 Return all the bookings that the current user has made.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: true
 * Request
   * Method: GET
   * URL: /api/bookings/current
@@ -1089,11 +1028,7 @@ Return all the bookings that the current user has made.
 
 Return all the bookings for a spot specified by id.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: true
 * Request
   * Method: GET
   * URL: /api/spots/:spotId/bookings
@@ -1160,12 +1095,8 @@ Return all the bookings for a spot specified by id.
 
 Create and return a new booking from a spot specified by id.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Spot must NOT belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Spot must NOT belong to the current user
 * Request
   * Method: POST
   * URL: /api/spots/:spotId/bookings
@@ -1246,12 +1177,8 @@ Create and return a new booking from a spot specified by id.
 
 Update and return an existing booking.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Booking must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Booking must belong to the current user
 * Request
   * Method: PUT
   * URL: /api/bookings/:bookingId
@@ -1344,12 +1271,9 @@ Update and return an existing booking.
 
 Delete an existing booking.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Booking OR Spot must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Booking must belong to the current user or the
+  Spot must belong to the current user
 * Request
   * Method: DELETE
   * URL: /api/bookings/:bookingId
@@ -1397,12 +1321,8 @@ Delete an existing booking.
 
 Delete an existing image for a Spot.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Spot must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
   * URL: /api/spot-images/:imageId
@@ -1436,12 +1356,8 @@ Delete an existing image for a Spot.
 
 Delete an existing image for a Review.
 
-* Security
-  * Require Auth-ENTICA-tion: true
-    * User must be logged in
-  * Require Auth-ORIZA-tion: true
-    * Review must belong to the current user
-
+* Require Authentication: true
+* Require proper authorization: Review must belong to the current user
 * Request
   * Method: DELETE
   * URL: /api/review-images/:imageId
@@ -1475,10 +1391,7 @@ Delete an existing image for a Review.
 
 Return spots filtered by query parameters.
 
-* Security
-  * Require Auth-ENTICA-tion: false
-  * Require Auth-ORIZA-tion: false
-
+* Require Authentication: false
 * Request
   * Method: GET
   * URL: /api/spots
