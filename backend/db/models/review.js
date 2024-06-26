@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "userId"
       });
 
+      Review.belongsTo(models.Spots, {
+        foreignKey: "spotId"
+      });
+
       Review.hasMany(models.ReviewImages, {
         foreignKey: 'reviewId',
         onDelete: "CASCADE",
