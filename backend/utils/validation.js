@@ -13,7 +13,7 @@ const handleValidationErrors = (req, _res, next) => {
 
     const err = Error("Bad request.");
     err.errors = errors;
-    err.status = 400;
+    err.status = 400; // should this be changed to 401?
     err.title = "Bad request.";
     next(err);
   }
