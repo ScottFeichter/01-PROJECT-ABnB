@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not part of Sequelize lifecycle
      * The 'models/index' file will call this method automatically
     */
-   
+
     toSafeObject() {
       const {id, username, email } = this; //context will be the User instance
       return { id, username, email};
@@ -54,6 +54,12 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      EntreeType.hasMany(models.Spot, {
+        foreignKey: 'ownerId',
+        onDelete: "CASCADE",
+        hooks: true
+      })
+
     }
   }
 
