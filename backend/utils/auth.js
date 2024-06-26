@@ -14,7 +14,7 @@ const setTokenCookie = (res, user) => {
     username: user.username,
   };
   const token = jwt.sign(
-    { data: safeUser },
+    { data: safeUser }, // video 17:37 has {data: user.toSafeObject()}
     secret,
     { expiresIn: parseInt(expiresIn) } // 604,800 seconds = 1 week
   );
