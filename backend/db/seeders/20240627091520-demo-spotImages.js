@@ -22,40 +22,19 @@ module.exports = {
     await Spot.bulkCreate(
       [
         {
-          ownerId: 1,
-          address: "999 Zebra Street",
-          city: "San Diego",
-          state: "California",
-          country: "United States of America",
-          lat: 32.7157,
-          lng: -117.1611,
-          name: "Zoo Suit Riot",
-          description: "Cozy place next to the elephants",
-          price: 500,
+          spotId: 1,
+          url: "https://thetrekplanner.com/wp-content/uploads/2013/12/IMG_9494.jpg",
+          preview: true,
         },
         {
-          ownerId: 2,
-          address: "888 Diamond Way",
-          city: "Antwerp",
-          state: "Antwerp",
-          country: "Belgium",
-          lat: 51.2213,
-          lng: 4.4051,
-          name: "Cousin Evys",
-          description: "There are no fugazi here",
-          price: 9000,
+          spotId: 2,
+          url: "https://external-preview.redd.it/k2cRGfm61Jj7Tc2SfyKBrVuhro0ctgynP8Gtv1ph6wE.jpg?width=640&crop=smart&auto=webp&s=a230d6f70d6cc9e64e01946702e497d5e28baff5",
+          preview: true,
         },
         {
-          ownerId: 3,
-          address: "777 Palace Blvd",
-          city: "Westminster",
-          state: "Greater London",
-          country: "England",
-          lat: 51.4975,
-          lng: 0.1357,
-          name: "Casa Carlos",
-          description: "Feel like royalty at this historic landmark",
-          price: 500,
+          spotId: 3,
+          address: "https://cmsadmin.rct.uk/sites/default/files/Buckingham%20Palace%20landing%20guards.jpg",
+          preview: true,
         },
       ],
       { validate: true }
@@ -69,5 +48,16 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    options.tableName = "SpotImages";
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(
+      options,
+      {
+        url: { [Op.in]: ["https://thetrekplanner.com/wp-content/uploads/2013/12/IMG_9494.jpg",
+          "https://external-preview.redd.it/k2cRGfm61Jj7Tc2SfyKBrVuhro0ctgynP8Gtv1ph6wE.jpg?width=640&crop=smart&auto=webp&s=a230d6f70d6cc9e64e01946702e497d5e28baff5",
+          "https://cmsadmin.rct.uk/sites/default/files/Buckingham%20Palace%20landing%20guards.jpg"] },
+      },
+      {}
+    );
   }
 };
