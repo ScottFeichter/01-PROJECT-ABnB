@@ -22,6 +22,7 @@ module.exports = {
     await Spot.bulkCreate(
       [
         {
+          ownerId: 1,
           address: "999 Zebra Street",
           city: "San Diego",
           state: "California",
@@ -33,6 +34,7 @@ module.exports = {
           price: 500,
         },
         {
+          ownerId: 2,
           address: "888 Diamond Way",
           city: "Antwerp",
           state: "Antwerp",
@@ -44,6 +46,7 @@ module.exports = {
           price: 9000,
         },
         {
+          ownerId: 3,
           address: "777 Palace Blvd",
           city: "Westminster",
           state: "Greater London",
@@ -71,7 +74,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        username: { [Op.in]: ["Zoo Suit Riot", "Cousin Evys", "Casa Carlos"] },
+        name: { [Op.in]: ["Zoo Suit Riot", "Cousin Evys", "Casa Carlos"] },
       },
       {}
     );
