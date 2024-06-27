@@ -1,17 +1,18 @@
 const express = require("express");
-const { Spot } = require("../../db/models");
+const { Spot, SpotImage, Review, User } = require("../../db/models");
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
   const spots = await Spot.findAll({
-    include: {
-      model: SpotImage
-    }
+    attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt', ],
+    include: [{model: SpotImage, attributes: ['url']}, {model: Review, attributes: ['stars']}]
   });
-  console.log("spots", spots);
+  console.log("spots:  ", spots);
 
   res.json(spots);
 });
+
+
 
 module.exports = router;
