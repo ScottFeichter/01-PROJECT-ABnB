@@ -19,7 +19,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await User.bulkCreate(
+    await Spot.bulkCreate(
       [
         {
           address: "999 Zebra Street",
