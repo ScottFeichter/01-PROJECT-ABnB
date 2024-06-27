@@ -1,6 +1,6 @@
 'use strict';
 
-const { Spot } = require("../models");
+const { SpotImage } = require("../models");
 
 let options = {};
 if (process.env.NODE_ENV === "production") {
@@ -19,7 +19,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await Spot.bulkCreate(
+    await SpotImage.bulkCreate(
       [
         {
           spotId: 1,
@@ -33,7 +33,7 @@ module.exports = {
         },
         {
           spotId: 3,
-          address: "https://cmsadmin.rct.uk/sites/default/files/Buckingham%20Palace%20landing%20guards.jpg",
+          url: "https://cmsadmin.rct.uk/sites/default/files/Buckingham%20Palace%20landing%20guards.jpg",
           preview: true,
         },
       ],
@@ -55,7 +55,7 @@ module.exports = {
       {
         url: { [Op.in]: ["https://thetrekplanner.com/wp-content/uploads/2013/12/IMG_9494.jpg",
           "https://external-preview.redd.it/k2cRGfm61Jj7Tc2SfyKBrVuhro0ctgynP8Gtv1ph6wE.jpg?width=640&crop=smart&auto=webp&s=a230d6f70d6cc9e64e01946702e497d5e28baff5",
-          "https://cmsadmin.rct.uk/sites/default/files/Buckingham%20Palace%20landing%20guards.jpg"] },
+          "https://cmsadmin.rct.uk/sites/default/files/Buckingham%20Palace%20landing%20guards.jpg"]},
       },
       {}
     );
