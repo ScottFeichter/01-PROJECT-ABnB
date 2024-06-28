@@ -21,9 +21,8 @@ const previewImage = (spot) => {
 };
 
 /**
- * returns average rating or N/A
+ * returns average rating or N/A of a spot
  */
-
 const avgRating = (spot) => {
   let avgRating;
   if (spot.Reviews.length > 0) {
@@ -42,9 +41,8 @@ const avgRating = (spot) => {
 };
 
 /**
- * returns nuSpot
+ * returns nuSpot from spot w expected attributes only
  */
-
 const nuSpot = (spot) => {
   let nuSpot = {
     id: spot.id,
@@ -66,6 +64,7 @@ const nuSpot = (spot) => {
   return nuSpot;
 };
 
+// ------------------handler----------------------------------------------
 router.get("/", async (req, res) => {
   let spots = await Spot.findAll({
     attributes: [
