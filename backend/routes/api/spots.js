@@ -103,9 +103,51 @@ router.get("/", async (req, res) => {
 });
 
 
+// ==================GET A SPOT BY ID =========================================
+// ------------------helpers----------------------------------------------
+// ------------------handler----------------------------------------------
+router.get("/:spotId", async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId, {
+    attributes: [
+      "id",
+      "ownerId",
+      "address",
+      "city",
+      "state",
+      "country",
+      "lat",
+      "lng",
+      "name",
+      "description",
+      "price",
+      "createdAt",
+      "updatedAt",
+    ],
+    include: [
+      { model: SpotImage, attributes: ["url", "id", "preview"] },
+      { model: Review, attributes: ["stars"] },
+      { model: User, attributes: ["id", "firstName", "lastName"]}
+    ],
+  });
+
+
+  let result;
+  result = nuSpot(spot);
+  result.numReviews = spot.Reviews.length;
+  result.avgStarRating = avgRating(spot);
+  result.spotImages = spot.SpotImages;
+  // result.previewImage = previewImage(spot);
+  result.Owner = spot.User;
+
+
+
+  res.json(result);
+});
+
+
 // ==================CREATE A SPOT=========================================
 // ------------------helpers----------------------------------------------
-// ------------------handlers----------------------------------------------
+// ------------------handler----------------------------------------------
 router.post('/', async (req, res, next) => {
   const { ownerId, address, city, state, country, lat, lng, name, description, price } = req.body;
   // need aggregate unique of address city state
@@ -131,13 +173,45 @@ router.post('/', async (req, res, next) => {
   await nuSpot.validate();
   await nuSpot.save();
 
-
-
   res.json(nuSpot);
-
 });
 
 
+// ==================EDIT A SPOT=========================================
+// ------------------helpers----------------------------------------------
+// ------------------handler----------------------------------------------
+router.put('/:spotId', async (req, res)=> {
+    const { ownerId, address, city, state, country, lat, lng, name, description, price } = req.body;
+    const spotToUpdate = await Spot.findByPk(req.params.spotId);
+
+    if(ownerId !== undefined) spotToUpdate.ownerId = ownerId;
+    if(address !== undefined) spotToUpdate.address = address;
+    if(city !== undefined) spotToUpdate.city = city;
+    if(state !== undefined) spotToUpdate.state = state;
+    if(country !== undefined) spotToUpdate.country = country;
+    if(lat !== undefined) spotToUpdate.lat = lat;
+    if(lng !== undefined) spotToUpdate.lng = lng;
+    if(name !== undefined) spotToUpdate.name = name;
+    if(description !== undefined) spotToUpdate.description = description;
+    if(price !== undefined) spotToUpdate.price = price;
+
+    await spotToUpdate.save();
+
+    res.json(spotToUpdate);
+});
+
+
+// ==================DELETE A SPOT=========================================
+// ------------------helpers----------------------------------------------
+// ------------------handler----------------------------------------------
+router.delete('/:spotId', async (req, res) => {
+    const spotToDelete = await Spot.findByPk(req.params.spotId);
+    await spotToDelete.destroy();
+
+    res.json({message: "Successfully Deleted"});
+
+
+});
 
 
 module.exports = router;
