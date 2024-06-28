@@ -1,6 +1,9 @@
 const express = require("express");
 const { Spot, SpotImage, Review, User } = require("../../db/models");
 
+const { Op } = require("sequelize");
+
+
 const router = express.Router();
 
 // ==================GET ALL SPOTS=========================================
@@ -100,6 +103,39 @@ router.get("/", async (req, res) => {
 });
 
 
+// ==================CREATE A SPOT=========================================
+// ------------------helpers----------------------------------------------
+// ------------------handlers----------------------------------------------
+router.post('/', async (req, res, next) => {
+  const { ownerId, address, city, state, country, lat, lng, name, description, price } = req.body;
+  // need aggregate unique of address city state
+  // check if exists
+
+  // const exists = await findOne({
+  //   where: [{address: address},{city: city}, {state: state}]
+  // });
+
+  const nuSpot = Spot.build({
+    ownerId,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price
+  });
+
+  await nuSpot.validate();
+  await nuSpot.save();
+
+
+
+  res.json(nuSpot);
+
+});
 
 
 
