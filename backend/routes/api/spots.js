@@ -121,59 +121,69 @@ router.get("/", async (req, res) => {
 // ====GET ALL SPOTS OWNED BY THE CURRENT USER============================
 // ------------------helpers----------------------------------------------
 // ------------------handler----------------------------------------------
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, async (req, res, next) => {
   const userId = req.user.id;
-
   console.log("userId========== ", userId);
+
+  if(userId = "current") {
+
   const currUserSpots = await Spot.findAll({
     where: {ownerId: userId}
   });
 
-  res.json(currUserSpots);
+  return res.json(currUserSpots);
+
+  }
 
 });
 
 
-// // ==================GET A SPOT BY ID =========================================
-// // ------------------helpers----------------------------------------------
-// // ------------------handler----------------------------------------------
-// router.get("/:spotId", async (req, res) => {
-//   const spot = await Spot.findByPk(req.params.spotId, {
-//     attributes: [
-//       "id",
-//       "ownerId",
-//       "address",
-//       "city",
-//       "state",
-//       "country",
-//       "lat",
-//       "lng",
-//       "name",
-//       "description",
-//       "price",
-//       "createdAt",
-//       "updatedAt",
-//     ],
-//     include: [
-//       { model: SpotImage, attributes: ["url", "id", "preview"] },
-//       { model: Review, attributes: ["stars"] },
-//       { model: User, attributes: ["id", "firstName", "lastName"]}
-//     ],
-//   });
+// ==================GET A SPOT BY ID =========================================
+// ------------------helpers----------------------------------------------
+// ------------------handler----------------------------------------------
+router.get("/:spotId", async (req, res, next) => {
+  const spot = await Spot.findByPk(req.params.spotId, {
+    attributes: [
+      "id",
+      "ownerId",
+      "address",
+      "city",
+      "state",
+      "country",
+      "lat",
+      "lng",
+      "name",
+      "description",
+      "price",
+      "createdAt",
+      "updatedAt",
+    ],
+    include: [
+      { model: SpotImage, attributes: ["url", "id", "preview"] },
+      { model: Review, attributes: ["stars"] },
+      { model: User, attributes: ["id", "firstName", "lastName"]}
+    ],
+  });
+
+  if(!spot) {
+    const err = new Error('Spot couldn\'t be found');
+    err.status = 404;
+    return next(err);
+  }
 
 
-//   let result;
-//   result = nuSpot(spot);
-//   result.numReviews = spot.Reviews.length;
-//   result.avgStarRating = avgRating(spot);
-//   result.spotImages = spot.SpotImages;
-//   // result.previewImage = previewImage(spot);
-//   result.Owner = spot.User;
+  let result;
+  result = nuSpot(spot);
+  result.numReviews = spot.Reviews.length;
+  result.avgStarRating = avgRating(spot);
+  result.spotImages = spot.SpotImages;
+  // result.previewImage = previewImage(spot);
+  result.Owner = spot.User;
 
 
 
-//   res.json(result);
-// });
+  res.json(result);
+});
 
 
 // ==================CREATE A SPOT=========================================
@@ -205,7 +215,6 @@ router.post('/', requireAuth, async (req, res, next) => {
     where: [{ownerId: ownerId}, {address: address},{city: city}, {state: state}]
   });
 
-  console.log("exists=============", exists);
 
   if(exists.length) {
     const err = new Error('Spot already exists');
@@ -264,7 +273,6 @@ router.put('/:spotId', requireAuth, async (req, res, next)=> {
     }
 
 
-
     if(address !== undefined) spotToUpdate.address = address;
     if(city !== undefined) spotToUpdate.city = city;
     if(state !== undefined) spotToUpdate.state = state;
@@ -284,10 +292,28 @@ router.put('/:spotId', requireAuth, async (req, res, next)=> {
 // ==================DELETE A SPOT=========================================
 // ------------------helpers----------------------------------------------
 // ------------------handler----------------------------------------------
-router.delete('/:spotId', requireAuth, async (req, res) => {
-    const spotToDelete = await Spot.findByPk(req.params.spotId);
-    await spotToDelete.destroy();
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
+    const spotToDelete = await Spot.findByPk(req.params.spotId);
+    const userId = req.user.id;
+
+    console.log("req.user.id==============", req.user.id);
+    // console.log("spotToDelete.ownerId=====", spotToDelete.ownerId);
+
+    if(!spotToDelete) {
+      const err = new Error("Spot couldnn\'t be found");
+      err.status = 404;
+      return next(err);
+    }
+
+    if(spotToDelete.ownerId !== userId) {
+      const err = new Error("Forbidden");
+      err.status = 403;
+      return next(err);
+    }
+
+
+    await spotToDelete.destroy();
     res.json({message: "Successfully Deleted"});
 
 });
