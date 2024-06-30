@@ -125,15 +125,44 @@ router.get('/current', requireAuth, async (req, res, next) => {
   const userId = req.user.id;
   console.log("userId========== ", userId);
 
-  if(userId = "current") {
+
 
   const currUserSpots = await Spot.findAll({
-    where: {ownerId: userId}
+    where: {ownerId: userId},
+    attributes: [
+      "id",
+      "ownerId",
+      "address",
+      "city",
+      "state",
+      "country",
+      "lat",
+      "lng",
+      "name",
+      "description",
+      "price",
+      "createdAt",
+      "updatedAt",
+    ],
+    include: [
+      { model: SpotImage, attributes: ["url"] },
+      { model: Review, attributes: ["stars"] },
+    ],
+
   });
+
+  let nuSpots = [];
+
+  for (let spot of currUserSpots) {
+    spot.previewImage = previewImage(spot);
+    spot.avgRating = avgRating(spot);
+    nuSpots.push(nuSpot(spot));
+  }
+
 
   return res.json(currUserSpots);
 
-  }
+
 
 });
 
