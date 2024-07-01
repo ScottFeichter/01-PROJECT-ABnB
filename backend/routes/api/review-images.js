@@ -32,10 +32,11 @@ router.delete("/:imageId", requireAuth, async (req, res, next) => {
     err.status = 404;
     return next(err);
   }
-  const review = await Review.findByPk(imageToDelete.reviewId);
-  const spot = await Spot.findByPk(review.spotId);
 
-  if (spot.ownerId !== userId) {
+  const review = await Review.findByPk(imageToDelete.reviewId);
+  // const spot = await Spot.findByPk(review.spotId);
+
+  if (review.userId !== userId) {
     const err = new Error("Forbidden");
     err.status = 403;
     return next(err);
