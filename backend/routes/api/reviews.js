@@ -77,7 +77,10 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
   let { review, stars } = req.body;
   stars = +stars;
   const userId = req.user.id;
-  const reviewId = req.params.reviewId;
+  let reviewId = req.params.reviewId;
+  reviewId = +reviewId;
+
+  console.log("stars", typeof stars, "review", typeof review, "userId", typeof userId, "reviewId", typeof reviewId);
 
   const reviewToUpdate = await Review.findByPk(reviewId);
 
@@ -95,9 +98,8 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
 
   if (
     typeof review !== "string" ||
-    typeof review !== "" ||
+    review === "" ||
     typeof stars !== "number" ||
-    typeof stars !== undefined ||
     !Number.isInteger(stars) ||
     stars < 1 ||
     stars > 5
