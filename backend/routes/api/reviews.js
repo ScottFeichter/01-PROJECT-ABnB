@@ -25,6 +25,51 @@ const router = express.Router();
 
 //none
 
+// ====ADD AN IMAGE TO A REVIEW BASED ON THE REVIEWS ID============================
+router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
+  const { url } = req.body;
+  const userId = req.user.id;
+  const reviewId = req.params.reviewId;
+
+  const review = await Review.findByPk(reviewId);
+
+  if (!review) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  // console.log("review==========", review);
+
+  const reviewImages = await ReviewImage.findAll({
+    where: { reviewId: reviewId },
+  });
+
+  // console.log("reviewImages=====", reviewImages.length);
+
+  if (reviewImages.length >= 9) {
+    const err = new Error(
+      "Maximum number of images for this resource was reached"
+    );
+    err.status = 403;
+    return next(err)
+  }
+
+  const nuReviewImage = ReviewImage.build({
+    reviewId: reviewId,
+    url: url,
+  });
+
+  await nuReviewImage.validate();
+  await nuReviewImage.save();
+
+  const nuReviewImageFromDb = await ReviewImage.findOne({
+    attributes: ["id", "url"],
+    where: [{ url: url }, { reviewId: reviewId }],
+  });
+
+  res.status(200).json(nuReviewImageFromDb);
+});
 
 //=========GET ALL REVIEWS OF CURRENT USER==========
 router.get("/current", requireAuth, async (req, res, next) => {
@@ -67,10 +112,5 @@ router.get("/current", requireAuth, async (req, res, next) => {
 
   return res.json(currUserReviews);
 });
-
-
-
-
-
 
 module.exports = router;
