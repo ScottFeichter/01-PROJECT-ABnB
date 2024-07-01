@@ -565,7 +565,7 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
 
   if (!spotToDelete) {
-    const err = new Error("Spot couldnn't be found");
+    const err = new Error("Spot couldn\'t be found");
     err.status = 404;
     return next(err);
   }
