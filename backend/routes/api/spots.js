@@ -1,5 +1,11 @@
 const express = require("express");
-const { Spot, SpotImage, Review, User, ReviewImage } = require("../../db/models");
+const {
+  Spot,
+  SpotImage,
+  Review,
+  User,
+  ReviewImage,
+} = require("../../db/models");
 
 const {
   setTokenCookie,
@@ -88,8 +94,6 @@ const nuSpot = (spot) => {
   return nuSpot;
 };
 
-
-
 //=========GET ALL REVIEWS BY A SPOTS ID==========
 router.get("/:spotId/reviews", async (req, res, next) => {
   const spotId = req.params.spotId;
@@ -107,10 +111,10 @@ router.get("/:spotId/reviews", async (req, res, next) => {
   const spot = await Spot.findByPk(spotId);
   // console.log("spot ==============", spot);
 
-  if(!spot) {
-    const err = new Error("Spot couldn\'t be found");
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
     err.status = 404;
-    return next(err)
+    return next(err);
   }
 
   const spotReviews = await Review.findAll({
@@ -134,10 +138,6 @@ router.get("/:spotId/reviews", async (req, res, next) => {
 
   return res.json(Reviews);
 });
-
-
-
-
 
 // ====ADD AN IMAGE TO A SPOT BASED ON THE SPOTS ID==AKA CREATE AN IMAGE FOR A SPOT==========================
 router.post("/:spotId/images", requireAuth, async (req, res, next) => {
@@ -176,6 +176,67 @@ router.post("/:spotId/images", requireAuth, async (req, res, next) => {
 
   res.status(200).json(nuSpotImageFromDb);
 });
+
+// ====CREATE A REVIEW FOR A SPOT BASED ON THE SPOTS ID==========================
+router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
+  const { review, stars } = req.body;
+
+  if (typeof stars === "string") {
+    stars = +stars;
+  }
+
+  if (
+    typeof review !== "string" ||
+    review === "" ||
+    typeof stars !== "number" ||
+    !Number.isInteger(stars)
+  ) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
+      review: "Review text is required",
+      starts: "Stars must be an integer from 1 to 5",
+    };
+    return next(err);
+  }
+
+  const spotId = req.params.spotId;
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  const userId = req.user.id;
+
+  const exists = await Review.findAll({
+    where: [{ spotId: spotId }, { userId: userId }],
+  });
+
+  if (exists.length) {
+    const err = new Error("User already has a review for this spot");
+    err.status = 500;
+    return next(err);
+  }
+
+  const nuReview = await Review.build({
+    spotId: spotId,
+    userId: userId,
+    review: review,
+    stars: stars,
+  });
+
+  await nuReview.validate();
+  await nuReview.save();
+
+  res.json(nuReview);
+});
+
+// ============================================================================
+// SPOTS
+// ============================================================================
 
 // ====GET ALL SPOTS OWNED BY THE CURRENT USER============================
 router.get("/current", requireAuth, async (req, res, next) => {
@@ -382,7 +443,7 @@ router.post("/", requireAuth, async (req, res, next) => {
     err.status = 409;
     next(err);
   } else {
-    const nuSpot = Spot.build({
+    const nuSpot = await Spot.build({
       ownerId: ownerId,
       address: address,
       city: city,
@@ -518,12 +579,5 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
   await spotToDelete.destroy();
   res.json({ message: "Successfully Deleted" });
 });
-
-
-
-
-
-
-
 
 module.exports = router;
