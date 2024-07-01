@@ -128,9 +128,8 @@ router.get("/current", requireAuth, async (req, res, next) => {
           "name",
           "price",
         ],
-        include: [{ model: SpotImage, attributes: "url" }],
+        include: [{ model: SpotImage, attributes: ["url"] }],
       },
-      { model: bookingImage, attributes: ["id", "url"] },
     ],
     attributes: [
       "userId",
@@ -141,7 +140,12 @@ router.get("/current", requireAuth, async (req, res, next) => {
     ],
   });
 
-  console.log(currUserBookings);
+  console.log("curruserbookings=========== ", currUserBookings);
 
-  return res.json(currUserBookings);
+  const theCurrentUserBookings = { Bookings: currUserBookings};
+
+  return res.json(theCurrentUserBookings);
 });
+
+
+module.exports = router;
