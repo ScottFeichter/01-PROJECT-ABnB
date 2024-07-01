@@ -293,61 +293,65 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
   }
 });
 
-// ====CREATE A REVIEW FOR A SPOT BASED ON THE SPOTS ID==========================
-router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
-  const { review, stars } = req.body;
+// ====CREATE A booking FOR A SPOT BASED ON THE SPOTS ID==========================
+router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const { startDate, endDate } = req.body;
 
-  if (typeof stars === "string") {
-    stars = +stars;
-  }
-
-  if (
-    typeof review !== "string" ||
-    review === "" ||
-    typeof stars !== "number" ||
-    !Number.isInteger(stars)
-  ) {
-    const err = new Error("Bad Request");
-    err.status = 400;
-    err.errors = {
-      review: "Review text is required",
-      starts: "Stars must be an integer from 1 to 5",
-    };
+  const userId = req.user.id;
+  if(spot.ownerId === userId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
     return next(err);
   }
 
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId);
-
   if (!spot) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;
     return next(err);
   }
 
-  const userId = req.user.id;
+// NEED LOGIC
+  if (
+    typeof startDate !== "string" ||
+    startDate === "" ||
+    typeof endDate !== "string" ||
+    endDate === ""
+  ) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
+      startDate: "startDate cannot be in the past",
+      endDate: "endDate cannot be on or before startDate",
+    };
+    return next(err);
+  }
 
-  const exists = await Review.findAll({
+
+// NEED LOGIC
+  const exists = await Booking.findAll({
     where: [{ spotId: spotId }, { userId: userId }],
   });
 
   if (exists.length) {
-    const err = new Error("User already has a review for this spot");
+    const err = new Error("User already has a booking for this spot");
     err.status = 500;
     return next(err);
   }
 
-  const nuReview = await Review.build({
+// SUCCESS
+  const nubooking = await Booking.build({
     spotId: spotId,
     userId: userId,
-    review: review,
-    stars: stars,
+    startDate: startDate,
+    endDate: endDate
   });
 
-  await nuReview.validate();
-  await nuReview.save();
+  await nubooking.validate();
+  await nubooking.save();
 
-  res.json(nuReview);
+  res.json(nubooking);
 });
 
 // ============================================================================
