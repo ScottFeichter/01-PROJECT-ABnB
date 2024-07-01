@@ -29,15 +29,13 @@ const router = express.Router();
 router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   const { url } = req.body;
   const userId = req.user.id;
-  const reviewId = req.params.reviewId;
+  const reviewId = +req.params.reviewId;
+
+  console.log("userId================", userId);
+
+  console.log("reviewId=========", reviewId);
 
   const review = await Review.findByPk(reviewId);
-
-  if(review.userId !== userId) {
-    const err = new Error("Forbidden");
-    err.status = 403;
-    return next(err);
-  }
 
   if (!review) {
     const err = new Error("Review couldn't be found");
@@ -46,6 +44,15 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   }
 
   // console.log("review==========", review);
+
+  console.log("review.userId========", review.userId);
+
+  if(review.userId !== userId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
 
   const reviewImages = await ReviewImage.findAll({
     where: { reviewId: reviewId },
