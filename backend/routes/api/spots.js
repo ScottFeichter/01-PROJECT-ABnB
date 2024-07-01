@@ -1,10 +1,16 @@
 const express = require("express");
 const { Spot, SpotImage, Review, User } = require("../../db/models");
 
-const { setTokenCookie, restoreUser, requireAuth } = require("../../utils/auth")
+const {
+  setTokenCookie,
+  restoreUser,
+  requireAuth,
+} = require("../../utils/auth");
+
+const { validationResult, matchedData } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
 
 const { Op } = require("sequelize");
-
 
 const router = express.Router();
 
@@ -23,7 +29,6 @@ const router = express.Router();
 //   "price": 1
 // }
 
-// ==================GET ALL SPOTS=========================================
 // ------------------helpers----------------------------------------------
 
 /**
@@ -83,52 +88,15 @@ const nuSpot = (spot) => {
   return nuSpot;
 };
 
-// ------------------handler----------------------------------------------
-router.get("/", async (req, res) => {
-  let spots = await Spot.findAll({
-    attributes: [
-      "id",
-      "ownerId",
-      "address",
-      "city",
-      "state",
-      "country",
-      "lat",
-      "lng",
-      "name",
-      "description",
-      "price",
-      "createdAt",
-      "updatedAt",
-    ],
-    include: [
-      { model: SpotImage, attributes: ["url"] },
-      { model: Review, attributes: ["stars"] },
-    ],
-  });
-
-  let nuSpots = [];
-
-  for (let spot of spots) {
-    spot.previewImage = previewImage(spot);
-    spot.avgRating = avgRating(spot);
-    nuSpots.push(nuSpot(spot));
-  }
-
-  res.json(nuSpots);
-});
-
 // ====GET ALL SPOTS OWNED BY THE CURRENT USER============================
 // ------------------helpers----------------------------------------------
 // ------------------handler----------------------------------------------
-router.get('/current', requireAuth, async (req, res, next) => {
+router.get("/current", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
-  console.log("userId========== ", userId);
-
 
 
   const currUserSpots = await Spot.findAll({
-    where: {ownerId: userId},
+    where: { ownerId: userId },
     attributes: [
       "id",
       "ownerId",
@@ -148,7 +116,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
       { model: SpotImage, attributes: ["url"] },
       { model: Review, attributes: ["stars"] },
     ],
-
   });
 
   let nuSpots = [];
@@ -159,13 +126,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
     nuSpots.push(nuSpot(spot));
   }
 
-
   return res.json(currUserSpots);
-
-
-
 });
-
 
 // ==================GET A SPOT BY ID =========================================
 // ------------------helpers----------------------------------------------
@@ -190,16 +152,15 @@ router.get("/:spotId", async (req, res, next) => {
     include: [
       { model: SpotImage, attributes: ["url", "id", "preview"] },
       { model: Review, attributes: ["stars"] },
-      { model: User, attributes: ["id", "firstName", "lastName"]}
+      { model: User, attributes: ["id", "firstName", "lastName"] },
     ],
   });
 
-  if(!spot) {
-    const err = new Error('Spot couldn\'t be found');
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
     err.status = 404;
     return next(err);
   }
-
 
   let result;
   result = nuSpot(spot);
@@ -209,44 +170,143 @@ router.get("/:spotId", async (req, res, next) => {
   // result.previewImage = previewImage(spot);
   result.Owner = spot.User;
 
-
-
   res.json(result);
 });
+
+
+
+// ==================GET ALL SPOTS=========================================
+// ------------------helpers----------------------------------------------
+// ------------------handler----------------------------------------------
+router.get("/", async (req, res) => {
+
+  let {size, page} = req.query;
+
+  if(!page) page = 1;
+  if(!size) size = 5;
+
+  if(page < 1 || isNaN(page)) page = 1;
+  if(size < 1 || isNaN(size)) size = 5;
+
+
+  if(size > 5) size = 5;
+
+  const pagination = {};
+
+  if (size > 0 && page > 0) {
+    pagination.limit = parseInt(size);
+    pagination.offset = parseInt(size) * (parseInt(page - 1));
+  };
+
+  let theSpots = await Spot.findAll({
+    attributes: [
+      "id",
+      "ownerId",
+      "address",
+      "city",
+      "state",
+      "country",
+      "lat",
+      "lng",
+      "name",
+      "description",
+      "price",
+      "createdAt",
+      "updatedAt",
+    ],
+    include: [
+      { model: SpotImage, attributes: ["url"] },
+      { model: Review, attributes: ["stars"] },
+    ],
+    ...pagination
+  });
+
+  let spots = [];
+
+  for (let spot of theSpots) {
+    spot.previewImage = previewImage(spot);
+    spot.avgRating = avgRating(spot);
+    spots.push(nuSpot(spot));
+  }
+
+
+
+  return res.json({spots, page, size});
+});
+
 
 
 // ==================CREATE A SPOT=========================================
 // ------------------helpers----------------------------------------------
 // ------------------handler----------------------------------------------
-router.post('/', requireAuth, async (req, res, next) => {
-  const { address, city, state, country, lat, lng, name, description, price } = req.body;
+router.post("/", requireAuth, async (req, res, next) => {
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
   const ownerId = req.user.id;
 
-  // need aggregate unique of address city state
-  // check if exists
+  if (typeof address !== "string") {
+    const err = new Error("Valid street address is required");
+    err.status = 400;
+    return next(err);
+  }
+  if (typeof city !== "string") {
+    const err = new Error("Valid city required");
+    err.status = 400;
+    return next(err);
+  }
+  if (typeof state !== "string") {
+    const err = new Error("Valid state required");
+    err.status = 400;
+    return next(err);
+  }
 
-   // {
-  //   "message": "Bad Request", // (or "Validation error" if generated by Sequelize),
-  //   "errors": {
-  //     "address": "Street address is required",
-  //     "city": "City is required",
-  //     "state": "State is required",
-  //     "country": "Country is required",
-  //     "lat": "Latitude must be within -90 and 90",
-  //     "lng": "Longitude must be within -180 and 180",
-  //     "name": "Name must be less than 50 characters",
-  //     "description": "Description is required",
-  //     "price": "Price per day must be a positive number"
-  //   }
-  // }
+  if (typeof country !== "string") {
+    const err = new Error("Valid country required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof parseFloat(lat) !== "number") {
+    const err = new Error("Valid latitude required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof parseFloat(lng) !== "number") {
+    const err = new Error("Valid longitude required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof name !== "string") {
+    const err = new Error("Valid name required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof description !== "string") {
+    const err = new Error("Valid description required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof price !== "number") {
+    const err = new Error("Valid price required");
+    err.status = 400;
+    return next(err);
+  }
 
   const exists = await Spot.findAll({
-    where: [{ownerId: ownerId}, {address: address},{city: city}, {state: state}]
+    where: [
+      { ownerId: ownerId },
+      { address: address },
+      { city: city },
+      { state: state },
+    ],
   });
 
-
-  if(exists.length) {
-    const err = new Error('Spot already exists');
+  if (exists.length) {
+    const err = new Error("Spot already exists");
     err.status = 409;
     next(err);
   } else {
@@ -260,93 +320,137 @@ router.post('/', requireAuth, async (req, res, next) => {
       lng: lng,
       name: name,
       description: description,
-      price: price
+      price: price,
     });
 
     await nuSpot.validate();
     await nuSpot.save();
-
   }
 
-
-
   const nuSpotFromDb = await Spot.findOne({
-    where: [{ownerId: ownerId}, {address: address},{city: city}, {state: state}]
-  })
+    where: [
+      { ownerId: ownerId },
+      { address: address },
+      { city: city },
+      { state: state },
+    ],
+  });
 
 
 
-  res.json(nuSpotFromDb);
+  res.status(201).json(nuSpotFromDb);
 });
-
 
 // ==================EDIT A SPOT=========================================
 // ------------------helpers----------------------------------------------
 // ------------------handler----------------------------------------------
-router.put('/:spotId', requireAuth, async (req, res, next)=> {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    const ownerId = req.user.id;
+router.put("/:spotId", requireAuth, async (req, res, next) => {
+  const { address, city, state, country, lat, lng, name, description, price } =
+    req.body;
+  const ownerId = req.user.id;
 
-    const spotToUpdate = await Spot.findByPk(req.params.spotId);
+  const spotToUpdate = await Spot.findByPk(req.params.spotId);
 
-    if(!spotToUpdate) {
-      const err = new Error('Spot couldn\'t be found');
-      err.status = 404;
-      return next(err);
-    }
+  if (!spotToUpdate) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
 
-    if(spotToUpdate.ownerId !== ownerId) {
-      const err = new Error('Forbidden');
-      err.status = 403;
-      return next(err);
-    }
+  if (spotToUpdate.ownerId !== ownerId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
 
+  if (typeof address !== "string" || typeof address !== undefined) {
+    const err = new Error("Valid street address is required");
+    err.status = 400;
+    return next(err);
+  }
+  if (typeof city !== "string" || typeof city !== undefined) {
+    const err = new Error("Valid city required");
+    err.status = 400;
+    return next(err);
+  }
+  if (typeof state !== "string" || typeof state !== undefined) {
+    const err = new Error("Valid state required");
+    err.status = 400;
+    return next(err);
+  }
 
-    if(address !== undefined) spotToUpdate.address = address;
-    if(city !== undefined) spotToUpdate.city = city;
-    if(state !== undefined) spotToUpdate.state = state;
-    if(country !== undefined) spotToUpdate.country = country;
-    if(lat !== undefined) spotToUpdate.lat = lat;
-    if(lng !== undefined) spotToUpdate.lng = lng;
-    if(name !== undefined) spotToUpdate.name = name;
-    if(description !== undefined) spotToUpdate.description = description;
-    if(price !== undefined) spotToUpdate.price = price;
+  if (typeof country !== "string" || typeof country !== undefined) {
+    const err = new Error("Valid country required");
+    err.status = 400;
+    return next(err);
+  }
 
-    await spotToUpdate.save();
+  if (typeof parseFloat(lat) !== "number" || typeof lat !== undefined) {
+    const err = new Error("Valid latitude required");
+    err.status = 400;
+    return next(err);
+  }
 
-    res.json(spotToUpdate);
+  if (typeof parseFloat(lng) !== "number" || typeof lng !== undefined) {
+    const err = new Error("Valid longitude required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof name !== "string" || typeof name !== undefined) {
+    const err = new Error("Valid name required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof description !== "string" || typeof description !== undefined) {
+    const err = new Error("Valid description required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (typeof price !== "number" || typeof price !== undefined) {
+    const err = new Error("Valid price required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if (address !== undefined) spotToUpdate.address = address;
+  if (city !== undefined) spotToUpdate.city = city;
+  if (state !== undefined) spotToUpdate.state = state;
+  if (country !== undefined) spotToUpdate.country = country;
+  if (lat !== undefined) spotToUpdate.lat = lat;
+  if (lng !== undefined) spotToUpdate.lng = lng;
+  if (name !== undefined) spotToUpdate.name = name;
+  if (description !== undefined) spotToUpdate.description = description;
+  if (price !== undefined) spotToUpdate.price = price;
+
+  await spotToUpdate.save();
+
+  res.json(spotToUpdate);
 });
-
 
 // ==================DELETE A SPOT=========================================
 // ------------------helpers----------------------------------------------
 // ------------------handler----------------------------------------------
-router.delete('/:spotId', requireAuth, async (req, res, next) => {
+router.delete("/:spotId", requireAuth, async (req, res, next) => {
+  const spotToDelete = await Spot.findByPk(req.params.spotId);
+  const userId = req.user.id;
 
-    const spotToDelete = await Spot.findByPk(req.params.spotId);
-    const userId = req.user.id;
+  if (!spotToDelete) {
+    const err = new Error("Spot couldnn't be found");
+    err.status = 404;
+    return next(err);
+  }
 
-    console.log("req.user.id==============", req.user.id);
-    // console.log("spotToDelete.ownerId=====", spotToDelete.ownerId);
+  if (spotToDelete.ownerId !== userId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
 
-    if(!spotToDelete) {
-      const err = new Error("Spot couldnn\'t be found");
-      err.status = 404;
-      return next(err);
-    }
-
-    if(spotToDelete.ownerId !== userId) {
-      const err = new Error("Forbidden");
-      err.status = 403;
-      return next(err);
-    }
-
-
-    await spotToDelete.destroy();
-    res.json({message: "Successfully Deleted"});
-
+  await spotToDelete.destroy();
+  res.json({ message: "Successfully Deleted" });
 });
-
-
 
 module.exports = router;

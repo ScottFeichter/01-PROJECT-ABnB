@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     /**
@@ -12,46 +10,54 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Spot.belongsTo(models.User, {
-        foreignKey: "ownerId"
+        foreignKey: "ownerId",
       });
 
       Spot.hasMany(models.Review, {
-        foreignKey: 'spotId',
+        foreignKey: "spotId",
         onDelete: "CASCADE",
-        hooks: true
+        hooks: true,
       });
 
       Spot.hasMany(models.Booking, {
-        foreignKey: 'spotId',
+        foreignKey: "spotId",
         onDelete: "CASCADE",
-        hooks: true
+        hooks: true,
       });
       Spot.hasMany(models.SpotImage, {
-        foreignKey: 'spotId',
+        foreignKey: "spotId",
         onDelete: "CASCADE",
-        hooks: true
+        hooks: true,
       });
-
-
-
     }
   }
-  Spot.init({
-    ownerId: { type: DataTypes.INTEGER },
-    address: {type: DataTypes.STRING, allowNull: false},
-    city: {type: DataTypes.STRING, allowNull: false},
-    state: { type: DataTypes.STRING, allowNull: false},
-    country: { type: DataTypes.STRING, allowNull: false },
-    lat: { type: DataTypes.DECIMAL, allowNull: false},
-    lng:{ type: DataTypes.DECIMAL, allowNull: false},
-    name: {type: DataTypes.STRING, allowNull: false},
-    description: {type: DataTypes.STRING, allowNull: false},
-    price: { type: DataTypes.DECIMAL, allowNull: false},
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Spot',
-  });
+  Spot.init(
+    {
+      ownerId: { type: DataTypes.INTEGER },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {},
+      },
+      city: { type: DataTypes.STRING, allowNull: false },
+      state: { type: DataTypes.STRING, allowNull: false },
+      country: { type: DataTypes.STRING, allowNull: false },
+      lat: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        validate: { isNumeric: true },
+      },
+      lng: { type: DataTypes.DECIMAL, allowNull: false },
+      name: { type: DataTypes.STRING, allowNull: false },
+      description: { type: DataTypes.STRING, allowNull: false },
+      price: { type: DataTypes.DECIMAL, allowNull: false },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
+    },
+    {
+      sequelize,
+      modelName: "Spot",
+    }
+  );
   return Spot;
 };
