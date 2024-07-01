@@ -5,6 +5,7 @@ const {
   Review,
   User,
   ReviewImage,
+  Booking
 } = require("../../db/models");
 
 const {
