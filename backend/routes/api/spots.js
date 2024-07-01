@@ -1,5 +1,5 @@
 const express = require("express");
-const { Spot, SpotImage, Review, User } = require("../../db/models");
+const { Spot, SpotImage, Review, User, ReviewImage } = require("../../db/models");
 
 const {
   setTokenCookie,
@@ -87,6 +87,57 @@ const nuSpot = (spot) => {
   };
   return nuSpot;
 };
+
+
+
+//=========GET ALL REVIEWS BY A SPOTS ID==========
+router.get("/:spotId/reviews", async (req, res, next) => {
+  const spotId = req.params.spotId;
+
+  // console.log("REQ================ ", req);
+
+  // console.log("REQ.url=============", req.url);
+
+  // console.log("REQ.path ===========", req.path)
+
+  // console.log("REQ.params===========", req.params);
+
+  // console.log("spotId ==============", spotId);
+
+  const spot = await Spot.findByPk(spotId);
+  // console.log("spot ==============", spot);
+
+  if(!spot) {
+    const err = new Error("Spot couldn\'t be found");
+    err.status = 404;
+    return next(err)
+  }
+
+  const spotReviews = await Review.findAll({
+    where: { spotId: spotId },
+    attributes: [
+      "id",
+      "userId",
+      "spotId",
+      "review",
+      "stars",
+      "createdAt",
+      "updatedAt",
+    ],
+    include: [
+      { model: User, attributes: ["id", "firstName", "lastName"] },
+      { model: ReviewImage, attributes: ["id", "url"] },
+    ],
+  });
+
+  let Reviews = { Reviews: spotReviews };
+
+  return res.json(Reviews);
+});
+
+
+
+
 
 // ====ADD AN IMAGE TO A SPOT BASED ON THE SPOTS ID==AKA CREATE AN IMAGE FOR A SPOT==========================
 router.post("/:spotId/images", requireAuth, async (req, res, next) => {
@@ -467,5 +518,12 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
   await spotToDelete.destroy();
   res.json({ message: "Successfully Deleted" });
 });
+
+
+
+
+
+
+
 
 module.exports = router;
