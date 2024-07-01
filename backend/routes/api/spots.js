@@ -406,15 +406,15 @@ router.get("/current", requireAuth, async (req, res, next) => {
     ],
   });
 
-  let nuSpots = [];
+  let Spots = [];
 
   for (let spot of currUserSpots) {
     spot.previewImage = previewImage(spot);
     spot.avgRating = avgRating(spot);
-    nuSpots.push(nuSpot(spot));
+    Spots.push(nuSpot(spot));
   }
 
-  return res.json(currUserSpots);
+  return res.json(Spots);
 });
 
 // ==================GET A SPOT BY ID =========================================
@@ -452,7 +452,7 @@ router.get("/:spotId", async (req, res, next) => {
   result = nuSpot(spot);
   result.numReviews = spot.Reviews.length;
   result.avgStarRating = avgRating(spot);
-  result.spotImages = spot.SpotImages;
+  result.SpotImages = spot.SpotImages;
   // result.previewImage = previewImage(spot);
   result.Owner = spot.User;
 
@@ -501,15 +501,15 @@ router.get("/", async (req, res) => {
     ...pagination,
   });
 
-  let spots = [];
+  let Spots = [];
 
   for (let spot of theSpots) {
     spot.previewImage = previewImage(spot);
     spot.avgRating = avgRating(spot);
-    spots.push(nuSpot(spot));
+    Spots.push(nuSpot(spot));
   }
 
-  return res.json({ spots, page, size });
+  return res.json({ Spots, page, size });
 });
 
 // ==================CREATE A SPOT=========================================
@@ -552,7 +552,7 @@ router.post("/", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  if (typeof name !== "string") {
+  if (typeof name !== "string" || name.length > 50) {
     const err = new Error("Valid name required");
     err.status = 400;
     return next(err);
@@ -633,54 +633,54 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  if (typeof address !== "string" || typeof address !== undefined) {
-    const err = new Error("Valid street address is required");
+  if ((typeof address !== "string" && address !== undefined) || address === undefined) {
+    const err = new Error("Street address is required");
     err.status = 400;
     return next(err);
   }
-  if (typeof city !== "string" || typeof city !== undefined) {
-    const err = new Error("Valid city required");
+  if ((typeof city !== "string" && city !== undefined) || city === undefined) {
+    const err = new Error("City is required");
     err.status = 400;
     return next(err);
   }
-  if (typeof state !== "string" || typeof state !== undefined) {
-    const err = new Error("Valid state required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if (typeof country !== "string" || typeof country !== undefined) {
-    const err = new Error("Valid country required");
+  if ((typeof state !== "string" && state !== undefined) || state === undefined) {
+    const err = new Error("State is required");
     err.status = 400;
     return next(err);
   }
 
-  if (typeof parseFloat(lat) !== "number" || typeof lat !== undefined) {
+  if ((typeof country !== "string" && country !== undefined) || country === undefined) {
+    const err = new Error("Country is required");
+    err.status = 400;
+    return next(err);
+  }
+
+  if ((typeof parseFloat(lat) !== "number" && lat !== undefined) || (parseFloat(lat) < -90 || parseFloat(lat) > 90)) {
     const err = new Error("Valid latitude required");
     err.status = 400;
     return next(err);
   }
 
-  if (typeof parseFloat(lng) !== "number" || typeof lng !== undefined) {
-    const err = new Error("Valid longitude required");
+  if ((typeof parseFloat(lng) !== "number" && lng !== undefined) || (parseFloat(lng) < -180 || parseFloat(lng) > 180)) {
+    const err = new Error("Longitude must be within -180 and 180");
     err.status = 400;
     return next(err);
   }
 
-  if (typeof name !== "string" || typeof name !== undefined) {
-    const err = new Error("Valid name required");
+  if ((typeof name !== "string" && name !== undefined) || name.length > 50) {
+    const err = new Error("Name must be less than 50 characters");
     err.status = 400;
     return next(err);
   }
 
-  if (typeof description !== "string" || typeof description !== undefined) {
-    const err = new Error("Valid description required");
+  if (typeof description !== "string" && description !== undefined) {
+    const err = new Error("Description required");
     err.status = 400;
     return next(err);
   }
 
-  if (typeof price !== "number" || typeof price !== undefined) {
-    const err = new Error("Valid price required");
+  if ((typeof price !== "number" && price !== undefined) || price < 0) {
+    const err = new Error("Price per day must be a positive number");
     err.status = 400;
     return next(err);
   }
