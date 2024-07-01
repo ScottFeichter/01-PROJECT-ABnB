@@ -152,7 +152,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
     attributes: ["userId", "startDate", "endDate", "createdAt", "updatedAt"],
   });
 
-  console.log("curruserbookings=========== ", currUserBookings);
+  // console.log("curruserbookings=========== ", currUserBookings);
 
   const theCurrentUserBookings = { Bookings: currUserBookings };
 

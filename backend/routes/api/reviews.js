@@ -80,7 +80,7 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
   let reviewId = req.params.reviewId;
   reviewId = +reviewId;
 
-  console.log("stars", typeof stars, "review", typeof review, "userId", typeof userId, "reviewId", typeof reviewId);
+  // console.log("stars", typeof stars, "review", typeof review, "userId", typeof userId, "reviewId", typeof reviewId);
 
   const reviewToUpdate = await Review.findByPk(reviewId);
 
@@ -184,7 +184,7 @@ router.get("/current", requireAuth, async (req, res, next) => {
     ],
   });
 
-  console.log(currUserReviews);
+  // console.log(currUserReviews);
 
   return res.json(currUserReviews);
 });
