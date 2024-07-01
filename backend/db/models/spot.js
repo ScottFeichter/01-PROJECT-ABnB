@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.belongsTo(models.User, {
         foreignKey: "ownerId",
-        as: 'Owner'
+        as: 'User'
       });
 
       Spot.hasMany(models.Review, {
