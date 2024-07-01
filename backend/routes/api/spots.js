@@ -88,12 +88,47 @@ const nuSpot = (spot) => {
   return nuSpot;
 };
 
+// ====ADD AN IMAGE TO A SPOT BASED ON THE SPOTS ID==AKA CREATE AN IMAGE FOR A SPOT==========================
+router.post("/:spotId/images", requireAuth, async (req, res, next) => {
+  const { url, preview } = req.body;
+
+  const ownerId = req.user.id;
+  const spotId = req.params.spotId;
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  if (ownerId !== spot.ownerId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
+  const nuSpotImage = SpotImage.build({
+    spotId: spotId,
+    url: url,
+    preview: preview,
+  });
+
+  await nuSpotImage.validate();
+  await nuSpotImage.save();
+
+  const nuSpotImageFromDb = await SpotImage.findOne({
+    attributes: ["id", "url", "preview"],
+    where: [{ url: url }, { spotId: spotId }],
+  });
+
+  res.status(200).json(nuSpotImageFromDb);
+});
+
 // ====GET ALL SPOTS OWNED BY THE CURRENT USER============================
-// ------------------helpers----------------------------------------------
-// ------------------handler----------------------------------------------
 router.get("/current", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
-
 
   const currUserSpots = await Spot.findAll({
     where: { ownerId: userId },
@@ -130,8 +165,6 @@ router.get("/current", requireAuth, async (req, res, next) => {
 });
 
 // ==================GET A SPOT BY ID =========================================
-// ------------------helpers----------------------------------------------
-// ------------------handler----------------------------------------------
 router.get("/:spotId", async (req, res, next) => {
   const spot = await Spot.findByPk(req.params.spotId, {
     attributes: [
@@ -173,30 +206,24 @@ router.get("/:spotId", async (req, res, next) => {
   res.json(result);
 });
 
-
-
 // ==================GET ALL SPOTS=========================================
-// ------------------helpers----------------------------------------------
-// ------------------handler----------------------------------------------
 router.get("/", async (req, res) => {
+  let { size, page } = req.query;
 
-  let {size, page} = req.query;
+  if (!page) page = 1;
+  if (!size) size = 5;
 
-  if(!page) page = 1;
-  if(!size) size = 5;
+  if (page < 1 || isNaN(page)) page = 1;
+  if (size < 1 || isNaN(size)) size = 5;
 
-  if(page < 1 || isNaN(page)) page = 1;
-  if(size < 1 || isNaN(size)) size = 5;
-
-
-  if(size > 5) size = 5;
+  if (size > 5) size = 5;
 
   const pagination = {};
 
   if (size > 0 && page > 0) {
     pagination.limit = parseInt(size);
-    pagination.offset = parseInt(size) * (parseInt(page - 1));
-  };
+    pagination.offset = parseInt(size) * parseInt(page - 1);
+  }
 
   let theSpots = await Spot.findAll({
     attributes: [
@@ -218,7 +245,7 @@ router.get("/", async (req, res) => {
       { model: SpotImage, attributes: ["url"] },
       { model: Review, attributes: ["stars"] },
     ],
-    ...pagination
+    ...pagination,
   });
 
   let spots = [];
@@ -229,16 +256,10 @@ router.get("/", async (req, res) => {
     spots.push(nuSpot(spot));
   }
 
-
-
-  return res.json({spots, page, size});
+  return res.json({ spots, page, size });
 });
 
-
-
 // ==================CREATE A SPOT=========================================
-// ------------------helpers----------------------------------------------
-// ------------------handler----------------------------------------------
 router.post("/", requireAuth, async (req, res, next) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
@@ -336,14 +357,10 @@ router.post("/", requireAuth, async (req, res, next) => {
     ],
   });
 
-
-
   res.status(201).json(nuSpotFromDb);
 });
 
 // ==================EDIT A SPOT=========================================
-// ------------------helpers----------------------------------------------
-// ------------------handler----------------------------------------------
 router.put("/:spotId", requireAuth, async (req, res, next) => {
   const { address, city, state, country, lat, lng, name, description, price } =
     req.body;
@@ -431,8 +448,6 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
 });
 
 // ==================DELETE A SPOT=========================================
-// ------------------helpers----------------------------------------------
-// ------------------handler----------------------------------------------
 router.delete("/:spotId", requireAuth, async (req, res, next) => {
   const spotToDelete = await Spot.findByPk(req.params.spotId);
   const userId = req.user.id;
