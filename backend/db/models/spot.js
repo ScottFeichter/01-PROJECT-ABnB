@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.belongsTo(models.User, {
         foreignKey: "ownerId",
-        as: 'User'
+        // as: 'User'
       });
 
       Spot.hasMany(models.Review, {
@@ -33,7 +33,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Spot.init(
-    {
+    { id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+      },
       ownerId: { type: DataTypes.INTEGER },
       address: {
         type: DataTypes.STRING,
