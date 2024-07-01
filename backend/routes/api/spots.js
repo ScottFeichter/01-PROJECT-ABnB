@@ -296,15 +296,9 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
 // ====CREATE A booking FOR A SPOT BASED ON THE SPOTS ID==========================
 router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   const { startDate, endDate } = req.body;
-
-  const userId = req.user.id;
-  if (spot.ownerId === userId) {
-    const err = new Error("Forbidden");
-    err.status = 403;
-    return next(err);
-  }
-
   const spotId = req.params.spotId;
+
+  // couldnt find the spot
   const spot = await Spot.findByPk(spotId);
   if (!spot) {
     const err = new Error("Spot couldn't be found");
@@ -312,13 +306,27 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  // NEED LOGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  if (
-    typeof startDate !== "string" ||
-    startDate === "" ||
-    typeof endDate !== "string" ||
-    endDate === ""
-  ) {
+  // authorization
+  const userId = req.user.id;
+  if (spot.ownerId === userId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
+  // comparing dates helper
+  const getToday = () => {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+    return today;
+  };
+
+  let today = getToday();
+  // validation
+  if (startDate < today || startDate >= endDate) {
     const err = new Error("Bad Request");
     err.status = 400;
     err.errors = {
@@ -328,15 +336,29 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  // NEED LOGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const exists = await Booking.findAll({
-    where: [{ spotId: spotId }, { userId: userId }],
+  // booking conflict
+  const existingBookings = await Booking.findAll({
+    where: [{ spotId: spotId }],
+    attributes: ["id", "startDate", "endDate"],
   });
 
-  if (exists.length) {
-    const err = new Error("User already has a booking for this spot");
-    err.status = 500;
-    return next(err);
+  if (existingBookings.length) {
+    for (let booking of existingBookings) {
+      if (
+        (booking.startDate >= startDate && booking.startDate <= endDate) ||
+        (booking.endDate >= startDate && booking.endDate <= endDate)
+      ) {
+        const err = new Error(
+          "Sorry, this spot is already booked for the specified dates"
+        );
+        err.errors = {
+          startDate: "Start date conflicts with an existing booking",
+          endDate: "End date conflicts with an existing booking",
+        };
+        err.status = 403;
+        return next(err);
+      }
+    }
   }
 
   // SUCCESS
