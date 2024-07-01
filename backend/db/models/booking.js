@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     /**
@@ -12,30 +10,33 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Booking.belongsTo(models.User, {
-        foreignKey: "userId"
+        foreignKey: "userId",
       });
 
       Booking.belongsTo(models.Spot, {
-        foreignKey: "spotId"
+        foreignKey: "spotId",
       });
     }
   }
-  Booking.init({
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+  Booking.init(
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      spotId: { type: DataTypes.INTEGER, allowNull: false },
+      userId: { type: DataTypes.INTEGER, allowNull: false },
+      startDate: { type: DataTypes.STRING, allowNull: false },
+      endDate: { type: DataTypes.STRING, allowNull: false },
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
-    spotId: {type: DataTypes.INTEGER, allowNull: false},
-    userId: {type: DataTypes.INTEGER, allowNull: false},
-    startDate: {type: DataTypes.STRING, allowNull: false},
-    endDate: {type: DataTypes.STRING, allowNull: false},
-    createdAt: {type: DataTypes.DATE, allowNull: false},
-    updatedAt: { type: DataTypes.DATE, allowNull: false}
-  }, {
-    sequelize,
-    modelName: 'Booking',
-  });
+    {
+      sequelize,
+      modelName: "Booking",
+    }
+  );
   return Booking;
 };
