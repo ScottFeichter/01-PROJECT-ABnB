@@ -24,19 +24,19 @@ module.exports = {
       [
         {
           spotId: 1,
-          ownerId: 1,
+          userId: 1,
           startDate: "2024-01-01",
           endDate: "2024-01-02",
         },
         {
           spotId: 1,
-          ownerId: 1,
+          userId: 1,
           startDate: "2024-01-03",
           endDate: "2024-01-04",
         },
         {
           spotId: 1,
-          ownerId: 1,
+          userId: 1,
           startDate: "2024-01-05",
           endDate: "2024-01-06",
         },
@@ -57,7 +57,7 @@ module.exports = {
     return queryInterface.bulkDelete(
       options,
       {
-        spotId: { [Op.in]: [1] },
+        spotId: { [Op.eq] : [1] }
       },
       {}
     );
