@@ -52,7 +52,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
       "Maximum number of images for this resource was reached"
     );
     err.status = 403;
-    return next(err)
+    return next(err);
   }
 
   const nuReviewImage = ReviewImage.build({
@@ -70,6 +70,62 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 
   res.status(200).json(nuReviewImageFromDb);
 });
+
+// ====EDIT A REVIEW ============================
+
+router.put("/:reviewId", requireAuth, async (req, res, next) => {
+  let { review, stars } = req.body;
+  stars = +stars;
+  const userId = req.user.id;
+  const reviewId = req.params.reviewId;
+
+  const reviewToUpdate = await Review.findByPk(reviewId);
+
+  if (!reviewToUpdate) {
+    const err = new Error("Review couldn't be found");
+    err.status = 404;
+    return next(err);
+  }
+
+  if (reviewToUpdate.userId !== userId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
+  if (
+    typeof review !== "string" ||
+    typeof review !== "" ||
+    typeof stars !== "number" ||
+    typeof stars !== undefined ||
+    !Number.isInteger(stars) ||
+    stars < 1 ||
+    stars > 5
+  ) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
+      review: "Review text is required",
+      stars: "Stars must be an integer from 1 to 5",
+    };
+    return next(err);
+  }
+
+
+  if (review !== undefined) reviewToUpdate.review = review;
+  if (stars !== undefined) reviewToUpdate.stars = stars;
+
+  await reviewToUpdate.save();
+
+  res.json(reviewToUpdate);
+});
+
+
+// ====DELETE A REVIEW ============================
+
+
+
+
 
 //=========GET ALL REVIEWS OF CURRENT USER==========
 router.get("/current", requireAuth, async (req, res, next) => {
