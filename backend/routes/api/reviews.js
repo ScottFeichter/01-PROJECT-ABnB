@@ -33,6 +33,12 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 
   const review = await Review.findByPk(reviewId);
 
+  if(review.userId !== userId) {
+    const err = new Error("Forbidden");
+    err.status = 403;
+    return next(err);
+  }
+
   if (!review) {
     const err = new Error("Review couldn't be found");
     err.status = 404;
