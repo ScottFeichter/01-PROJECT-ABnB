@@ -30,18 +30,16 @@ const router = express.Router();
 // ====EDIT A booking ============================
 
 router.put("/:bookingId", requireAuth, async (req, res, next) => {
-  let { booking, stars } = req.body;
-  stars = +stars;
-  const userId = req.user.id;
+  let { startDate, endDate } = req.body;
   let bookingId = req.params.bookingId;
   bookingId = +bookingId;
 
-  console.log("stars", typeof stars, "booking", typeof booking, "userId", typeof userId, "bookingId", typeof bookingId);
+  const userId = req.user.id;
 
-  const bookingToUpdate = await booking.findByPk(bookingId);
+  const bookingToUpdate = await Booking.findByPk(bookingId);
 
   if (!bookingToUpdate) {
-    const err = new Error("booking couldn't be found");
+    const err = new Error("Booking couldn\'t be found");
     err.status = 404;
     return next(err);
   }
@@ -51,6 +49,8 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     err.status = 403;
     return next(err);
   }
+
+  // NEED LOGIC !!!!!!!
 
   if (
     typeof booking !== "string" ||
@@ -69,9 +69,9 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-
-  if (booking !== undefined) bookingToUpdate.booking = booking;
-  if (stars !== undefined) bookingToUpdate.stars = stars;
+  // sucess
+  if (startDate !== undefined) bookingToUpdate.startDate = startDate;
+  if (endDate !== undefined) bookingToUpdate.endDate = endDate;
 
   await bookingToUpdate.save();
 

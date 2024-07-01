@@ -298,7 +298,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
   const { startDate, endDate } = req.body;
 
   const userId = req.user.id;
-  if(spot.ownerId === userId) {
+  if (spot.ownerId === userId) {
     const err = new Error("Forbidden");
     err.status = 403;
     return next(err);
@@ -312,7 +312,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-// NEED LOGIC
+  // NEED LOGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   if (
     typeof startDate !== "string" ||
     startDate === "" ||
@@ -328,8 +328,7 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-
-// NEED LOGIC
+  // NEED LOGIC!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const exists = await Booking.findAll({
     where: [{ spotId: spotId }, { userId: userId }],
   });
@@ -340,12 +339,12 @@ router.post("/:spotId/bookings", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-// SUCCESS
+  // SUCCESS
   const nubooking = await Booking.build({
     spotId: spotId,
     userId: userId,
     startDate: startDate,
-    endDate: endDate
+    endDate: endDate,
   });
 
   await nubooking.validate();
