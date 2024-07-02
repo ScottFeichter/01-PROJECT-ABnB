@@ -84,13 +84,13 @@ app.use((err, _req, _res, next) => {
 app.use((err, _req, res, _next) => {
 
   if(err.status === 401 && err.message === "Authentication required") {
-    return res.json({
+    return res.status(401).json({
       message: err.message,
     })
   }
 
   if(err.status === 403 && err.message === "Forbidden") {
-    return res.json({
+    return res.status(403).json({
       message: err.message,
     })
   }
