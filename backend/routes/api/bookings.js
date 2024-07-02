@@ -48,6 +48,24 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
+  if(startDate === endDate) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
+      startDate: "startDate and endDate cannot be the same"
+    }
+    return next(err);
+  }
+
+  if(endDate < startDate) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
+      startDate: "End Date cannot be before Start Date"
+    }
+    return next(err);
+  }
+
   // NEED LOGIC !!!!!!!
 
   // comparing dates helper
@@ -79,7 +97,8 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     for (let booking of existingBookings) {
       if (
         (booking.startDate >= startDate && booking.startDate <= endDate) ||
-        (booking.endDate >= startDate && booking.endDate <= endDate)
+        (booking.endDate >= startDate && booking.endDate <= endDate) ||
+        (booking.startDate < startDate && booking.endDate > endDate)
       ) {
         const err = new Error(
           "Sorry, this spot is already booked for the specified dates"
