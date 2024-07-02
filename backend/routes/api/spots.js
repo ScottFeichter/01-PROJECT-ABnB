@@ -189,13 +189,26 @@ router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
   if (
     typeof review !== "string" ||
     review === "" ||
-    typeof stars !== "number" ||
-    !Number.isInteger(stars)
+    review === undefined ||
+    review === null
   ) {
     const err = new Error("Bad Request");
     err.status = 400;
     err.errors = {
       review: "Review text is required",
+    };
+    return next(err);
+  }
+
+  if (
+    typeof stars !== "number" ||
+    !Number.isInteger(stars) ||
+    stars < 1 ||
+    stars > 5
+  ) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
       starts: "Stars must be an integer from 1 to 5",
     };
     return next(err);
@@ -518,54 +531,109 @@ router.post("/", requireAuth, async (req, res, next) => {
     req.body;
   const ownerId = req.user.id;
 
-  if (typeof address !== "string") {
-    const err = new Error("Valid street address is required");
+  if (
+    (typeof address !== "string" && address !== undefined) ||
+    address === undefined ||
+    address === "" ||
+    address === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { address: "Street address is required" };
     err.status = 400;
     return next(err);
   }
-  if (typeof city !== "string") {
-    const err = new Error("Valid city required");
+  if (
+    (typeof city !== "string" && city !== undefined) ||
+    city === undefined ||
+    city === "" ||
+    city === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { city: "City is required" };
     err.status = 400;
     return next(err);
   }
-  if (typeof state !== "string") {
-    const err = new Error("Valid state required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if (typeof country !== "string") {
-    const err = new Error("Valid country required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if (typeof parseFloat(lat) !== "number") {
-    const err = new Error("Valid latitude required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if (typeof parseFloat(lng) !== "number") {
-    const err = new Error("Valid longitude required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if (typeof name !== "string" || name.length > 50) {
-    const err = new Error("Valid name required");
+  if (
+    (typeof state !== "string" && state !== undefined) ||
+    state === undefined ||
+    state === "" ||
+    state === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { state: "State is required" };
     err.status = 400;
     return next(err);
   }
 
-  if (typeof description !== "string") {
-    const err = new Error("Valid description required");
+  if (
+    (typeof country !== "string" && country !== undefined) ||
+    country === undefined ||
+    country === "" ||
+    country === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { country: "Country is required" };
     err.status = 400;
     return next(err);
   }
 
-  if (typeof price !== "number") {
-    const err = new Error("Valid price required");
+  if (
+    (typeof parseFloat(lat) !== "number" && lat !== undefined) ||
+    parseFloat(lat) < -90 ||
+    parseFloat(lat) > 90 ||
+    lat === undefined ||
+    lat === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { lat: "Latitude must be within -90 and 90" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof parseFloat(lng) !== "number" && lng !== undefined) ||
+    parseFloat(lng) < -180 ||
+    parseFloat(lng) > 180 ||
+    lng === undefined ||
+    lng === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { lng: "Longitude must be within -180 and 180" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof name !== "string" && name !== undefined) ||
+    name.length > 50 ||
+    name === "" ||
+    name === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { name: "Name must be less than 50 characters" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof description !== "string" && description !== undefined) ||
+    description === "" ||
+    description === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { description: "Description is required" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof price !== "number" && price !== undefined) ||
+    price < 1 ||
+    price === undefined ||
+    price === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { price: "Price per day must be a positive number" };
     err.status = 400;
     return next(err);
   }
@@ -633,54 +701,109 @@ router.put("/:spotId", requireAuth, async (req, res, next) => {
     return next(err);
   }
 
-  if ((typeof address !== "string" && address !== undefined) || address === undefined) {
-    const err = new Error("Street address is required");
+  if (
+    (typeof address !== "string" && address !== undefined) ||
+    address === undefined ||
+    address === "" ||
+    address === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { address: "Street address is required" };
     err.status = 400;
     return next(err);
   }
-  if ((typeof city !== "string" && city !== undefined) || city === undefined) {
-    const err = new Error("City is required");
+  if (
+    (typeof city !== "string" && city !== undefined) ||
+    city === undefined ||
+    city === "" ||
+    city === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { city: "City is required" };
     err.status = 400;
     return next(err);
   }
-  if ((typeof state !== "string" && state !== undefined) || state === undefined) {
-    const err = new Error("State is required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if ((typeof country !== "string" && country !== undefined) || country === undefined) {
-    const err = new Error("Country is required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if ((typeof parseFloat(lat) !== "number" && lat !== undefined) || (parseFloat(lat) < -90 || parseFloat(lat) > 90)) {
-    const err = new Error("Valid latitude required");
-    err.status = 400;
-    return next(err);
-  }
-
-  if ((typeof parseFloat(lng) !== "number" && lng !== undefined) || (parseFloat(lng) < -180 || parseFloat(lng) > 180)) {
-    const err = new Error("Longitude must be within -180 and 180");
-    err.status = 400;
-    return next(err);
-  }
-
-  if ((typeof name !== "string" && name !== undefined) || name.length > 50) {
-    const err = new Error("Name must be less than 50 characters");
+  if (
+    (typeof state !== "string" && state !== undefined) ||
+    state === undefined ||
+    state === "" ||
+    state === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { state: "State is required" };
     err.status = 400;
     return next(err);
   }
 
-  if (typeof description !== "string" && description !== undefined) {
-    const err = new Error("Description required");
+  if (
+    (typeof country !== "string" && country !== undefined) ||
+    country === undefined ||
+    country === "" ||
+    country === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { country: "Country is required" };
     err.status = 400;
     return next(err);
   }
 
-  if ((typeof price !== "number" && price !== undefined) || price < 0) {
-    const err = new Error("Price per day must be a positive number");
+  if (
+    (typeof parseFloat(lat) !== "number" && lat !== undefined) ||
+    parseFloat(lat) < -90 ||
+    parseFloat(lat) > 90 ||
+    lat === undefined ||
+    lat === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { lat: "Latitude must be within -90 and 90" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof parseFloat(lng) !== "number" && lng !== undefined) ||
+    parseFloat(lng) < -180 ||
+    parseFloat(lng) > 180 ||
+    lng === undefined ||
+    lng === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { lng: "Longitude must be within -180 and 180" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof name !== "string" && name !== undefined) ||
+    name.length > 50 ||
+    name === "" ||
+    name === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { name: "Name must be less than 50 characters" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof description !== "string" && description !== undefined) ||
+    description === "" ||
+    description === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { description: "Description is required" };
+    err.status = 400;
+    return next(err);
+  }
+
+  if (
+    (typeof price !== "number" && price !== undefined) ||
+    price < 1 ||
+    price === undefined ||
+    price === null
+  ) {
+    const err = new Error("Bad Request");
+    err.errors = { price: "Price per day must be a positive number" };
     err.status = 400;
     return next(err);
   }
