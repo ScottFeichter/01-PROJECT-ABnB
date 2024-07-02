@@ -31,9 +31,9 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
   const reviewId = +req.params.reviewId;
 
-  console.log("userId================", userId);
+  // console.log("userId================", userId);
 
-  console.log("reviewId=========", reviewId);
+  // console.log("reviewId=========", reviewId);
 
   const review = await Review.findByPk(reviewId);
 
@@ -45,14 +45,13 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
 
   // console.log("review==========", review);
 
-  console.log("review.userId========", review.userId);
+  // console.log("review.userId========", review.userId);
 
-  if(review.userId !== userId) {
+  if (review.userId !== userId) {
     const err = new Error("Forbidden");
     err.status = 403;
     return next(err);
   }
-
 
   const reviewImages = await ReviewImage.findAll({
     where: { reviewId: reviewId },
@@ -112,20 +111,30 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
   if (
     typeof review !== "string" ||
     review === "" ||
-    typeof stars !== "number" ||
-    !Number.isInteger(stars) ||
-    stars < 1 ||
-    stars > 5
+    review === undefined ||
+    review === null
   ) {
     const err = new Error("Bad Request");
     err.status = 400;
     err.errors = {
       review: "Review text is required",
-      stars: "Stars must be an integer from 1 to 5",
     };
     return next(err);
   }
 
+  if (
+    typeof stars !== "number" ||
+    !Number.isInteger(stars) ||
+    stars < 1 ||
+    stars > 5 
+  ) {
+    const err = new Error("Bad Request");
+    err.status = 400;
+    err.errors = {
+      stars: "Stars must be an integer from 1 to 5",
+    };
+    return next(err);
+  }
 
   if (review !== undefined) reviewToUpdate.review = review;
   if (stars !== undefined) reviewToUpdate.stars = stars;
@@ -135,14 +144,13 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
   res.json(reviewToUpdate);
 });
 
-
 // ====DELETE A REVIEW ============================
 router.delete("/:reviewId", requireAuth, async (req, res, next) => {
   const reviewToDelete = await Review.findByPk(req.params.reviewId);
   const userId = req.user.id;
 
   if (!reviewToDelete) {
-    const err = new Error("Review couldn\'t be found");
+    const err = new Error("Review couldn't be found");
     err.status = 404;
     return next(err);
   }
@@ -157,15 +165,13 @@ router.delete("/:reviewId", requireAuth, async (req, res, next) => {
   res.json({ message: "Successfully Deleted" });
 });
 
-
-
-
 //=========GET ALL REVIEWS OF CURRENT USER==========
 router.get("/current", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
 
-  const currUserReviews = await Review.findAll({
+  let currUserReviews = await Review.findAll({
     where: { userId: userId },
+
     attributes: [
       "id",
       "userId",
@@ -175,8 +181,12 @@ router.get("/current", requireAuth, async (req, res, next) => {
       "createdAt",
       "updatedAt",
     ],
+
     include: [
-      { model: User, attributes: ["id", "firstName", "lastName"] },
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"],
+      },
       {
         model: Spot,
         attributes: [
@@ -191,15 +201,34 @@ router.get("/current", requireAuth, async (req, res, next) => {
           "name",
           "price",
         ],
-        include: [{ model: SpotImage, attributes: "url" }],
+        include: [
+          {
+            model: SpotImage,
+            attributes: [["url", "previewImage"]],
+          },
+        ],
       },
-      { model: ReviewImage, attributes: ["id", "url"] },
+      {
+        model: ReviewImage,
+        attributes: ["id", "url"],
+      },
     ],
   });
 
-  // console.log(currUserReviews);
+  let reviews = [];
 
-  return res.json(currUserReviews);
+  currUserReviews.forEach((review) => {
+    reviews.push(review.toJSON());
+  });
+
+  reviews.forEach((review) => {
+    review.Spot.previewImage = review.Spot.SpotImages[0].previewImage;
+    delete review.Spot.SpotImages;
+  });
+
+  let theReviews = { Reviews: reviews };
+
+  return res.json(theReviews);
 });
 
 module.exports = router;

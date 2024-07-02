@@ -82,10 +82,25 @@ app.use((err, _req, _res, next) => {
 
 // Error formatter
 app.use((err, _req, res, _next) => {
+
+  if(err.status === 401 && err.message === "Authentication required") {
+    return res.json({
+      message: err.message,
+    })
+  }
+
+  if(err.status === 403 && err.message === "Forbidden") {
+    return res.json({
+      message: err.message,
+    })
+  }
+
+
+
   res.status(err.status || 500);
   console.error(err);
   res.json({
-    title: err.title || 'Server Error',
+    title: isProduction ? null : (err.title || 'Server Error'),
     message: err.message,
     errors: err.errors,
     stack: isProduction ? null : err.stack
