@@ -81,6 +81,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res, next) => {
   });
 
   res.status(200).json(nuReviewImageFromDb);
+
 });
 
 // ====EDIT A REVIEW ============================
@@ -126,7 +127,7 @@ router.put("/:reviewId", requireAuth, async (req, res, next) => {
     typeof stars !== "number" ||
     !Number.isInteger(stars) ||
     stars < 1 ||
-    stars > 5 
+    stars > 5
   ) {
     const err = new Error("Bad Request");
     err.status = 400;
