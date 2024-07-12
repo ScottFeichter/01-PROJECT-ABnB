@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
   // To automatically open the app in the browser whenever the server starts,
   // uncomment the following lines:
   server: {
-    open: true,
+    // open: true,
     proxy: {
       '/api': 'http://localhost:8000'
     },
