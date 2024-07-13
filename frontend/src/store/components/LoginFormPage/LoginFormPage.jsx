@@ -1,7 +1,9 @@
 import {useState } from 'react';
-import * as sessionActions from "../../store/session"
+import login from '../../../store/session'
 import {useDispatch, useSelector} from 'react-redux'
 import {Navigate} from 'react-router-dom'
+
+import './LoginForm.css';
 
 
 const LoginFormPage = () => {
@@ -16,7 +18,7 @@ const LoginFormPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
-        return dispatch(sessionActions.login({credential, password})).catch(
+        return dispatch(login({credential, password})).catch(
             async (res) => {
                 const data = await res.json();
                 if (data?.errors) setErrors(data.errors);
@@ -24,36 +26,51 @@ const LoginFormPage = () => {
         );
     };
 
-
-
-
     return (<>
+    <header>
+        <img id='logoImg' src="" alt="logo"></img>
+        <h1>Log In</h1>
+        <img id='accountImg' src="" alt="account"></img>
 
-    <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-      <div className="errors">{errors.credential}</div>
-      <label>
-        Enter email or username:
-        <input
-          name="credential"
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-        />
-      </label>
-      <div className="errors">{errors.password}</div>
-      <label>
-        Password:
-        <input
-          name="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    </header>
+      <main>
+        <div id='formContainer'>
+            <form id='loginForm' onSubmit={handleSubmit}>
+                <div id='loginContainer'>
+                    <div className="errors">{errors.credential}</div>
+                        <label>
+                            email or username:
+                            <input
+
+                            id="credential"
+                            name="credential"
+                            type="text"
+                            defaultValue="email or username"
+                            value={credential}
+                            onChange={(e) => setCredential(e.target.value)}
+                            />
+                        </label>
+                    </div>
+                    <div id='passwordContainer'>
+                        <div className="errors">{errors.password}</div>
+                        <label>
+                            password:
+                            <input
+                            name="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            />
+                        </label>
+                    </div>
+                    <div id="buttonContainer">
+                        <button type="submit">Log In</button>
+                    </div>
+            </form>
+        </div>
+      </main>
+
     </>)
 }
 

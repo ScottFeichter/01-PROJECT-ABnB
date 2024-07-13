@@ -1,0 +1,67 @@
+* {
+    font-family: Figtree;
+}
+
+
+/* ======================HEADER========================== */
+header {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    border: 2px green dotted;
+}
+
+#logoImg {}
+h1 {
+    text-align: center;
+}
+#accountImg {}
+
+/* ======================MAIN========================== */
+
+main {}
+
+#formContainer {
+    /* margin: auto; */
+    /* padding: 10rem; */
+    /* padding: 100px, 100px, 100px, 100px; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    /* border: 1px red solid; */
+    /* border-radius: 25px; */
+}
+
+#loginForm{
+    /* margin: 4rem; */
+    /* padding: 4rem 0rem 4rem 0rem; */
+    border: 1px red solid;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#loginContainer {border: 2px blue dashed;}
+#passwordContainer {}
+#buttonContainer {}
+
+label {
+    /* padding: 1rem; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px green solid;
+}
+
+input {
+    margin: 1rem;
+    border: 2px purple solid;
+}
+
+button {
+    margin: auto;
+    size: 2rem;
+}
