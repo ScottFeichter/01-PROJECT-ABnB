@@ -12,7 +12,7 @@ const SignupFormPage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-    const [userName, setUserName] = useState("");
+    const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -21,23 +21,23 @@ const SignupFormPage = () => {
     if(sessionUser) return <Navigate to="/" replace={true} />
 
     const handleSubmit = (e) => {
-
+        e.preventDefault();
         if (confirmPassword === password) {
-            e.preventDefault();
             setErrors({});
-            console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, userName, password);
-            return dispatch(sessionActions.signupUser({firstName, lastName, email, userName, password})).catch(
+            console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
+            return dispatch(sessionActions.signup({firstName, lastName, email, username, password})).catch(
                 async (res) => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
                     console.log('CATCH DISPATCH RAN', data);
                 }
             )
-        } else {
-            const err = new Error("Password and confirmPassword must match exactly. Please try again.");
-            window.alert("Password and confirmPassword must match exactly. Please try again.");
-            return err;
         }
+
+        window.alert("Password and confirmPassword must match exactly. Please try again.");
+        return setErrors({
+            confirmPassword: "Confirm Password field must be the same as the Password field"
+        })
     };
 
     return (<>
@@ -53,81 +53,101 @@ const SignupFormPage = () => {
              <div id='firstNameContainer'>
                     <div className="errors">{errors.firstName}</div>
                         <label>
-                            email:
+                            first name:
                             <input
                             id="firstName"
                             name="firstName"
                             type="text"
+                            value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                             required
                             />
                         </label>
-                </div>
+                    </div>
+                    {errors.firstName && <p>{errors.firstName}</p>}
+
                 <div id='lastNameContainer'>
                     <div className="errors">{errors.lastName}</div>
                         <label>
-                            email:
+                            last name:
                             <input
                             id="lastName"
                             name="lastName"
+                            value={lastName}
                             type="text"
                             onChange={(e) => setLastName(e.target.value)}
                             required
                             />
                         </label>
-                </div>
-                <div id='emailContainer'>
-                    <div className="errors">{errors.email}</div>
-                        <label>
-                            email:
-                            <input
-                            id="email"
-                            name="email"
-                            type="text"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            />
-                        </label>
-                 </div>
-                 <div id='userNameContainer'>
-                        <div className="errors">{errors.userName}</div>
-                        <label>
-                            userName:
-                            <input
-                            id="userName"
-                            name="userName"
-                            type="userName"
-                            onChange={(e) => setUserName(e.target.value)}
-                            required
-                            />
-                        </label>
                     </div>
+                    {errors.lastName && <p>{errors.lastName}</p>}
+
+                <div id='emailContainer'>
+                      <div className="errors">{errors.email}</div>
+                          <label>
+                                email:
+                              <input
+                              id="email"
+                              name="email"
+                              value={email}
+                              type="text"
+                              onChange={(e) => setEmail(e.target.value)}
+                              required
+                              />
+                          </label>
+                      </div>
+                      {errors.email && <p>{errors.email}</p>}
+
+                 <div id='userNameContainer'>
+                      <div className="errors">{errors.username}</div>
+                            <label>
+                                username:
+                                <input
+                                id="username"
+                                name="username"
+                                value={username}
+                                type="username"
+                                onChange={(e) => setUserName(e.target.value)}
+                                required
+                                />
+                            </label>
+                        </div>
+                        {errors.username && <p>{errors.username}</p>}
+
+
                     <div id='passwordContainer'>
                         <div className="errors">{errors.password}</div>
-                        <label>
-                            password:
-                            <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            />
-                        </label>
-                    </div>
+                            <label>
+                                password:
+                                <input
+                                id="password"
+                                name="password"
+                                value={password}
+                                type="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                />
+                            </label>
+                        </div>
+                        {errors.password && <p>{errors.password}</p>}
+
+
                     <div id='confirmPasswordContainer'>
                         <div className="errors">{errors.password}</div>
-                        <label>
-                            password:
-                            <input
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            type="confirmPassword"
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                            />
-                        </label>
-                    </div>
+                            <label>
+                                confirm password:
+                                <input
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                value={confirmPassword}
+                                type="password"
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                />
+                            </label>
+                        </div>
+                        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+
                     <div id="buttonContainer">
                         <button type="submit">Log In</button>
                     </div>
