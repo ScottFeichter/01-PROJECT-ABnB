@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import LoginFormPage from "./store/components/LoginFormPage";
+import SignupFormPage from './store/components/SignUpFormPage';
 import * as sessionActions from './store/session';
 
-const Layout = () => {
+function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginFormPage />
-      }
+      },
+      {
+      path: '/signup',
+      element: <SignupFormPage />
+      },
     ]
   }
 ]);
