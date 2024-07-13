@@ -1,11 +1,11 @@
 import { csrfFetch } from "./csrf";
 
-/** Action Type Constants: */
+/** =======ACTION TYPE CONSTANTS: =========*/
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
 
 
-/**  Action Creators: */
+/** =======ACTION CREATORS: =========*/
 const setUser = (user) => {
   console.log('SETUSER RAN - USER', user);
   return {
@@ -21,7 +21,7 @@ const removeUser = () => {
 };
 
 
-/** Thunk */
+/** =======THUNKS: =========*/
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
   const response = await csrfFetch("/api/session", {
@@ -37,9 +37,23 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
+
+
+
+export const restoreUser = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session');
+  const data = await response.json()
+  console.log(`RESTORE USER RAN - DATA`, data);
+  dispatch(setUser(data.user));
+  return response;
+}
+
+
+
+/** =======INITIAL STATE: =========*/
 const initialState = {user: null}
 
-/** Reducer: */
+/** =======REDUCER: =========*/
 const sessionReducer = (state = initialState, action) => {
   console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
