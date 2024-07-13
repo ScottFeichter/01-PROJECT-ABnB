@@ -85,7 +85,7 @@ export const logout = () => async (dispatch) => {
   const response = await csrfFetch('/api/session', {method: 'DELETE'});
 
   console.log(`LOGOUT RAN - RESPONSE.STATUS`, response.status);
-  dispatch(setUser(removeUser()));
+  dispatch(removeUser());
   return response;
 }
 
