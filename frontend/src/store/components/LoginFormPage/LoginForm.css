@@ -5,10 +5,12 @@
 
 /* ======================HEADER========================== */
 header {
+    padding: 0 1rem 0 1rem;
     display: flex;
     align-items: center;
     justify-content:space-between;
-    border: 2px green dotted;
+    border: 1px gray solid;
+    border-radius: 25px;
 }
 
 #logoImg {}
@@ -22,18 +24,18 @@ h1 {
 main {}
 
 #formContainer {
-    /* margin: auto; */
+    margin: 0 16rem 0 16rem;
     /* padding: 10rem; */
     /* padding: 100px, 100px, 100px, 100px; */
     /* display: flex;
     align-items: center;
     justify-content: center; */
-    /* border: 1px red solid; */
-    /* border-radius: 25px; */
+    border: 3px orange solid;
+    /* border-radius: 25px;
 }
 
 #loginForm{
-    /* margin: 4rem; */
+    margin: auto;
     /* padding: 4rem 0rem 4rem 0rem; */
     border: 1px red solid;
     border-radius: 25px;
@@ -43,9 +45,16 @@ main {}
     justify-content: center;
 }
 
-#loginContainer {border: 2px blue dashed;}
+#loginContainer {
+    margin: 2rem auto;
+    /* border: 2px blue dashed; */
+}
 #passwordContainer {}
-#buttonContainer {}
+#buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 label {
     /* padding: 1rem; */
@@ -53,15 +62,16 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 2px green solid;
+    /* border: 2px green solid; */
 }
 
 input {
     margin: 1rem;
-    border: 2px purple solid;
+    /* border: 2px purple solid; */
 }
 
 button {
-    margin: auto;
-    size: 2rem;
+    margin: 4rem 0 4rem 0;
+    width: 8rem;
+    height: 2rem;
 }

@@ -7,6 +7,7 @@ const REMOVE_USER = "session/removeUser";
 
 /**  Action Creators: */
 const setUser = (user) => {
+  console.log('SETUSER RAN - USER', user);
   return {
     type: SET_USER,
     payload: user
@@ -30,11 +31,9 @@ export const login = (user) => async (dispatch) => {
       password
     })
   });
-
   const data = await response.json();
+  console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
   dispatch(setUser(data.user));
-
-  // console.log(">>>> login thunk ran");
   return response;
 };
 
@@ -42,8 +41,8 @@ const initialState = {user: null}
 
 /** Reducer: */
 const sessionReducer = (state = initialState, action) => {
+  console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
-    // do reducer stuff
     case SET_USER:
       return {...state, user: action.payload};
     case REMOVE_USER:

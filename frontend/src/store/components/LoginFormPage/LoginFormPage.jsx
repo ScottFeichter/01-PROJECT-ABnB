@@ -1,5 +1,5 @@
 import {useState } from 'react';
-import login from '../../../store/session'
+import * as sessionActions from '../../session'
 import {useDispatch, useSelector} from 'react-redux'
 import {Navigate} from 'react-router-dom'
 
@@ -18,10 +18,12 @@ const LoginFormPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
-        return dispatch(login({credential, password})).catch(
+        console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
+        return dispatch(sessionActions.login({credential, password})).catch(
             async (res) => {
                 const data = await res.json();
                 if (data?.errors) setErrors(data.errors);
+                console.log('CATCH DISPATCH RAN', data);
             }
         );
     };
@@ -29,11 +31,11 @@ const LoginFormPage = () => {
     return (<>
     <header>
         <img id='logoImg' src="" alt="logo"></img>
-        <h1>Log In</h1>
+        <h1>search bar</h1>
         <img id='accountImg' src="" alt="account"></img>
-
     </header>
       <main>
+        <h1>Log In</h1>
         <div id='formContainer'>
             <form id='loginForm' onSubmit={handleSubmit}>
                 <div id='loginContainer'>
@@ -41,13 +43,12 @@ const LoginFormPage = () => {
                         <label>
                             email or username:
                             <input
-
                             id="credential"
                             name="credential"
                             type="text"
-                            defaultValue="email or username"
-                            value={credential}
+                            // value={credential}
                             onChange={(e) => setCredential(e.target.value)}
+                            required
                             />
                         </label>
                     </div>
@@ -58,7 +59,7 @@ const LoginFormPage = () => {
                             <input
                             name="password"
                             type="password"
-                            value={password}
+                            // value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                             />
