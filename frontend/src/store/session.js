@@ -24,6 +24,7 @@ const setUser = (user) => {
 // };
 
 const removeUser = () => {
+  console.log('REMOVEUSER RAN - USER');
   return {
     type: REMOVE_USER
   };
@@ -76,6 +77,15 @@ export const restoreUser = () => async (dispatch) => {
   const data = await response.json()
   console.log(`RESTORE USER RAN - DATA`, data);
   dispatch(setUser(data.user));
+  return response;
+}
+
+/** LOGOUT */
+export const logout = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session', {method: 'DELETE'});
+
+  console.log(`LOGOUT RAN - RESPONSE.STATUS`, response.status);
+  dispatch(setUser(removeUser()));
   return response;
 }
 
