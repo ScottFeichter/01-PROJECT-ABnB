@@ -10,31 +10,6 @@ import './Navigation.css';
 const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
 
-    let sessionLinks = sessionUser ? (
-        <>
-         <li>
-            <ProfileButton user={sessionUser} />
-         </li>
-        </>
-    ) : (
-        <>
-        <li>
-            <OpenModalButton
-            buttonText="Log In"
-            modalComponent={<LoginFormModal />}
-            />
-        </li>
-        <li>
-            <OpenModalButton
-            buttonText="Sign Up"
-            modalComponent={<SignupFormModal />}
-            />
-        </li>
-        </>
-    );
-
-
-
 
 
     return(
@@ -45,9 +20,12 @@ const Navigation = ({isLoaded}) => {
             <li>
                 <NavLink to="/">Home</NavLink>
             </li>
-            {isLoaded && sessionLinks}
+            {isLoaded && (
+            <li>
+                <ProfileButton user={sessionUser} />
+            </li>
+            )}
         </ul>
-
     </header>
     );
 }
