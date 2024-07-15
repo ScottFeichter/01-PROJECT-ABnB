@@ -1,4 +1,17 @@
-ul {list-style-type: none;}
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+li {
+    padding-left: 2rem;
+}
+
+#NavLinkToHome {
+    color: #222222;
+}
 
 header {
     padding: 0 1rem 0 1rem;
@@ -7,4 +20,8 @@ header {
     justify-content:space-between;
     border: 1px gray solid;
     border-radius: 25px;
+}
+
+#logo {
+    height: 3rem;
 }
