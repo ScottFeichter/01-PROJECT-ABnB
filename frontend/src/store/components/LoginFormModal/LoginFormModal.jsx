@@ -1,35 +1,39 @@
 import {useState } from 'react';
 import * as sessionActions from '../../session'
-import {useDispatch, useSelector} from 'react-redux'
-import {Navigate} from 'react-router-dom'
+import {useDispatch } from 'react-redux'
+import { useModal } from '../../../context/Modal';
+// import {Navigate} from 'react-router-dom'
 
-import './LoginForm.css';
+import './LoginFormModal.css';
 
 
-const LoginFormPage = () => {
+const LoginFormModal = () => {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state=> state.session.user));
+    // const sessionUser = useSelector((state=> state.session.user));
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const { closeModal } = useModal();
 
-    if(sessionUser) return <Navigate to="/" replace={true} />
+    // if(sessionUser) return <Navigate to="/" replace={true} />
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
         console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
-        return dispatch(sessionActions.login({credential, password})).catch(
-            async (res) => {
-                const data = await res.json();
-                if (data?.errors) setErrors(data.errors);
-                console.log('CATCH DISPATCH RAN', data);
-            }
-        );
+        return dispatch(sessionActions.login({credential, password}))
+            .then(closeModal)
+            .catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                    console.log('CATCH DISPATCH RAN', data);
+                }
+            );
     };
 
-    return (<>
-
+    return (
+    <>
       <main>
       <h1>Log In</h1>
         <div id='formContainer'>
@@ -60,6 +64,7 @@ const LoginFormPage = () => {
                             required
                             />
                         </label>
+                        {errors.credential && (<p>{errors.credential}</p>)}
                     </div>
                     <div id="buttonContainer">
                         <button type="submit">Log In</button>
@@ -67,8 +72,8 @@ const LoginFormPage = () => {
             </form>
         </div>
       </main>
-
-    </>)
+    </>
+  )
 }
 
-export default LoginFormPage;
+export default LoginFormModal;

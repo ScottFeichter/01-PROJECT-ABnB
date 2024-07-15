@@ -10,13 +10,19 @@ export function ModalProvider({children}) {
     const [modalContent, setModalContent] = useState(null);
     const [onModalClose, setOnModalClose] = useState(null);
 
-    function closeModal() {
-        setModalContent(null);
-        if (typeof onModalClose === "function") {
-            setOnModalClose(null);
-            onModalClose();
-        }
-    }
+
+
+    const closeModal = () => {
+      setModalContent(null); // clear the modal contents
+      // If callback function is truthy, call the callback function and reset it
+      // to null:
+      if (typeof onModalClose === "function") {
+        setOnModalClose(null);
+        onModalClose();
+      }
+    };
+
+
 
     const contextValue = {
         modalRef,
@@ -51,3 +57,5 @@ export function Modal() {
       modalRef.current
     );
   }
+
+  export const useModal = () => useContext(ModalContext);
