@@ -1,0 +1,32 @@
+
+#profile-button {
+    margin: 0;
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-color: white;
+    padding: 0;
+    text-align: center;
+
+
+}
+
+#LuUserCircle2 {
+
+    height: 50px;
+    width: 50px;
+    color: red;
+
+}
+
+.profile-dropdown {
+    list-style-type: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#logout {
+    margin: 0;
+}

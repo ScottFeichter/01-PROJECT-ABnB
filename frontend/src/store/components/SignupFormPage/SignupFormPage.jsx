@@ -41,13 +41,8 @@ const SignupFormPage = () => {
     };
 
     return (<>
-    <header>
-        <img id='logoImg' src="" alt="logo"></img>
-        <h1>search bar</h1>
-        <img id='accountImg' src="" alt="account"></img>
-    </header>
       <main>
-        <h1>Sign Up</h1>
+      <h1>Sign Up</h1>
         <div id='formContainer'>
             <form id='signupForm' onSubmit={handleSubmit}>
              <div id='firstNameContainer'>

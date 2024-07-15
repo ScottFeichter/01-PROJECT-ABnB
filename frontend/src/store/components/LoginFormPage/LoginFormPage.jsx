@@ -29,13 +29,9 @@ const LoginFormPage = () => {
     };
 
     return (<>
-    <header>
-        <img id='logoImg' src="" alt="logo"></img>
-        <h1>search bar</h1>
-        <img id='accountImg' src="" alt="account"></img>
-    </header>
+
       <main>
-        <h1>Log In</h1>
+      <h1>Log In</h1>
         <div id='formContainer'>
             <form id='loginForm' onSubmit={handleSubmit}>
                 <div id='loginContainer'>
