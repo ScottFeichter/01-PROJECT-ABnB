@@ -1,31 +1,31 @@
 import {useState } from 'react';
+import {useDispatch } from 'react-redux'
+import { useModal } from '../../../context/Modal';
 import * as sessionActions from '../../session'
-import {useDispatch, useSelector} from 'react-redux'
-import {Navigate} from 'react-router-dom'
-
-import './SignupFormPage.css';
+import './SignupFormModal.css';
 
 
-const SignupFormPage = () => {
+const SignupFormModal = () => {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state=> state.session.user));
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
     const [errors, setErrors] = useState({});
+    const { closeModal } = useModal();
 
-    if(sessionUser) return <Navigate to="/" replace={true} />
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (confirmPassword === password) {
             setErrors({});
             console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
-            return dispatch(sessionActions.signup({firstName, lastName, email, username, password})).catch(
+            return dispatch(sessionActions.signup({firstName, lastName, email, username, password}))
+            .the(closeModal)
+            .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
@@ -34,7 +34,6 @@ const SignupFormPage = () => {
             )
         }
 
-        window.alert("Password and confirmPassword must match exactly. Please try again.");
         return setErrors({
             confirmPassword: "Confirm Password field must be the same as the Password field"
         })
@@ -144,7 +143,7 @@ const SignupFormPage = () => {
                         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
 
                     <div id="buttonContainer">
-                        <button type="submit">Log In</button>
+                        <button type="submit">Sign Up</button>
                     </div>
             </form>
         </div>
@@ -153,4 +152,4 @@ const SignupFormPage = () => {
     </>)
 }
 
-export default SignupFormPage;
+export default SignupFormModal;
