@@ -7,16 +7,12 @@
     background-color: white;
     padding: 0;
     text-align: center;
-
-
 }
 
 #LuUserCircle2 {
-
     height: 50px;
     width: 50px;
     color: red;
-
 }
 
 .profile-dropdown {
@@ -29,4 +25,25 @@
 
 #logout {
     margin: 0;
+    font-size: medium;
+}
+
+#houdini {
+    position: absolute;
+
+}
+
+#houdini li {
+
+
+font-size: medium;
+text-align: center;
+padding-left: -20rem;
+position:relative;
+border: 1px red solid;
+background-color: #E5E5E5;
+left: -7.5rem;
+width: 8rem;
+height: 2rem;
+
 }

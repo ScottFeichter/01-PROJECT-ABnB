@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
         <LuUserCircle2 id="LuUserCircle2"/>
       </button>
 
-      <ul className={ulClassName}>
+      <ul className={ulClassName} id="houdini">
         <li>{user.username}</li>
         <li>{user.firstName} {user.lastName}</li>
         <li>{user.email}</li>
