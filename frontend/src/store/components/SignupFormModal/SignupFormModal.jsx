@@ -22,14 +22,14 @@ const SignupFormModal = () => {
         e.preventDefault();
         if (confirmPassword === password) {
             setErrors({});
-            console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
+            // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
             return dispatch(sessionActions.signup({firstName, lastName, email, username, password}))
             .the(closeModal)
             .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
-                    console.log('CATCH DISPATCH RAN', data);
+                    // console.log('CATCH DISPATCH RAN', data);
                 }
             )
         }

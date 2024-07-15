@@ -8,7 +8,7 @@ const REMOVE_USER = "session/removeUser";
 
 /** =======ACTION CREATORS: =========*/
 const setUser = (user) => {
-  console.log('SETUSER RAN - USER', user);
+  // console.log('SETUSER RAN - USER', user);
   return {
     type: SET_USER,
     payload: user
@@ -24,7 +24,7 @@ const setUser = (user) => {
 // };
 
 const removeUser = () => {
-  console.log('REMOVEUSER RAN - USER');
+  // console.log('REMOVEUSER RAN - USER');
   return {
     type: REMOVE_USER
   };
@@ -44,7 +44,7 @@ export const login = (user) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
+  // console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
   dispatch(setUser(data.user));
   return response;
 };
@@ -64,7 +64,7 @@ export const signup = (user) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  console.log('THUNK SIGNUP RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
+  // console.log('THUNK SIGNUP RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
   dispatch(setUser(data.user));
   return response;
 };
@@ -75,7 +75,7 @@ export const signup = (user) => async (dispatch) => {
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch('/api/session');
   const data = await response.json()
-  console.log(`RESTORE USER RAN - DATA`, data);
+  // console.log(`RESTORE USER RAN - DATA`, data);
   dispatch(setUser(data.user));
   return response;
 }
@@ -85,7 +85,7 @@ export const restoreUser = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   const response = await csrfFetch('/api/session', {method: 'DELETE'});
 
-  console.log(`LOGOUT RAN - RESPONSE.STATUS`, response.status);
+  // console.log(`LOGOUT RAN - RESPONSE.STATUS`, response.status);
   dispatch(removeUser());
   return response;
 }
@@ -97,7 +97,7 @@ const initialState = {user: null}
 
 /** =======REDUCER: =========*/
 const sessionReducer = (state = initialState, action) => {
-  console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
+  // console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
     case SET_USER:
       return {...state, user: action.payload};

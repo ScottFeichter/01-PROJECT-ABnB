@@ -20,14 +20,14 @@ const LoginFormModal = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
-        console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
+        // console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
         return dispatch(sessionActions.login({credential, password}))
             .then(closeModal)
             .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
-                    console.log('CATCH DISPATCH RAN', data);
+                    // console.log('CATCH DISPATCH RAN', data);
                 }
             );
     };
