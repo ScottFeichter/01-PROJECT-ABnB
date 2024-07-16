@@ -1,9 +1,16 @@
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import * as spotsActions from '../../../spots'
 import Spot from "../../Spot";
 
 
 
+
+
+
 const SearchResults = () => {
+  
+
     const searchResults = useSelector(state => state.spots);
     const results = searchResults.spots;
 

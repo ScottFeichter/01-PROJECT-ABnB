@@ -15,8 +15,6 @@ const spotsSearch = (spots) => {
 };
 
 
-
-
 /** =======THUNKS: =========*/
 
 /** GET SPOTS */

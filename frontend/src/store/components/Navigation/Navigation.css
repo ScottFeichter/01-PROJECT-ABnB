@@ -1,18 +1,3 @@
-ul {
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-li {
-    padding-left: 2rem;
-}
-
-#NavLinkToHome {
-    color: #222222;
-}
-
 header {
     padding: 0 1rem 0 1rem;
     display: flex;
@@ -24,4 +9,20 @@ header {
 
 #logo {
     height: 3rem;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#homeLi {
+    padding-right: 2rem;
+}
+
+
+#NavLinkToHome {
+    color:  #FE595D;
 }

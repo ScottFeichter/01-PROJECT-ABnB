@@ -1,7 +1,11 @@
 
 
 const getSpotsController = async (search, session, csrf = null) => {
-  const {where, checkIn, checkOut, who} = search;
+
+  if(search) {
+    const {where, checkIn, checkOut, who} = search;
+  }
+
 
   // get all spots
   if(!session) {

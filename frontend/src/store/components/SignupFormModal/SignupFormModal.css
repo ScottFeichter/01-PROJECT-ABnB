@@ -4,26 +4,20 @@
 
 /* ======================MAIN========================== */
 
-main {}
+ #SignupFormModalMain {
+    width: 20rem;
+    height: 50rem;
+}
 
 h1 {
     text-align: center;
 }
-#formContainer {
-    margin: 0 16rem 0 16rem;
-    padding: 4rem 0 0 0;
-    /* padding: 100px, 100px, 100px, 100px; */
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    border: 3px orange solid;
-    /* border-radius: 25px;
-}
 
-#loginForm{
-    margin: auto;
-    /* padding: 4rem 0rem 4rem 0rem; */
-    border: 1px red solid;
+
+#signupForm{
+    margin: 2rem 4rem 4rem 4rem;
+    padding: 4rem 0rem 2rem 0rem;
+    border: 1px #FF5A5F solid;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -31,33 +25,39 @@ h1 {
     justify-content: center;
 }
 
-#loginContainer {
-    margin: 2rem auto;
-    /* border: 2px blue dashed; */
-}
-#passwordContainer {}
-#buttonContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 label {
-    /* padding: 1rem; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* border: 2px green solid; */
 }
 
 input {
     margin: 1rem;
-    /* border: 2px purple solid; */
 }
 
-button {
+
+
+#SignupFormModalButton {
     margin: 4rem 0 4rem 0;
     width: 8rem;
     height: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid #FE595D;
+    border-radius: 25px;
+    color: white;
+    background-color: #FE595D;
+    width: 100px;
+}
+
+#SignupFormModalButton:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#SignupFormModalButton:active{
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
 }

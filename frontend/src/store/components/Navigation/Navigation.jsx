@@ -1,7 +1,8 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import logo from './Logo/scottbnb.png';
-import SearchBar from "./SearchBar";
+import * as spotsActions from '../../spots'
 import ProfileButton from './ProfileButton';
 
 // import OpenModalButton from "../OpenModalButton/OpenModalButton";
@@ -13,6 +14,17 @@ import './Navigation.css';
 
 const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+
+        (async () => {
+             const spots = await dispatch(spotsActions.search());
+             console.log("SPOTS", spots);
+        })();
+
+    }, [dispatch])
+
 
 
     return(
@@ -20,9 +32,9 @@ const Navigation = ({isLoaded}) => {
         <a href="/">
             <img id="logo" src={logo} alt="logo"></img>
         </a>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <ul>
-            <li>
+            <li id="homeLi">
                 <NavLink to="/" id="NavLinkToHome">Home</NavLink>
             </li>
             {isLoaded && (

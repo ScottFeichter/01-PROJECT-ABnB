@@ -33,11 +33,12 @@ const LoginFormModal = () => {
     };
 
     return (
-    <>
-      <main>
+
+    <main id="LoginFormModalMain">
       <h1>Log In</h1>
-        <div id='formContainer'>
+
             <form id='loginForm' onSubmit={handleSubmit}>
+
                 <div id='loginContainer'>
                     <div className="errors">{errors.credential}</div>
                         <label>
@@ -52,6 +53,7 @@ const LoginFormModal = () => {
                             />
                         </label>
                     </div>
+
                     <div id='passwordContainer'>
                         <div className="errors">{errors.password}</div>
                         <label>
@@ -66,13 +68,15 @@ const LoginFormModal = () => {
                         </label>
                         {errors.credential && (<p>{errors.credential}</p>)}
                     </div>
+
                     <div id="buttonContainer">
-                        <button type="submit">Log In</button>
+                        <button type="submit" id="LoginFormModalButton">Log In</button>
                     </div>
+
             </form>
-        </div>
-      </main>
-    </>
+    </main>
+
+
   )
 }
 
