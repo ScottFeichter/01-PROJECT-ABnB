@@ -24,7 +24,7 @@ const SignupFormModal = () => {
             setErrors({});
             // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
             return dispatch(sessionActions.signup({firstName, lastName, email, username, password}))
-            .the(closeModal)
+            .then(closeModal)
             .catch(
                 async (res) => {
                     const data = await res.json();

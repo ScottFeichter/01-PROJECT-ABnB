@@ -1,0 +1,15 @@
+#spotContainer {
+    border: 1px black solid;
+}
+
+.detailContainer {
+    display: flex;
+}
+
+.key {
+    margin-left: 1rem;
+}
+
+.value {
+    margin-left: 1rem;
+}

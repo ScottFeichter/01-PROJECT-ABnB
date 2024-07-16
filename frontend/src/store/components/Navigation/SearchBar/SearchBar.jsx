@@ -1,17 +1,44 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import * as spotsActions from '../../../spots'
+import { useNavigate } from 'react-router-dom';
 
 import './SearchBar.css';
 
 function SearchBar() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+
   const [where, setWhere] = useState("Search destinations");
   const [checkIn, setCheckIn] = useState("Add dates");
   const [checkOut, setCheckOut] = useState("Add dates");
   const [who, setWho] = useState("Add guests");
   const [errors, setErrors] = useState({});
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(!where || where === "Search destinations") setWhere("*");
+    if(!checkIn || checkIn === "Add dates") setCheckIn("");
+    if(!checkOut || checkOut === "Add dates") setCheckOut("");
+    if(!who || who === "Add guests") setWho(1);
+
+    setErrors({});
+
+    dispatch(spotsActions.search({where, checkIn, checkOut, who}));
+
+    console.log('HANDLE SUBMIT SEARCH RAN WITH: ', {where, checkIn, checkOut, who});
+
+    navigate('/results');
+    return
+
+};
+
+
+
   return (
-    <form id="SearchBarForm">
+    <form id="SearchBarForm" onSubmit={handleSubmit}>
       <label className="SearchBarLabel">Where
         <input
           className="SearchBarInput"
@@ -58,8 +85,9 @@ function SearchBar() {
 
 
       <FaMagnifyingGlass id="FaMagnifyingGlass">
-        <button type="submit">Search</button>
+
       </FaMagnifyingGlass>
+      <button type="submit">Search</button>
 
 
     </form>
