@@ -1,15 +1,47 @@
-#spotContainer {
-    border: 1px black solid;
+.spotContainer {
+    font-size: small;
+    /* border: 1px black solid; */
+    margin: 1rem;
+    padding: 1rem;
+    display: inline-flex;
+    flex-direction: column;
 }
 
-.detailContainer {
+.spotPreviewImage {
+    width: 200px;
+    height: 200px;
+}
+
+.data {}
+
+.dataLevelOne {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.key {
-    margin-left: 1rem;
+
+
+
+
+.spotCityState {
+    margin: .25rem 0 0 0 ;
+
 }
 
-.value {
-    margin-left: 1rem;
+.spotRatingContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.spotFaStar {
+    margin: 0 .25rem 0 0;
+}
+
+.spotAvgRating {
+    margin: 0;
+}
+
+.spotPrice {
+    margin: .5rem 0 0 0 ;
 }
