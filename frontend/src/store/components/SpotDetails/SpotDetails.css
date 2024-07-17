@@ -1,0 +1,17 @@
+#SpotDetailsH1 {
+    text-align: left;
+}
+#SpotDetailsH3 {
+    text-align: left;
+}
+
+
+#SpotDetailsPreviewImage {
+    width: 400px;
+    height: 400px;
+}
+
+#SpotDetailsSpotImage-1 #SpotDetailsSpotImage-2 #SpotDetailsSpotImage-3 #SpotDetailsSpotImage-4 {
+    width: 200px;
+    height: 200px;
+}

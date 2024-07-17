@@ -1,18 +1,13 @@
 import './Spot.css';
 import { FaStar } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 
 function Spot({spot}) {
 
-const spotKeys = Object.keys(spot);
-const spotValues = Object.values(spot);
-// const spotEntries = Object.entries(spot);
-console.log(spot);
-
-
     return (
 
-       <a href={SpotDetails} spot={spot}>
+        <NavLink to={`/spots/${spot.id}`}>
         <span className="spotContainer">
 
             <img className="spotPreviewImage" src={spot.previewImage} alt="preview"></img>
@@ -32,10 +27,7 @@ console.log(spot);
             </div>
 
         </span>
-        </a>
-
-
-
+    </NavLink>
     )
 }
 
