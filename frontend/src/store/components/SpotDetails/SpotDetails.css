@@ -55,6 +55,7 @@
 
 #SpotDetailsPriceContainer {
     margin: .5rem;
+    width: 30%;
     display: flex;
     flex-direction: column;
     border: 1px blue solid;
@@ -68,6 +69,7 @@
 }
 
 #SpotDetailsPriceAndReviewsContainer{
+    margin-left: .5rem;
     display: flex;
     flex-direction: row;
     border: 1px brown solid;
