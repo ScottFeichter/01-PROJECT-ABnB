@@ -1,3 +1,12 @@
+#SpotDetailsMain {
+    margin: 0rem 1rem 1rem 1rem;
+    max-width: 900px;
+    border: 2px dashed red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
 #SpotDetailsH1 {
     text-align: left;
 }
@@ -5,13 +14,77 @@
     text-align: left;
 }
 
-
-#SpotDetailsPreviewImage {
-    width: 400px;
-    height: 400px;
+#SpotDetailsImagesSection {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* border: 1px orange solid; */
 }
 
-#SpotDetailsSpotImage-1 #SpotDetailsSpotImage-2 #SpotDetailsSpotImage-3 #SpotDetailsSpotImage-4 {
+
+#SpotDetailsPreviewImage {
+    width: 450px;
+    height: 400px;
+    margin: .5rem;
+}
+
+#SpotDetailsImageGrid {
+    display: grid;
+    grid-template-columns: max-content max-content;
+}
+
+#SpotDetailsSpotImage-1, #SpotDetailsSpotImage-2, #SpotDetailsSpotImage-3, #SpotDetailsSpotImage-4 {
     width: 200px;
-    height: 200px;
+    height: 190px;
+    margin: .5rem;
+    /* border: 1px black solid; */
+}
+
+#SpotDetailsHostedBySection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px purple solid;
+}
+
+#SpotDetailsHostedByTextContainer {
+    margin: .5rem;
+    border: 3px dashed gold;
+    width: 60%;
+}
+
+#SpotDetailsPriceContainer {
+    margin: .5rem;
+    display: flex;
+    flex-direction: column;
+    border: 1px blue solid;
+}
+
+#SpotDetailsHr {
+    color: black;
+    width: 880px;
+    border: 1px black solid;
+    border-color: black;
+}
+
+#SpotDetailsPriceAndReviewsContainer{
+    display: flex;
+    flex-direction: row;
+    border: 1px brown solid;
+}
+
+.spotRatingContainer {
+    margin: .5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px green solid;
+}
+
+#SpotDetailsReserveButton{
+    margin: .5rem;
+}
+
+#SpotDetailsReviewsSection {
+    margin: .5rem;
 }

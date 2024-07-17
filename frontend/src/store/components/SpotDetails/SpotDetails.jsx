@@ -21,32 +21,34 @@ function SpotDetails() {
             <section id="SpotDetailsImagesSection">
                 <img src={spot.previewImage} alt="img" id="SpotDetailsPreviewImage" />
                 <div id="SpotDetailsImageGrid">
-                    <img src="" alt="img" id="SpotDetailsSpotImage-1" />
-                    <img src="" alt="img" id="SpotDetailsSpotImage-2" />
-                    <img src="" alt="img" id="SpotDetailsSpotImage-3" />
-                    <img src="" alt="img" id="SpotDetailsSpotImage-4" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-1" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-2" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-3" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-4" />
                 </div>
             </section>
             <section id="SpotDetailsHostedBySection">
                 <div id="SpotDetailsHostedByTextContainer">
-                    {/* <h2>Hosted by {owner.firstName} {owner.lastName}</h2> */}
+                    <h2>Hosted by firstName lastName</h2>
                     <p>{spot.description}</p>
                 </div>
                 <div id="SpotDetailsPriceContainer">
-                    <h4>${spot.price} night</h4>
-                    <div className='spotRatingContainer'>
-                        <FaStar className='spotFaStar'></FaStar>
-                        <p className='spotAvgRating'>{spot.avgRating}</p>
-                        <p># reviews</p>
+                    <div id="SpotDetailsPriceAndReviewsContainer">
+                        <h4>${spot.price} night</h4>
+                        <div className='spotRatingContainer'>
+                            <FaStar className='spotFaStar'></FaStar>
+                            <p className='spotAvgRating'>{spot.avgRating} # reviews</p>
+                        </div>
                     </div>
+                    <button id="SpotDetailsReserveButton">Reserve</button>
 
                 </div>
             </section>
+            <hr id="SpotDetailsHr"></hr>
             <section id="SpotDetailsReviewsSection">
                 <div className='spotRatingContainer'>
                     <FaStar className='spotFaStar'></FaStar>
-                    <p className='spotAvgRating'>{spot.avgRating}</p>
-                    <p># reviews</p>
+                    <p className='spotAvgRating'>{spot.avgRating} # reviews</p>
                 </div>
                 <p>Here will be a review</p>
                 <p>Here will be another review</p>
