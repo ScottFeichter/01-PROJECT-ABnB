@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import Spot from "../../Spot";
+import './SearchResults.css';
 
 
 const SearchResults = () => {
@@ -11,7 +12,6 @@ const SearchResults = () => {
     return (
     <>
     {console.log('SERACH RESULTS RETURN RENDERED I GUESS')}
-    <h2>search resultssssss</h2>
     <div id="searchResults">
         {results ?
         results.map(result => <Spot key={result.id} spot={result} />) :

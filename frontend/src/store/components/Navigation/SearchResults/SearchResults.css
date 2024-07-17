@@ -1,0 +1,6 @@
+#searchResults {
+    display: flex;
+    flex-basis: 25%;
+    flex-wrap: nowrap;
+
+}
