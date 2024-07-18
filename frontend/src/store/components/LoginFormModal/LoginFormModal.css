@@ -25,36 +25,64 @@ h1 {
 #passwordContainer {}
 #buttonContainer {}
 
-label {
+.LoginFormModalLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-input {
-    margin: 1rem;
+.LoginFormModalInput {
+    margin: 0.5rem 1rem 2rem 1rem;
+    border: 1px solid #FF5A5F;
+    box-shadow: none;
 }
 
+
 #LoginFormModalButton {
-    margin: 4rem 0 4rem 0;
+    margin: 1.5rem 0 3rem 0;
     width: 8rem;
     height: 2rem;
     font-size: 1rem;
     font-weight: 500;
-    border: 1px solid #FE595D;
-    border-radius: 25px;
-    color: white;
-    background-color: #FE595D;
     width: 100px;
+    border-radius: 25px;
 }
 
-#LoginFormModalButton:hover {
+#LoginFormModalButton:enabled {
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+}
+
+
+#LoginFormModalButton:disabled {
+    border: 1px solid grey;
+   color: grey;
+   background-color: whitesmoke;
+}
+
+#LoginFormModalButton:enabled:hover {
     color: white;
     background-color: rgba(0, 0, 0, 1);
 }
 
-#LoginFormModalButton:active{
+#LoginFormModalButton:enabled:active{
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
+}
+
+#LoginDemoUserButton {
+    background-color: white;
+    color: #FF5A5F;
+    border: none;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+#LoginDemoUserButton:hover {
+    cursor: pointer;
+    color: black;
 }

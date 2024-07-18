@@ -35,7 +35,9 @@ const removeUser = () => {
 
 /** LOGIN */
 export const login = (user) => async (dispatch) => {
+
   const { credential, password } = user;
+
   const response = await csrfFetch("/api/session", {
     method: "POST",
     body: JSON.stringify({
@@ -44,7 +46,7 @@ export const login = (user) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  // console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
+  console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
   dispatch(setUser(data.user));
   return response;
 };
