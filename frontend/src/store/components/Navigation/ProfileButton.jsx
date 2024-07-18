@@ -51,7 +51,7 @@ function ProfileButton({ user }) {
 
       <ul className={ulClassName} id="houdini" ref={ulRef}>
         {user ? (
-          <>
+          <div id='houdiniLiWrapperDiv'>
             <li >Hello, {user.firstName} {user.lastName}</li>
             <li >{user.username}</li>
             <li >{user.email}</li>
@@ -61,7 +61,7 @@ function ProfileButton({ user }) {
             <li >
               <button onClick={logout} id="userLogoutButton">Log Out</button>
             </li>
-          </>
+          </div>
         ) : (
           <>
           <ul id="notLoggedIn">

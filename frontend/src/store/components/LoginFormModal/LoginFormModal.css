@@ -58,8 +58,8 @@ h1 {
 
 #LoginFormModalButton:disabled {
     border: 1px solid grey;
-   color: grey;
-   background-color: whitesmoke;
+    color: grey;
+    background-color: whitesmoke;
 }
 
 #LoginFormModalButton:enabled:hover {

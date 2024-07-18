@@ -19,10 +19,23 @@
     cursor: pointer;
 }
 
+#houdiniLiWrapperDiv {
+
+
+position: relative;
+border: 2px #FE595D solid;
+background-color: #ffffff;
+right: 15rem;
+/* width: 14rem; */
+
+}
+
 .profile-dropdown {
     display: flex;
     flex-direction: column;
     list-style-type: none;
+
+
 }
 
 .hidden {
@@ -44,7 +57,8 @@
     flex-direction: column;
     position: relative;
     left: -7rem;
-    border: 2px #FE595D green;
+    border: 2px #FE595D solid;
+    background-color: white;
 }
 
 
@@ -57,6 +71,7 @@
 .notLoggedInButton {
     padding: 0;
     font-size: 16px;
+    font-weight: 600;
     text-decoration: underline;
     color: #FE595D;
     background-color: white;
@@ -75,12 +90,12 @@
 
 
 
-#houdini > li {
+#houdiniLiWrapperDiv > li {
 
 display: flex;
 align-items: center;
 padding-left: 1rem;
-position: relative;
+/* position: relative; */
 border: 2px #FE595D solid;
 background-color: #ffffff;
 right: 15rem;
@@ -91,12 +106,14 @@ height: 2rem;
 
 #manageSpotsNavLink {
     font-size: 16px;
+    font-weight: 600;
     color: #FE595D;
 }
 
 #userLogoutButton {
     padding: 0;
     font-size: 16px;
+    font-weight: 600;
     text-decoration: underline;
     color: #FE595D;
     background-color: white;

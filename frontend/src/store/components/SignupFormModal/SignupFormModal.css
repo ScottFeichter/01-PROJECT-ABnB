@@ -45,19 +45,30 @@ h1 {
     height: 2rem;
     font-size: 1rem;
     font-weight: 500;
-    border: 1px solid #FE595D;
     border-radius: 25px;
-    color: white;
-    background-color: #FE595D;
     width: 100px;
 }
 
-#SignupFormModalButton:hover {
+#SignupFormModalButton:enabled {
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+
+}
+
+#SignupFormModalButton:disabled {
+    border: 1px solid grey;
+    color: grey;
+    background-color: whitesmoke;
+
+}
+
+#SignupFormModalButton:enabled:hover {
     color: white;
     background-color: rgba(0, 0, 0, 1);
 }
 
-#SignupFormModalButton:active{
+#SignupFormModalButton:enabled:active{
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
 }

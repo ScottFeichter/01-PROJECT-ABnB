@@ -2,6 +2,7 @@ import {useState } from 'react';
 import {useDispatch } from 'react-redux'
 import { useModal } from '../../../context/Modal';
 import * as sessionActions from '../../session'
+import { useEffect } from 'react';
 import './SignupFormModal.css';
 
 
@@ -14,9 +15,35 @@ const SignupFormModal = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
 
 
+// Log In Button Disabled------------------------------------------------------------------------
+
+
+const checkDisabled = () => {
+    if(
+    (firstName.length === 0 || !firstName) ||
+    (lastName.length === 0 || !lastName) ||
+    (email.length === 0 || !email) ||
+    (username.length === 0 || !username) ||
+    (password.length === 0 || !password) ||
+    (confirmPassword.length === 0 || !confirmPassword) ||
+    (username.length < 4) ||
+    (password.length < 6) 
+    )
+    {setIsDisabled(true) } else {setIsDisabled(false)}
+
+   }
+
+   useEffect(()=> {
+    checkDisabled();
+   });
+
+
+
+// Signup Button handler------------------------------------------------------------------------
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -154,7 +181,7 @@ const SignupFormModal = () => {
                             <div id="buttonContainer">
                                 <button
                                 id="SignupFormModalButton"
-                                type="submit">
+                                type="submit" disabled={isDisabled}>
                                     Sign Up
                                     </button>
                             </div>
