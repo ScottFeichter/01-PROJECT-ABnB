@@ -11,6 +11,12 @@ header {
     height: 3rem;
 }
 
+#IoHome {
+    height: 30px;
+    width: 30px;
+    color: #FE595D;
+}
+
 ul {
     list-style-type: none;
     display: flex;

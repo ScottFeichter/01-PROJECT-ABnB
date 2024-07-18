@@ -4,6 +4,8 @@ import { useSelector, useDispatch} from "react-redux";
 import logo from './Logo/scottbnb.png';
 import * as spotsActions from '../../spots'
 import ProfileButton from './ProfileButton';
+import { IoHome } from "react-icons/io5";
+
 
 // import OpenModalButton from "../OpenModalButton/OpenModalButton";
 // import LoginFormModal from "../LoginFormModal/LoginFormModal";
@@ -35,7 +37,7 @@ const Navigation = ({isLoaded}) => {
         {/* <SearchBar /> */}
         <ul>
             <li id="homeLi">
-                <NavLink to="/" id="NavLinkToHome">Home</NavLink>
+                <NavLink to="/" id="NavLinkToHome"><IoHome id="IoHome"/></NavLink>
             </li>
             {isLoaded && (
             <li>

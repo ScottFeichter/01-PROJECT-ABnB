@@ -5,6 +5,7 @@ import * as sessionActions from '../../session';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import {NavLink} from "react-router-dom"
 
 import "./ProfileButton.css";
 
@@ -51,11 +52,14 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} id="houdini" ref={ulRef}>
         {user ? (
           <>
+            <li >Hello, {user.firstName} {user.lastName}</li>
             <li >{user.username}</li>
-            <li >{user.firstName} {user.lastName}</li>
             <li >{user.email}</li>
             <li >
-              <button onClick={logout}>Log Out</button>
+              <NavLink to="/manageSpots" id='manageSpotsNavLink'>Manage Spots</NavLink>
+            </li>
+            <li >
+              <button onClick={logout} id="userLogoutButton">Log Out</button>
             </li>
           </>
         ) : (
@@ -71,7 +75,7 @@ function ProfileButton({ user }) {
             </li>
             <li >
               <OpenModalButton
-                buttonClassName="notLoggedInButton"
+                className="notLoggedInButton"
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
