@@ -17,6 +17,10 @@ header {
     color: #FE595D;
 }
 
+#IoHome:hover {
+    color: black;
+}
+
 ul {
     list-style-type: none;
     display: flex;
