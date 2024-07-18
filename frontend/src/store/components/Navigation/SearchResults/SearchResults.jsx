@@ -11,7 +11,7 @@ const SearchResults = () => {
 
     return (
     <>
-    {console.log('SERACH RESULTS RETURN RENDERED I GUESS')}
+    {/* {console.log('SERACH RESULTS RETURN RENDERED')} */}
     <div id="searchResults">
         {results ?
         results.map(result => <Spot key={result.id} spot={result} />) :

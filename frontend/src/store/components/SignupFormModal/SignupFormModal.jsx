@@ -49,9 +49,10 @@ const SignupFormModal = () => {
 
                     <div id='firstNameContainer'>
                             <div className="errors">{errors.firstName}</div>
-                                <label>
+                                <label className='signUpFormLabel'>
                                     first name:
                                     <input
+                                    className='signUpFormInput'
                                     id="firstName"
                                     name="firstName"
                                     type="text"
@@ -65,9 +66,10 @@ const SignupFormModal = () => {
 
                         <div id='lastNameContainer'>
                             <div className="errors">{errors.lastName}</div>
-                                <label>
+                                <label className='signUpFormLabel'>
                                     last name:
                                     <input
+                                    className='signUpFormInput'
                                     id="lastName"
                                     name="lastName"
                                     value={lastName}
@@ -81,9 +83,10 @@ const SignupFormModal = () => {
 
                         <div id='emailContainer'>
                             <div className="errors">{errors.email}</div>
-                                <label>
+                                <label className='signUpFormLabel'>
                                         email:
                                     <input
+                                    className='signUpFormInput'
                                     id="email"
                                     name="email"
                                     value={email}
@@ -97,9 +100,10 @@ const SignupFormModal = () => {
 
                         <div id='userNameContainer'>
                             <div className="errors">{errors.username}</div>
-                                    <label>
+                                    <label className='signUpFormLabel'>
                                         username:
                                         <input
+                                        className='signUpFormInput'
                                         id="username"
                                         name="username"
                                         value={username}
@@ -114,9 +118,10 @@ const SignupFormModal = () => {
 
                             <div id='passwordContainer'>
                                 <div className="errors">{errors.password}</div>
-                                    <label>
+                                    <label className='signUpFormLabel'>
                                         password:
                                         <input
+                                        className='signUpFormInput'
                                         id="password"
                                         name="password"
                                         value={password}
@@ -131,9 +136,10 @@ const SignupFormModal = () => {
 
                             <div id='confirmPasswordContainer'>
                                 <div className="errors">{errors.password}</div>
-                                    <label>
+                                    <label className='signUpFormLabel'>
                                         confirm password:
                                         <input
+                                        className='signUpFormInput'
                                         id="confirmPassword"
                                         name="confirmPassword"
                                         value={confirmPassword}
