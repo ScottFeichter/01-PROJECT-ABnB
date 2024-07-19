@@ -128,7 +128,7 @@ const initialState = {}
 
 /** =======REDUCER: =========*/
 const reviewsReducer = (state = initialState, action) => {
-  console.log('REVIEWS REDUCER RAN - STATE AND ACTION', state, action)
+  // console.log('REVIEWS REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
 
     case REVIEWS_CURRENT:

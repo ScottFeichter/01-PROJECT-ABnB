@@ -22,7 +22,7 @@ const Navigation = ({isLoaded}) => {
 
         (async () => {
              const spots = await dispatch(spotsActions.search());
-             console.log("SPOTS", spots);
+            //  console.log("SPOTS", spots);
         })();
 
     }, [dispatch])

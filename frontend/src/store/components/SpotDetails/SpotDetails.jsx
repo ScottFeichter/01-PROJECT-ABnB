@@ -7,32 +7,37 @@ import { getSpotDetailsById } from '../../spots';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 
 function SpotDetails() {
     const dispatch = useDispatch();
     const {spotId} = useParams();
     const spots = useSelector(state => state.spots.spots);
     const spot = spots.find((spot) => spot.id === +spotId);
+    const tehspot = useSelector(state => state.spots.spot)
+    console.log('!!!!!!!!!!!!!!', tehspot)
+    console.log("spot!!!!!!!!!!!!!!!!", spot)
     const [spotOwner, setSpotOwner] = useState();
     const [reviewsShow, setReviewsShow] = useState();
-
+    let spotDetails = useRef(0);
 
 //get Spot Details----------------------------------
-//    useEffect(()=>{
-//     const getSpotDetails = async () => {
-//         const spotDetails = await dispatch(getSpotDetailsById(spotId));
-//         const owner = spotDetails.Owner;
-//         console.log(spotDetails);
-//         setSpotOwner(spotDetails.Owner);
-//         console.log(spotOwner)
-//         const spotOwnerFirstName = owner.firstName;
-//         console.log(spotOwnerFirstName)
-//         const spotOwnerLastName = owner.lastName;
-//         console.log(spotOwnerLastName)
-//     }
-//     getSpotDetails()
-//    }, [])
+   useEffect(()=>{
+    const getSpotDetails = async () => {
+        spotDetails = await dispatch(getSpotDetailsById(spotId));
+        const owner = spotDetails.Owner;
+        console.log(spotDetails);
+        setSpotOwner(spotDetails.Owner);
+        console.log(spotOwner)
+        const spotOwnerFirstName = owner.firstName;
+        console.log(spotOwnerFirstName)
+        const spotOwnerLastName = owner.lastName;
+        console.log(spotOwnerLastName)
+    }
+    getSpotDetails()
+   }, [])
 
+   console.log('SpotDetails', spotDetails);
 
 
 // getReviews---------------------------------------
@@ -85,7 +90,7 @@ function SpotDetails() {
             <section id="SpotDetailsHostedBySection">
 
                 <div id="SpotDetailsHostedByTextContainer">
-                    <h2>Hosted by firstName lastName</h2>
+                    <h2>Hosted by  lastName</h2>
                     <p>{spot.description}</p>
                 </div>
 
@@ -108,6 +113,12 @@ function SpotDetails() {
                     <FaStar className='spotFaStar'></FaStar>
                     <p className='spotAvgRating'>{reviewsShow}</p>
                 </div>
+
+                <div id="SpotDetailsReviews">
+                    {}
+                </div>
+
+
                 <p>Here will be a review</p>
                 <p>Here will be another review</p>
                 <p>Here will be still another review</p>

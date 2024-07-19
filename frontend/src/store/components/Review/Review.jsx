@@ -1,6 +1,6 @@
 import './Review.css';
 
-function Review() {
+function Review({prop}) {
     const review = {
         "id": 1,
         "userId": 1,
@@ -24,11 +24,11 @@ function Review() {
 
 // stars-------------------------------------------------------------
 
-const starDisplay;
+// const starDisplay;
 
-for (let i = 0; i <= +review.stars; i++) {
+// for (let i = 0; i <= +review.stars; i++) {
 
-}
+// }
 
 // date-------------------------------------------------------------
     const year = review.createdAt.substring(0,5);

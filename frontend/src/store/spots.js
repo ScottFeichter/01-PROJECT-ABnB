@@ -8,7 +8,7 @@ const DELETED_SPOT = "spot/deletedSpot";
 
 /** =======ACTION CREATORS: =========*/
 const spotsSearch = (spots) => {
-  console.log('SPOTSSEARCH RAN - SPOTS', spots);
+  // console.log('SPOTSSEARCH RAN - SPOTS', spots);
   return {
     type: SPOT_SEARCH,
     payload: spots
@@ -55,7 +55,7 @@ export const search = (search) => async (dispatch) => {
 
   const response = await fetch("/api/spots");
   const data = await response.json();
-  console.log('THUNK SEARCH RAN DATA: ', data );
+  // console.log('THUNK SEARCH RAN DATA: ', data );
   dispatch(spotsSearch(data.Spots));
   return data
 };
@@ -128,11 +128,11 @@ const initialState = {}
 
 /** =======REDUCER: =========*/
 const spotsReducer = (state = initialState, action) => {
-  console.log('SPOTS REDUCER RAN - STATE AND ACTION', state, action)
+  // console.log('SPOTS REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
 
     case SPOT_SEARCH:
-      console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
+      // console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
       return {...state, spots: action.payload};
 
     case SPOT_BY_ID:
