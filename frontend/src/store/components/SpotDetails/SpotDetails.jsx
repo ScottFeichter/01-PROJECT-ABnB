@@ -2,20 +2,69 @@ import './SpotDetails.css';
 import { FaStar } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { getReviewsBySpotId } from '../../reviews';
+import { getSpotDetailsById } from '../../spots';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function SpotDetails() {
+    const dispatch = useDispatch();
     const {spotId} = useParams();
     const spots = useSelector(state => state.spots.spots);
     const spot = spots.find((spot) => spot.id === +spotId);
-    // const owner = dispatch(getOwner(spot.ownerId));
+    const [spotOwner, setSpotOwner] = useState();
+    const [reviewsShow, setReviewsShow] = useState();
 
+
+//get Spot Details----------------------------------
+//    useEffect(()=>{
+//     const getSpotDetails = async () => {
+//         const spotDetails = await dispatch(getSpotDetailsById(spotId));
+//         const owner = spotDetails.Owner;
+//         console.log(spotDetails);
+//         setSpotOwner(spotDetails.Owner);
+//         console.log(spotOwner)
+//         const spotOwnerFirstName = owner.firstName;
+//         console.log(spotOwnerFirstName)
+//         const spotOwnerLastName = owner.lastName;
+//         console.log(spotOwnerLastName)
+//     }
+//     getSpotDetails()
+//    }, [])
+
+
+
+// getReviews---------------------------------------
+    useEffect(() => {
+        const getReviews = async () => {
+            const response = await dispatch(getReviewsBySpotId(spotId));
+            console.log('response========', response)
+
+            const reviews = response.Reviews.length;
+            console.log('reviews============', reviews);
+
+            if(response.Reviews.length === 1) {
+                setReviewsShow(`${spot.avgRating}  •  ${response.Reviews.length} Review`);
+            } else if (!response.Reviews.length) {
+                setReviewsShow(`\xa0\xa0\xa0 New`)
+            } else {
+                setReviewsShow(`${spot.avgRating}  •  ${response.Reviews.length} Reviews`);
+            }
+        }
+        getReviews()
+    }, []);
+
+
+
+// handleReserve---------------------------------------
 
     const handleReserve = (e) => {
         e.preventDefault();
         window.alert("Feature coming soon");
     }
 
+// return---------------------------------------
 
     return (
         <main id="SpotDetailsMain">
@@ -34,7 +83,7 @@ function SpotDetails() {
             </section>
 
             <section id="SpotDetailsHostedBySection">
-                
+
                 <div id="SpotDetailsHostedByTextContainer">
                     <h2>Hosted by firstName lastName</h2>
                     <p>{spot.description}</p>
@@ -45,7 +94,7 @@ function SpotDetails() {
                         <h4>${spot.price} night</h4>
                         <div className='spotDetailsRatingContainer'>
                             <FaStar className='spotFaStar'></FaStar>
-                            <p className='spotAvgRating'>{spot.avgRating} # reviews</p>
+                            <p className='spotAvgRating'>{reviewsShow}</p>
                         </div>
                     </div>
 
@@ -57,7 +106,7 @@ function SpotDetails() {
             <section id="SpotDetailsReviewsSection">
                 <div className='spotRatingContainer'>
                     <FaStar className='spotFaStar'></FaStar>
-                    <p className='spotAvgRating'>{spot.avgRating} # reviews</p>
+                    <p className='spotAvgRating'>{reviewsShow}</p>
                 </div>
                 <p>Here will be a review</p>
                 <p>Here will be another review</p>

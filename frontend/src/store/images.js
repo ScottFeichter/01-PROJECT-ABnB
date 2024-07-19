@@ -128,7 +128,7 @@ const initialState = {}
 
 /** =======REDUCER: =========*/
 const imagesReducer = (state = initialState, action) => {
-  console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
+  console.log('IMAGES REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
 
     case IMAGE_SEARCH:

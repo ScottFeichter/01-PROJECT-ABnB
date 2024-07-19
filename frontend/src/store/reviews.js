@@ -62,7 +62,7 @@ export const getReviewsByCurrent = (currentUserId) => async (dispatch) => {
 
 /** GET DETAILS OF A REVIEW FROM AN ID */
 export const getReviewsBySpotId = (spotId) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${spotId}`);
+  const response = await fetch(`/api/spots/${spotId}/reviews`);
   const data = await response.json();
   console.log('THUNK GET REVIEW BY SPOT ID RAN DATA: ', data );
   dispatch(reviewsBySpotId(data));
@@ -128,7 +128,7 @@ const initialState = {}
 
 /** =======REDUCER: =========*/
 const reviewsReducer = (state = initialState, action) => {
-  console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
+  console.log('REVIEWS REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
 
     case REVIEWS_CURRENT:
@@ -136,8 +136,8 @@ const reviewsReducer = (state = initialState, action) => {
       return {...state, reviews: action.payload};
 
     case REVIEWS_BY_SPOTID:
-      console.log("REVIEWSREDUCER RAN REVIEWS_BY_SPOTID CASE RETURNING: ", {...state, review: action.payload})
-      return {...state, review: action.payload};
+      console.log("REVIEWSREDUCER RAN REVIEWS_BY_SPOTID CASE RETURNING: ", {...state, reviews: action.payload})
+      return {...state, reviews: action.payload};
 
     case CREATE_REVIEW:
       console.log("REVIEWSREDUCER RAN CREATE_REVIEW CASE RETURNING: ", {...state, review: action.payload})
