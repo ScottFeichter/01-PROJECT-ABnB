@@ -1,6 +1,7 @@
 #spotsMain {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 1rem;
 }
 
 .spotNavLink {
@@ -22,8 +23,9 @@
     padding: 5px 0;
     position: relative;
     z-index: 1;
-    top: 1rem;
-    margin-left: 1rem;
+    top: .65rem;
+    margin-left: auto;
+    margin-right: auto;
     opacity: 0;
     transition: opacity 0.3s ease-in;
   }
@@ -39,16 +41,17 @@
 .spotContainer {
     font-size: small;
     border: 1px #FF5A5F solid;
-    margin: 1rem;
+    margin: 1rem .25rem;
     padding: 1rem;
+    padding-top: 0;
     display: inline-flex;
     flex-direction: column;
 }
 
 /* previewImage */
 .spotPreviewImage {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
 }
 
 
