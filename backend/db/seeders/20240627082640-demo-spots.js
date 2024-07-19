@@ -50,7 +50,7 @@ module.exports = {
           ownerId: 3,
           address: "777 Palace Blvd",
           city: "Westminster",
-          state: "Greater London",
+          state: "Gtr London",
           country: "England",
           lat: 51.4975,
           lng: 0.1357,
