@@ -1,5 +1,9 @@
 #reviewMain {
-    
+    display: flex;
+    flex-direction: row;
+    row-gap: .5rem;
+    align-items: baseline;
+    justify-content: space-evenly;
 }
 
 #reviewFirstName {}
