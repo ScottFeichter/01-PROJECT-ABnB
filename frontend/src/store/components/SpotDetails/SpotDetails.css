@@ -1,7 +1,6 @@
 #SpotDetailsMain {
-    margin: 0rem 1rem 1rem 1rem;
+    margin: 0rem 1rem 1rem 1.5rem;
     max-width: 900px;
-    border: 2px dashed red;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -9,9 +8,15 @@
 
 #SpotDetailsH1 {
     text-align: left;
+    text-wrap: nowrap;
+    margin-left: .5rem;
+    margin-bottom: .5rem;
 }
 #SpotDetailsH3 {
     text-align: left;
+    text-wrap: nowrap;
+    margin-left: .5rem;
+    margin-top: .5rem;
 }
 
 #SpotDetailsImagesSection {
@@ -23,8 +28,8 @@
 
 
 #SpotDetailsPreviewImage {
-    width: 450px;
-    height: 400px;
+    width: 376px;
+    height: 376px;
     margin: .5rem;
 }
 
@@ -34,48 +39,50 @@
 }
 
 #SpotDetailsSpotImage-1, #SpotDetailsSpotImage-2, #SpotDetailsSpotImage-3, #SpotDetailsSpotImage-4 {
-    width: 200px;
-    height: 190px;
+    width: 180px;
+    height: 180px;
     margin: .5rem;
     /* border: 1px black solid; */
 }
 
 #SpotDetailsHostedBySection {
+    width: 780px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px purple solid;
+    /* border: 1px pink solid; */
 }
 
 #SpotDetailsHostedByTextContainer {
     margin: .5rem;
-    border: 3px dashed gold;
     width: 60%;
+    /* border: 3px dashed gold; */
 }
 
 #SpotDetailsPriceContainer {
     margin: .5rem;
-    width: 30%;
+    width: 40%;
     display: flex;
     flex-direction: column;
-    border: 1px blue solid;
+    /* border: 1px blue solid; */
 }
 
 #SpotDetailsHr {
     color: black;
-    width: 880px;
-    border: 1px black solid;
-    border-color: black;
+    width: 780px;
+    border: 1px grey solid;
+    border-color: grey;
 }
 
 #SpotDetailsPriceAndReviewsContainer{
     margin-left: .5rem;
     display: flex;
     flex-direction: row;
-    border: 1px brown solid;
+    justify-content: space-between;
+    /* border: 1px brown solid; */
 }
 
-.spotRatingContainer {
+.spotDetailsRatingContainer {
     margin: .5rem;
     display: flex;
     flex-direction: row;
@@ -83,10 +90,36 @@
     border: 1px green solid;
 }
 
-#SpotDetailsReserveButton{
-    margin: .5rem;
+
+/* button------------------- */
+
+#SpotDetailsReserveButton {
+    margin: auto auto auto auto;
+    width: 12rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+
+    border-radius: 25px;
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
 }
 
+
+#SpotDetailsReserveButton:enabled:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#SpotDetailsReserveButton:enabled:active{
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+
+
+/* Reviews--------------------- */
 #SpotDetailsReviewsSection {
     margin: .5rem;
 }

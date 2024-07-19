@@ -11,6 +11,11 @@ function SpotDetails() {
     // const owner = dispatch(getOwner(spot.ownerId));
 
 
+    const handleReserve = (e) => {
+        e.preventDefault();
+        window.alert("Feature coming soon");
+    }
+
 
     return (
         <main id="SpotDetailsMain">
@@ -27,23 +32,27 @@ function SpotDetails() {
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-4" />
                 </div>
             </section>
+
             <section id="SpotDetailsHostedBySection">
+                
                 <div id="SpotDetailsHostedByTextContainer">
                     <h2>Hosted by firstName lastName</h2>
                     <p>{spot.description}</p>
                 </div>
+
                 <div id="SpotDetailsPriceContainer">
                     <div id="SpotDetailsPriceAndReviewsContainer">
                         <h4>${spot.price} night</h4>
-                        <div className='spotRatingContainer'>
+                        <div className='spotDetailsRatingContainer'>
                             <FaStar className='spotFaStar'></FaStar>
                             <p className='spotAvgRating'>{spot.avgRating} # reviews</p>
                         </div>
                     </div>
-                    <button id="SpotDetailsReserveButton">Reserve</button>
 
+                    <button id="SpotDetailsReserveButton" onClick={handleReserve}>Reserve</button>
                 </div>
             </section>
+
             <hr id="SpotDetailsHr"></hr>
             <section id="SpotDetailsReviewsSection">
                 <div className='spotRatingContainer'>
