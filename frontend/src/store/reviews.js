@@ -1,25 +1,25 @@
 
 /** =======ACTION TYPE CONSTANTS: =========*/
-const REVIEW_SEARCH = "review/search";
-const REVIEW_BY_ID = "review/reviewById";
+const REVIEWS_CURRENT = "reviews/current";
+const REVIEWS_BY_SPOTID = "reviews/reviewBySpotId";
 const CREATE_REVIEW = "review/createReview";
 const UPDATE_REVIEW = "review/updateReview";
 const DELETED_REVIEW = "review/deletedReview";
 
 /** =======ACTION CREATORS: =========*/
-const reviewsSearch = (reviews) => {
-  console.log('REVIEWSSEARCH RAN - REVIEWS', reviews);
+const reviewsByCurrent = (reviews) => {
+  console.log('REVIEWSBYCURRENT RAN - REVIEWS', reviews);
   return {
-    type: REVIEW_SEARCH,
+    type: REVIEWS_CURRENT,
     payload: reviews
   };
 };
 
-const reviewById = (review) => {
-  console.log('REVIEWBYID RAN - REVIEWS', review);
+const reviewsBySpotId = (reviews) => {
+  console.log('REVIEWBYID RAN - REVIEWS', reviews);
   return {
-    type: REVIEW_BY_ID,
-    payload: review
+    type: REVIEWS_BY_SPOTID,
+    payload: reviews
   };
 };
 
@@ -51,21 +51,21 @@ const deletedReview = (review) => {
 /** =======THUNKS: =========*/
 
 /** GET REVIEWS */
-export const getReviews = () => async (dispatch) => {
+export const getReviewsByCurrent = (currentUserId) => async (dispatch) => {
 
-  const response = await fetch("/api/reviews");
+  const response = await fetch(`/api/reviews/${currentUserId}`);
   const data = await response.json();
-  console.log('THUNK GETREVIEWS RAN DATA: ', data );
-  dispatch(reviewsSearch(data.Reviews));
+  console.log('THUNK GET REVIEWS BY CURRENT RAN DATA: ', data );
+  dispatch(reviewsByCurrent(data.Reviews));
   return data
 };
 
 /** GET DETAILS OF A REVIEW FROM AN ID */
-export const getReviewDetailsById = (reviewId) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/${reviewId}`);
+export const getReviewsBySpotId = (spotId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${spotId}`);
   const data = await response.json();
-  console.log('THUNK GET REVIEW BY ID RAN DATA: ', data );
-  dispatch(reviewById(data));
+  console.log('THUNK GET REVIEW BY SPOT ID RAN DATA: ', data );
+  dispatch(reviewsBySpotId(data));
   return data
 };
 
@@ -131,12 +131,12 @@ const reviewsReducer = (state = initialState, action) => {
   console.log('SESSION REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
 
-    case REVIEW_SEARCH:
-      console.log("REVIEWSREDUCER RAN REVIEW_SEARCH CASE RETURNING: ", {...state, reviews: action.payload})
+    case REVIEWS_CURRENT:
+      console.log("REVIEWSREDUCER RAN REVIEWS_CURRENT CASE RETURNING: ", {...state, reviews: action.payload})
       return {...state, reviews: action.payload};
 
-    case REVIEW_BY_ID:
-      console.log("REVIEWSREDUCER RAN REVIEW_BY_ID CASE RETURNING: ", {...state, review: action.payload})
+    case REVIEWS_BY_SPOTID:
+      console.log("REVIEWSREDUCER RAN REVIEWS_BY_SPOTID CASE RETURNING: ", {...state, review: action.payload})
       return {...state, review: action.payload};
 
     case CREATE_REVIEW:
