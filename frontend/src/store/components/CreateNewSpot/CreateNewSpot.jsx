@@ -85,9 +85,10 @@ function CreateNewSpot() {
                     <form id='CreateNewSpotForm' onSubmit={handleSubmit}>
 
 {/* form section 1---------------------------------------------------------- */}
-                        <section id="CreateNewSpotFormSection1">Where's your place located?
+                        <section id="CreateNewSpotFormSection1">Where&apos;s your place located?
                             <p id="CreateNewSpotFromSection1P">
-                            Guests will only get your exact address once they booked a reservation</p>
+                                Guests will only get your exact address once they booked a reservation
+                            </p>
 
                             <div id='countryContainer'>
                                     <div className="errors">{errors.country}</div>
@@ -193,35 +194,59 @@ function CreateNewSpot() {
                                         </div>
                                         {errors.longitude && <p>{errors.longitude}</p>}
 
-                                    </section>
+                        </section>
 {/* form section 2---------------------------------------------------------- */}
 
-                                    <section id="CreateNewSpotFormSection2">Describe your place to guests
-                                        <p id="CreateNewSpotFromSection2P">
-                                        Mention the best features of your space, any special amentities like
-                                        fast wifi or parking, and what you love about the neighborhood.
-                                        </p>
+                        <section id="CreateNewSpotFormSection2">Describe your place to guests
+                            <p id="CreateNewSpotFromSection2P">
+                                Mention the best features of your space, any special amentities like
+                                fast wifi or parking, and what you love about the neighborhood.
+                            </p>
 
 
 
-                                    </section>
+                        </section>
 
 {/* form section 3---------------------------------------------------------- */}
 
-                                    <section id="CreateNewSpotFormSection3">Describe your place to guests
-                                        <p id="CreateNewSpotFromSection3P">
-                                        Mention the best features of your space, any special amentities like
-                                        fast wifi or parking, and what you love about the neighborhood.
-                                        </p>
-
-                                        
-
-                                    </section>
+                        <section id="CreateNewSpotFormSection3">Create a title for your spot
+                            <p id="CreateNewSpotFromSection3P">
+                                Catch guests&apos; attention with a spot title that highlights what makes
+                                your place special.
+                            </p>
 
 
 
+                        </section>
 
 
+{/* form section 4---------------------------------------------------------- */}
+
+                        <section id="CreateNewSpotFormSection4">Describe your place to guests
+                            <p id="CreateNewSpotFromSection4P">
+                            Mention the best features of your space, any special amentities like
+                            fast wifi or parking, and what you love about the neighborhood.
+                            </p>
+
+
+
+                        </section>
+
+
+{/* form section 5---------------------------------------------------------- */}
+
+                        <section id="CreateNewSpotFormSection5">Describe your place to guests
+                            <p id="CreateNewSpotFromSection5P">
+                            Mention the best features of your space, any special amentities like
+                            fast wifi or parking, and what you love about the neighborhood.
+                            </p>
+
+
+
+                        </section>
+
+
+{/* form button---------------------------------------------------------- */}
 
                                 <div id="buttonContainer">
                                     <button
