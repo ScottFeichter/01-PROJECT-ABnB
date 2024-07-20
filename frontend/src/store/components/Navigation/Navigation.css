@@ -14,7 +14,7 @@ header {
 #NavLinkToCreateNewSpot {
     color: #FE595D;
     font-weight: bold;
-    /* margin-left: 22rem; */
+    margin-right: 2rem;
     text-wrap: nowrap;
 }
 

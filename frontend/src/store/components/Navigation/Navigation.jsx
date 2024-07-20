@@ -23,8 +23,13 @@ const Navigation = ({isLoaded}) => {
             <img id="logo" src={logo} alt="logo"></img>
         </a>
         {/* <SearchBar /> */}
-        {sessionUser ? <NavLink to="/newSpot" id="NavLinkToCreateNewSpot">Create a New Spot</NavLink> : ""}
+
         <ul>
+            <li>
+                {sessionUser ?
+                <NavLink to="/newSpot" id="NavLinkToCreateNewSpot">Create a New Spot</NavLink>
+                : ""}
+            </li>
             <li id="homeLi">
                 <NavLink to="/" id="NavLinkToHome"><IoHome id="IoHome"/></NavLink>
             </li>
