@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SearchResults from './store/components/Navigation/SearchResults';
 import SpotDetails from './store/components/SpotDetails/SpotDetails';
+import CreateNewSpot from "./store/components/CreateNewSpot/CreateNewSpot";
 // import Layout from './store/components/Layout';
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";

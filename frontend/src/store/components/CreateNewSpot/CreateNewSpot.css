@@ -1,6 +1,5 @@
 #CreateNewSpotMain {
-    width: 20rem;
-    height: 40rem;
+
 }
 
 h1 {
@@ -29,18 +28,35 @@ h1 {
 
 .CreateNewSpotFormInput {
     margin: 0 1rem 1rem 1rem;
+    width: 20rem;
 }
+
+
+
+#CreateNewSpotFormSection1 {}
+#CreateNewSpotFromSection1P {}
+
+#CreateNewSpotFormSection2 {}
+#CreateNewSpotFromSection2P {}
+
+#CreateNewSpotFormSection3 {}
+#CreateNewSpotFromSection3P {}
+
+#CreateNewSpotFormSection4 {}
+#CreateNewSpotFromSection4P {}
+
+#CreateNewSpotFormSection5 {}
+#CreateNewSpotFromSection5P {}
 
 
 
 #CreateNewSpotButton {
     margin: 2rem 0 4rem 0;
-    width: 8rem;
-    height: 2rem;
-    font-size: 1rem;
+    width: 16rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
     font-weight: 500;
     border-radius: 25px;
-    width: 100px;
 }
 
 #CreateNewSpotButton:enabled {
@@ -54,7 +70,6 @@ h1 {
     border: 1px solid grey;
     color: grey;
     background-color: whitesmoke;
-
 }
 
 #CreateNewSpotButton:enabled:hover {
