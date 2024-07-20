@@ -1,4 +1,4 @@
-import './Navigation.css';
+
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from './Logo/scottbnb.png';
@@ -9,6 +9,7 @@ import { IoHome } from "react-icons/io5";
 // import LoginFormModal from "../LoginFormModal/LoginFormModal";
 // import SignupFormModal from "../SignupFormModal/SignupFormModal";
 
+import './Navigation.css';
 
 
 const Navigation = ({isLoaded}) => {

@@ -9,10 +9,15 @@
     text-align: center;
 }
 
+#profile-button:hover {
+    cursor: pointer;
+}
+
 #LuUserCircle2 {
     height: 50px;
     width: 50px;
     color: #FE595D;
+
 }
 
 #LuUserCircle2:hover {
