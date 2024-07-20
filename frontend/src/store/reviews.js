@@ -16,7 +16,7 @@ const reviewsByCurrent = (reviews) => {
 };
 
 const reviewsBySpotId = (reviews) => {
-  console.log('REVIEWBYID RAN - REVIEWS', reviews);
+  // console.log('REVIEWBYID RAN - REVIEWS', reviews);
   return {
     type: REVIEWS_BY_SPOTID,
     payload: reviews
@@ -64,9 +64,8 @@ export const getReviewsByCurrent = (currentUserId) => async (dispatch) => {
 export const getReviewsBySpotId = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`);
   const data = await response.json();
-  console.log('THUNK GET REVIEW BY SPOT ID RAN DATA: ', data);
-  dispatch(reviewsBySpotId(data));
-  return data
+  // console.log('THUNK GET REVIEW BY SPOT ID RAN DATA: ', data);
+  return dispatch(reviewsBySpotId(data));
 };
 
 
@@ -136,7 +135,7 @@ const reviewsReducer = (state = initialState, action) => {
       return {...state, reviews: action.payload};
 
     case REVIEWS_BY_SPOTID:
-      console.log("REVIEWSREDUCER RAN REVIEWS_BY_SPOTID CASE RETURNING: ", {...state, reviews: action.payload})
+      // console.log("REVIEWSREDUCER RAN REVIEWS_BY_SPOTID CASE RETURNING: ", {...state, reviews: action.payload})
       return {...state, reviews: action.payload};
 
     case CREATE_REVIEW:

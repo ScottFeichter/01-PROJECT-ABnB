@@ -134,11 +134,11 @@ const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case SPOT_SEARCH:
-      console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
+      // console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
       return {...state, Spots: action.payload}
 
     case SPOT_BY_ID:
-      console.log("SPOTSREDUCER RAN SPOT_BY_ID CASE RETURNING: ", {...state, spot: action.payload})
+      // console.log("SPOTSREDUCER RAN SPOT_BY_ID CASE RETURNING: ", {...state, spot: action.payload})
       return {...state, spotDetail: action.payload};
 
     case CREATE_SPOT:

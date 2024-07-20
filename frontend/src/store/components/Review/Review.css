@@ -1,13 +1,29 @@
 #reviewMain {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     row-gap: .5rem;
     align-items: baseline;
     justify-content: space-evenly;
 }
 
-#reviewFirstName {}
+#reviewReviewer {
+    margin-top: 2rem;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: baseline;
+}
 
-#reviewDate{}
+#reviewFirstName {
+    margin: 0 1rem 0rem 0;
+    font-size: medium;
+}
 
-#reviewReview {}
+#reviewDate{
+    margin: 0 1rem 0rem 0;
+    font-size: small;
+    color: rgb(69, 69, 69);
+}
+
+#reviewReview {
+    margin: 0;
+}

@@ -25,11 +25,13 @@ function Spot({spot}) {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        const spotDetails = await dispatch(getSpotDetailsById(spot.id)).then(console.log('spotDetails from the NavLink!!!!!!!!!!!!!!'));
-        const reviews = await dispatch(getReviewsBySpotId(spot.id)).then(console.log('reviews from NavLink!!!!!!!!!!!!'))
+        const spotDetails = await dispatch(getSpotDetailsById(spot.id))
+        .then(console.log(/*'spotDetails from the NavLink!!!!!!!!!!!!!!'*/));
+
+        const reviews = await dispatch(getReviewsBySpotId(spot.id))
+        .then(console.log(/*'reviews from NavLink!!!!!!!!!!!!'*/))
+
         navigate(`/spots/${spot.id}`)
-
-
 
     }
 

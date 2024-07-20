@@ -1,26 +1,29 @@
 import './Review.css';
 
-function Review({prop}) {
-    const review = {
-        "id": 1,
-        "userId": 1,
-        "spotId": 1,
-        "review": "This was an awesome spot!",
-        "stars": 5,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36" ,
-        "User": {
-          "id": 1,
-          "firstName": "John",
-          "lastName": "Smith"
-        },
-        "ReviewImages": [
-          {
-            "id": 1,
-            "url": "image url"
-          }
-        ],
-    }
+function Review({review}) {
+
+    // console.log('PROP++++++', review);
+
+    // const review = {
+    //     "id": 1,
+    //     "userId": 1,
+    //     "spotId": 1,
+    //     "review": "This was an awesome spot!",
+    //     "stars": 5,
+    //     "createdAt": "2021-11-19 20:39:36",
+    //     "updatedAt": "2021-11-19 20:39:36" ,
+    //     "User": {
+    //       "id": 1,
+    //       "firstName": "John",
+    //       "lastName": "Smith"
+    //     },
+    //     "ReviewImages": [
+    //       {
+    //         "id": 1,
+    //         "url": "image url"
+    //       }
+    //     ],
+    // }
 
 // stars-------------------------------------------------------------
 
@@ -31,7 +34,7 @@ function Review({prop}) {
 // }
 
 // date-------------------------------------------------------------
-    const year = review.createdAt.substring(0,5);
+    const year = review.createdAt.substring(0,4);
     const monthNum = review.createdAt.substring(5, 7);
     const months = {
         "01": "January",
@@ -49,16 +52,18 @@ function Review({prop}) {
     }
     const month = months[monthNum];
     const date = {month: month, year: year};
-    console.log('date===================== ', date);
+    // console.log('date===================== ', date);
 
 // return-------------------------------------------------------------
 
     return (
 
         <main id="reviewMain">
-            <h3 id="reviewFirstName">{review.User.firstName}</h3>
-            <h4 id="reviewDate">{date.month} {date.year}</h4>
-            <p id="reviewReview">{review.review}</p>
+            <div id="reviewReviewer">
+                <h3 id="reviewFirstName">{review.User.firstName}</h3>
+                <h4 id="reviewDate">{date.month} {date.year}</h4>
+            </div>
+            <p id="reviewReview">{`"${review.review}"`}</p>
         </main>
 
     )

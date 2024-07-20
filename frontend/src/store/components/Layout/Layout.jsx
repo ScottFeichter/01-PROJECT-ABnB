@@ -18,7 +18,7 @@ function Layout() {
 
     useEffect(() => {
        dispatch(spotsActions.search());
-       console.log("DISPATCH LINE 24 APP.jsx");
+      //  console.log("DISPATCH LINE 21 LAYOUT.jsx");
      },)
 
 

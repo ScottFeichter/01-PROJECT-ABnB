@@ -1,36 +1,29 @@
 import './SpotDetails.css';
 import { FaStar } from "react-icons/fa";
 import { useSelector } from 'react-redux';
-import { getReviewsBySpotId } from '../../reviews';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Review from '../Review/Review';
 
 
 function SpotDetails() {
-    const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.spotDetail);
     const reviews = useSelector(state => state.reviews.reviews.Reviews);
 
 
-// getReviews---------------------------------------
+// prepare reviews for display---------------------------------------
 
     const [reviewsShow, setReviewsShow] = useState();
 
     useEffect(() => {
         const getReviews = async () => {
-            const response = await dispatch(getReviewsBySpotId(spot.id));
-            console.log('response========', response)
 
-            const reviews = response.Reviews.length;
-            console.log('reviews============', reviews);
-
-            if(response.Reviews.length === 1) {
-                setReviewsShow(`${spot.avgStarRating}  •  ${response.Reviews.length} Review`);
-            } else if (!response.Reviews.length) {
+            if(reviews.length === 1) {
+                setReviewsShow(`${spot.avgStarRating}  •  ${reviews.length} Review`);
+            } else if (!reviews.length) {
                 setReviewsShow(`\xa0\xa0\xa0 New`)
             } else {
-                setReviewsShow(`${spot.avgStarRating}  •  ${response.Reviews.length} Reviews`);
+                setReviewsShow(`${spot.avgStarRating}  •  ${reviews.length} Reviews`);
             }
         }
         getReviews()
@@ -47,7 +40,7 @@ function SpotDetails() {
 
 // return---------------------------------------
 
-    console.log('SPOT DETAILS COMPONENT RAN');
+    // console.log('SPOT DETAILS COMPONENT RAN');
     return (
         <main id="SpotDetailsMain">
 
@@ -92,14 +85,11 @@ function SpotDetails() {
                 </div>
 
                 <div id="SpotDetailsReviews">
-                    {console.log(reviews)}
+                    {reviews ?
+                     reviews.map(review => <Review review={review} key={review.id} />) :
+                     <p>sorry, no reviews</p> }
                 </div>
 
-
-                <p>Here will be a review</p>
-                <p>Here will be another review</p>
-                <p>Here will be still another review</p>
-                <p>And indeed one more review</p>
             </section>
         </main>
 
