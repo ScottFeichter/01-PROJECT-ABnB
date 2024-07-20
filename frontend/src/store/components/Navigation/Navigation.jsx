@@ -1,34 +1,20 @@
-import { useEffect } from "react";
+import './Navigation.css';
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
 import logo from './Logo/scottbnb.png';
-import * as spotsActions from '../../spots'
 import ProfileButton from './ProfileButton';
 import { IoHome } from "react-icons/io5";
-
 
 // import OpenModalButton from "../OpenModalButton/OpenModalButton";
 // import LoginFormModal from "../LoginFormModal/LoginFormModal";
 // import SignupFormModal from "../SignupFormModal/SignupFormModal";
 
-import './Navigation.css';
 
 
 const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-
-        (async () => {
-             const spots = await dispatch(spotsActions.search());
-            //  console.log("SPOTS", spots);
-        })();
-
-    }, [dispatch])
-
-
-
+    console.log("NAVIGATION COMPONENT RAN");
     return(
      <header>
         <a href="/">

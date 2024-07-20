@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navigation from './store/components/Navigation';
 import * as sessionActions from './store/session';
+import * as spotsActions from './store/spots'
 import SearchResults from './store/components/Navigation/SearchResults';
 import SpotDetails from './store/components/SpotDetails/SpotDetails';
 
@@ -16,6 +17,14 @@ function Layout() {
     });
   }, [dispatch]);
 
+
+  // useEffect(() => {
+
+     dispatch(spotsActions.search());
+     console.log("DISPATCH LINE 24 APP.jsx");
+// }, [])
+
+  console.log("LAYOUT COMPONENT RAN");
   return (<>
     <Navigation isLoaded={isLoaded} />
     {isLoaded && <Outlet />}
@@ -40,6 +49,8 @@ const router = createBrowserRouter([
 
 
 function App() {
+
+  console.log("APP COMPONENT RAN");
   return <RouterProvider router={router} />;
 }
 

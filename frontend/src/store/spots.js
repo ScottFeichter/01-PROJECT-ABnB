@@ -8,7 +8,7 @@ const DELETED_SPOT = "spot/deletedSpot";
 
 /** =======ACTION CREATORS: =========*/
 const spotsSearch = (spots) => {
-  // console.log('SPOTSSEARCH RAN - SPOTS', spots);
+  console.log('SPOTSSEARCH RAN - SPOTS', spots);
   return {
     type: SPOT_SEARCH,
     payload: spots
@@ -55,16 +55,17 @@ export const search = (search) => async (dispatch) => {
 
   const response = await fetch("/api/spots");
   const data = await response.json();
-  // console.log('THUNK SEARCH RAN DATA: ', data );
-  dispatch(spotsSearch(data.Spots));
-  return data
+  const spots = data.Spots;
+  console.log('THUNK SEARCH RAN DATA: ', spots);
+  // dispatch(spotsSearch(data.Spots));
+  return dispatch(spotsSearch(spots))
 };
 
 /** GET DETAILS OF A SPOT FROM AN ID */
 export const getSpotDetailsById = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
   const data = await response.json();
-  console.log('THUNK SEARCH RAN DATA: ', data );
+  console.log('THUNK GETSPOTBYID RAN DATA: ', data );
   dispatch(spotById(data));
   return data
 };
@@ -129,15 +130,22 @@ const initialState = {}
 /** =======REDUCER: =========*/
 const spotsReducer = (state = initialState, action) => {
   // console.log('SPOTS REDUCER RAN - STATE AND ACTION', state, action)
+
   switch (action.type) {
 
     case SPOT_SEARCH:
-      // console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
-      return {...state, spots: action.payload};
+      // console.log('ACTION.PAYLOAD', action.payload);
+      // console.log('STATE', state)
+      // console.log('STATE OBJECY', {state})
+      // console.log('STATE DESTRUCTERED', {...state})
+      // console.log('STATE DESTRUCTRED TEST', {...state, test: "test"})
+      console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
+
+      return action.payload;
 
     case SPOT_BY_ID:
       console.log("SPOTSREDUCER RAN SPOT_BY_ID CASE RETURNING: ", {...state, spot: action.payload})
-      return {...state, spot: action.payload};
+      return {...state, spotDetail: action.payload};
 
     case CREATE_SPOT:
       console.log("SPOTSREDUCER RAN CREATE_SPOT CASE RETURNING: ", {...state, spot: action.payload})
@@ -153,6 +161,7 @@ const spotsReducer = (state = initialState, action) => {
       return {...state, spot: action.payload};
 
     default:
+      // console.log('SPOTSREDUCER RAN DEFAULT')
       return state;
   }
 }
