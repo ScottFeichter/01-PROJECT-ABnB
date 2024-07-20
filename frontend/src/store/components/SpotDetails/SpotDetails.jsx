@@ -9,6 +9,10 @@ import Review from '../Review/Review';
 function SpotDetails() {
     const spot = useSelector(state => state.spots.spotDetail);
     const reviews = useSelector(state => state.reviews.reviews.Reviews);
+    const reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
+    console.log(reviewsInOrder)
+
+
 
 
 // prepare reviews for display---------------------------------------
@@ -85,9 +89,9 @@ function SpotDetails() {
                 </div>
 
                 <div id="SpotDetailsReviews">
-                    {reviews ?
-                     reviews.map(review => <Review review={review} key={review.id} />) :
-                     <p>sorry, no reviews</p> }
+                    {reviewsInOrder ?
+                     reviewsInOrder.map(review => <Review review={review} key={review.id} />) :
+                     <p>Be the first to post a review!</p> }
                 </div>
 
             </section>
