@@ -4,6 +4,7 @@ import {useDispatch } from 'react-redux'
 import * as spotsActions from '../../spots'
 import { useEffect } from 'react';
 
+
 function CreateNewSpot() {
 
         const dispatch = useDispatch();
@@ -21,16 +22,23 @@ function CreateNewSpot() {
 
 // states form section 2----------------------------------------------------------
 
+        const [description, setDescription] = useState("")
 
 // states form section 3----------------------------------------------------------
 
+        const [title, setTitle] = useState("")
 
 // states form section 4----------------------------------------------------------
 
+        const [basePrice, setBasePrice] = useState(0)
 
 // states form section 5----------------------------------------------------------
 
-
+        const [previewImg, setPreviewImg] = useState("")
+        const [img1, setImg1] = useState("")
+        const [img2, setImg2] = useState("")
+        const [img3, setImg3] = useState("")
+        const [img4, setImg4] = useState("")
 
 // CreateNewSpot Button Disabled------------------------------------------------------------------------
 
@@ -104,6 +112,7 @@ function CreateNewSpot() {
                                             id="country"
                                             name="country"
                                             type="text"
+                                            placeholder='Country'
                                             value={country}
                                             onChange={(e) => setCountry(e.target.value)}
                                             required
@@ -120,6 +129,7 @@ function CreateNewSpot() {
                                             className='CreateNewSpotFormInput'
                                             id="streetAddress"
                                             name="streetAddress"
+                                            placeholder='Address'
                                             value={streetAddress}
                                             type="text"
                                             onChange={(e) => setStreetAddress(e.target.value)}
@@ -137,6 +147,7 @@ function CreateNewSpot() {
                                             className='CreateNewSpotFormInput'
                                             id="city"
                                             name="city"
+                                            placeholder='City'
                                             value={city}
                                             type="text"
                                             onChange={(e) => setCity(e.target.value)}
@@ -154,6 +165,7 @@ function CreateNewSpot() {
                                                 className='CreateNewSpotFormInput'
                                                 id="state"
                                                 name="state"
+                                                placeholder='STATE'
                                                 value={state}
                                                 type="state"
                                                 onChange={(e) => setState(e.target.value)}
@@ -172,6 +184,7 @@ function CreateNewSpot() {
                                                 className='CreateNewSpotFormInput'
                                                 id="latitude"
                                                 name="latitude"
+                                                placeholder='Latitude'
                                                 value={latitude}
                                                 type="latitude"
                                                 onChange={(e) => setLatitude(e.target.value)}
@@ -190,6 +203,7 @@ function CreateNewSpot() {
                                                 className='CreateNewSpotFormInput'
                                                 id="longitude"
                                                 name="longitude"
+                                                placeholder='Longitude'
                                                 value={longitude}
                                                 type="latitude"
                                                 onChange={(e) => setLongitude(e.target.value)}
@@ -209,22 +223,26 @@ function CreateNewSpot() {
                                 Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.
                             </p>
 
-                            <div id='countryContainer'>
+                            <div id='descriptionContainer'>
                                     <div className="errors">{errors.country}</div>
                                         <label className='CreateNewSpotFormLabel'>
-                                            Country:
-                                            <input
+
+                                            <textarea
                                             className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
-                                            type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
+                                            id="description"
+                                            name="description"
+                                            rows={8}
+                                            cols={40}
+                                            type="text-area"
+                                            placeholder="Please write at least 30 characters"
+                                            value={description}
+
+                                            onChange={(e) => setDescription(e.target.value)}
                                             required
                                             />
                                         </label>
                             </div>
-                            {errors.country && <p>{errors.country}</p>}
+                            {errors.description && <p>{errors.description}</p>}
 
 
 
@@ -241,22 +259,23 @@ function CreateNewSpot() {
                                 Catch guests&apos; attention with a spot title that highlights what makes your place special.
                             </p>
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
+                            <div id='titleContainer'>
+                                    <div className="errors">{errors.title}</div>
                                         <label className='CreateNewSpotFormLabel'>
-                                            Country:
+
                                             <input
                                             className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
+                                            id="title"
+                                            name="title"
                                             type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
+                                            placeholder='Name of your spot'
+                                            value={title}
+                                            onChange={(e) => setTitle(e.target.value)}
                                             required
                                             />
                                         </label>
                             </div>
-                            {errors.country && <p>{errors.country}</p>}
+                            {errors.title && <p>{errors.title}</p>}
 
 
 
@@ -272,22 +291,23 @@ function CreateNewSpot() {
                                 Competitive pricing can help your listing stand out and rank higher in search results.
                             </p>
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
+                            <div id='basePriceContainer'>
+                                    <div className="errors">{errors.basePrice}</div>
                                         <label className='CreateNewSpotFormLabel'>
-                                            Country:
+                                            $
                                             <input
                                             className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
+                                            id="basePrice"
+                                            name="basePrice"
                                             type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
+                                            placeholder='Price per night (USD)'
+                                            value={basePrice}
+                                            onChange={(e) => setBasePrice(e.target.value)}
                                             required
                                             />
                                         </label>
                             </div>
-                            {errors.country && <p>{errors.country}</p>}
+                            {errors.basePrice && <p>{errors.basePrice}</p>}
 
 
 
@@ -303,39 +323,40 @@ function CreateNewSpot() {
                                 Submit a link to at least one photo to publish your spot.
                             </p>
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
+                            <div id='previewImgContainer'>
+                                    <div className="errors">{errors.previewImg}</div>
                                         <label className='CreateNewSpotFormLabel'>
-                                            Country:
                                             <input
                                             className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
+                                            id="previewImg"
+                                            name="previewImg"
                                             type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
+                                            placeholder='Preview Image URL'
+                                            value={previewImg}
+                                            onChange={(e) => setPreviewImg(e.target.value)}
                                             required
                                             />
                                         </label>
                             </div>
-                            {errors.country && <p>{errors.country}</p>}
+                            {errors.previewImg && <p>{errors.previewImg}</p>}
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
+                            <div id='img1Container'>
+                                    <div className="errors">{errors.img1}</div>
                                         <label className='CreateNewSpotFormLabel'>
-                                            Country:
+
                                             <input
                                             className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
+                                            id="img1"
+                                            name="img1"
                                             type="text"
-                                            value={country}
+                                            placeholder='Image URL'
+                                            value={img1}
                                             onChange={(e) => setCountry(e.target.value)}
                                             required
                                             />
                                         </label>
                             </div>
-                            {errors.country && <p>{errors.country}</p>}
+                            {errors.img1 && <p>{errors.img1}</p>}
 
                             <div id='countryContainer'>
                                     <div className="errors">{errors.country}</div>
