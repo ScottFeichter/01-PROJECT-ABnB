@@ -11,6 +11,18 @@ header {
     height: 3rem;
 }
 
+#NavLinkToCreateNewSpot {
+    color: #FE595D;
+    font-weight: bold;
+    /* margin-left: 22rem; */
+    text-wrap: nowrap;
+}
+
+#NavLinkToCreateNewSpot:hover {
+    cursor: pointer;
+    color: black;
+}
+
 #IoHome {
     height: 30px;
     width: 30px;

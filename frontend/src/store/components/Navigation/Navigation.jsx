@@ -15,6 +15,7 @@ import './Navigation.css';
 const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
 
+
     // console.log("NAVIGATION COMPONENT RAN");
     return(
      <header>
@@ -22,6 +23,7 @@ const Navigation = ({isLoaded}) => {
             <img id="logo" src={logo} alt="logo"></img>
         </a>
         {/* <SearchBar /> */}
+        {sessionUser ? <NavLink to="/newSpot" id="NavLinkToCreateNewSpot">Create a New Spot</NavLink> : ""}
         <ul>
             <li id="homeLi">
                 <NavLink to="/" id="NavLinkToHome"><IoHome id="IoHome"/></NavLink>
