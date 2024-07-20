@@ -11,7 +11,7 @@ function CreateNewSpot() {
         const [errors, setErrors] = useState({});
         const [isDisabled, setIsDisabled] = useState(false);
 
-// form section 1----------------------------------------------------------
+// states form section 1----------------------------------------------------------
         const [country, setCountry] = useState("");
         const [streetAddress, setStreetAddress] = useState("");
         const [city, setCity] = useState("");
@@ -19,11 +19,16 @@ function CreateNewSpot() {
         const [latitude, setLatitude] = useState("");
         const [longitude, setLongitude] = useState("");
 
+// states form section 2----------------------------------------------------------
 
 
+// states form section 3----------------------------------------------------------
 
 
+// states form section 4----------------------------------------------------------
 
+
+// states form section 5----------------------------------------------------------
 
 
 
@@ -195,68 +200,214 @@ function CreateNewSpot() {
                                         {errors.longitude && <p>{errors.longitude}</p>}
 
                         </section>
+
+                        <hr className='CreateNewSpotHr'></hr>
 {/* form section 2---------------------------------------------------------- */}
 
                         <section id="CreateNewSpotFormSection2">Describe your place to guests
                             <p id="CreateNewSpotFromSection2P">
-                                Mention the best features of your space, any special amentities like
-                                fast wifi or parking, and what you love about the neighborhood.
+                                Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.
                             </p>
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
+
+
 
 
 
                         </section>
+
+                        <hr className='CreateNewSpotHr'></hr>
 
 {/* form section 3---------------------------------------------------------- */}
 
                         <section id="CreateNewSpotFormSection3">Create a title for your spot
                             <p id="CreateNewSpotFromSection3P">
-                                Catch guests&apos; attention with a spot title that highlights what makes
-                                your place special.
+                                Catch guests&apos; attention with a spot title that highlights what makes your place special.
                             </p>
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
 
 
 
                         </section>
+
+                        <hr className='CreateNewSpotHr'></hr>
 
 
 {/* form section 4---------------------------------------------------------- */}
 
-                        <section id="CreateNewSpotFormSection4">Describe your place to guests
+                        <section id="CreateNewSpotFormSection4">Set a base price for your spot
                             <p id="CreateNewSpotFromSection4P">
-                            Mention the best features of your space, any special amentities like
-                            fast wifi or parking, and what you love about the neighborhood.
+                                Competitive pricing can help your listing stand out and rank higher in search results.
                             </p>
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
 
 
 
                         </section>
+
+                        <hr className='CreateNewSpotHr'></hr>
 
 
 {/* form section 5---------------------------------------------------------- */}
 
-                        <section id="CreateNewSpotFormSection5">Describe your place to guests
+                        <section id="CreateNewSpotFormSection5">Liven up your spot with photos
                             <p id="CreateNewSpotFromSection5P">
-                            Mention the best features of your space, any special amentities like
-                            fast wifi or parking, and what you love about the neighborhood.
+                                Submit a link to at least one photo to publish your spot.
                             </p>
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
+
+                            <div id='countryContainer'>
+                                    <div className="errors">{errors.country}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+                                            Country:
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="country"
+                                            name="country"
+                                            type="text"
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
+                                            required
+                                            />
+                                        </label>
+                            </div>
+                            {errors.country && <p>{errors.country}</p>}
 
 
 
                         </section>
 
+                        <hr className='CreateNewSpotHr'></hr>
+
+
 
 {/* form button---------------------------------------------------------- */}
 
-                                <div id="buttonContainer">
-                                    <button
-                                    id="CreateNewSpotButton"
-                                    type="submit" disabled={isDisabled}>
-                                        Create Spot
-                                        </button>
-                                </div>
-                    </form>
+                        <div id="buttonContainer">
+                            <button
+                            id="CreateNewSpotButton"
+                            type="submit" disabled={isDisabled}>
+                                Create Spot
+                                </button>
+                        </div>
 
+
+                    </form>
 
           </main>
 
