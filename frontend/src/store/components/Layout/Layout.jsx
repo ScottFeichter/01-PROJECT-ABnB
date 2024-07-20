@@ -16,11 +16,10 @@ function Layout() {
     }, [dispatch]);
 
 
-    // useEffect(() => {
-
+    useEffect(() => {
        dispatch(spotsActions.search());
        console.log("DISPATCH LINE 24 APP.jsx");
-  // }, [])
+     },)
 
 
 
