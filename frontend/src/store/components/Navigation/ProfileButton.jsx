@@ -43,6 +43,7 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+  // console.log('PROFILE BUTTON COMPONENT RAN')
   return (
     <>
       <button onClick={toggleMenu} id="profile-button">

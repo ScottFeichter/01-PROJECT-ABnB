@@ -14,7 +14,7 @@ import { IoHome } from "react-icons/io5";
 const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log("NAVIGATION COMPONENT RAN");
+    // console.log("NAVIGATION COMPONENT RAN");
     return(
      <header>
         <a href="/">
