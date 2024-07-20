@@ -8,14 +8,14 @@ import { useEffect } from 'react';
 
 
 function SpotDetails() {
-    console.log("SPOTDETAILS DEBUGGER")
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.spotDetail);
-    const [reviewsShow, setReviewsShow] = useState();
-
+    const reviews = useSelector(state => state.reviews.reviews.Reviews);
 
 
 // getReviews---------------------------------------
+
+    const [reviewsShow, setReviewsShow] = useState();
 
     useEffect(() => {
         const getReviews = async () => {
@@ -92,7 +92,7 @@ function SpotDetails() {
                 </div>
 
                 <div id="SpotDetailsReviews">
-                    {}
+                    {console.log(reviews)}
                 </div>
 
 

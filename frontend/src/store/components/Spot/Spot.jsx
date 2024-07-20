@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { getReviewsBySpotId } from '../../reviews';
 import { getSpotDetailsById } from '../../spots';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -24,8 +25,8 @@ function Spot({spot}) {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        const response = await dispatch(getSpotDetailsById(spot.id)).then(console.log('from the NavLink!!!!!!!!!!!!!!'))
-
+        const spotDetails = await dispatch(getSpotDetailsById(spot.id)).then(console.log('spotDetails from the NavLink!!!!!!!!!!!!!!'));
+        const reviews = await dispatch(getReviewsBySpotId(spot.id)).then(console.log('reviews from NavLink!!!!!!!!!!!!'))
         navigate(`/spots/${spot.id}`)
 
 

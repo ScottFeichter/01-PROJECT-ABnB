@@ -8,7 +8,7 @@ const DELETED_SPOT = "spot/deletedSpot";
 
 /** =======ACTION CREATORS: =========*/
 const spotsSearch = (spots) => {
-  console.log('SPOTSSEARCH RAN - SPOTS', spots);
+  // console.log('SPOTSSEARCH RAN - SPOTS', spots);
   return {
     type: SPOT_SEARCH,
     payload: spots
@@ -16,7 +16,7 @@ const spotsSearch = (spots) => {
 };
 
 const spotById = (spot) => {
-  console.log('SPOTBYID RAN - SPOTS', spot);
+  // console.log('SPOTBYID RAN - SPOTS', spot);
   return {
     type: SPOT_BY_ID,
     payload: spot
@@ -56,7 +56,7 @@ export const search = (search) => async (dispatch) => {
   const response = await fetch("/api/spots");
   const data = await response.json();
   const spots = data.Spots;
-  console.log('THUNK SEARCH RAN DATA: ', spots);
+  // console.log('THUNK SEARCH RAN DATA: ', spots);
   // dispatch(spotsSearch(data.Spots));
   return dispatch(spotsSearch(spots))
 };
@@ -65,10 +65,8 @@ export const search = (search) => async (dispatch) => {
 export const getSpotDetailsById = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
   const data = await response.json();
-  console.log('THUNK GETSPOTBYID RAN DATA: ', data );
+  // console.log('THUNK GETSPOTBYID RAN DATA: ', data );
   dispatch(spotById(data));
-  console.log("SPOTS DEBUGGER getSpotDetails...")
-  debugger
   return data
 };
 
@@ -136,18 +134,11 @@ const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case SPOT_SEARCH:
-      // console.log('ACTION.PAYLOAD', action.payload);
-      // console.log('STATE', state)
-      // console.log('STATE OBJECY', {state})
-      // console.log('STATE DESTRUCTERED', {...state})
-      // console.log('STATE DESTRUCTRED TEST', {...state, test: "test"})
       console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
-
       return {...state, Spots: action.payload}
 
     case SPOT_BY_ID:
       console.log("SPOTSREDUCER RAN SPOT_BY_ID CASE RETURNING: ", {...state, spot: action.payload})
-      debugger;
       return {...state, spotDetail: action.payload};
 
     case CREATE_SPOT:

@@ -3,33 +3,36 @@ import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navigation from './store/components/Navigation';
 import * as sessionActions from './store/session';
-import * as spotsActions from './store/spots'
+import * as spotsActions from './store/spots';
 import SearchResults from './store/components/Navigation/SearchResults';
 import SpotDetails from './store/components/SpotDetails/SpotDetails';
+import Layout from './store/components/Layout';
 
-function Layout() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+// function Layout() {
+//   const dispatch = useDispatch();
+//   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(()=> {
-    dispatch(sessionActions.restoreUser()).then(()=> {
-      setIsLoaded(true)
-    });
-  }, [dispatch]);
+//   useEffect(()=> {
+//     dispatch(sessionActions.restoreUser()).then(()=> {
+//       setIsLoaded(true)
+//     });
+//   }, [dispatch]);
 
 
-  // useEffect(() => {
+//   // useEffect(() => {
 
-     dispatch(spotsActions.search());
-     console.log("DISPATCH LINE 24 APP.jsx");
-// }, [])
+//      dispatch(spotsActions.search());
+//      console.log("DISPATCH LINE 24 APP.jsx");
+// // }, [])
 
-  console.log("LAYOUT COMPONENT RAN");
-  return (<>
-    <Navigation isLoaded={isLoaded} />
-    {isLoaded && <Outlet />}
-  </>)
-}
+
+
+//   // console.log("LAYOUT COMPONENT RAN");
+//   return (<>
+//     <Navigation isLoaded={isLoaded} />
+//     {isLoaded && <Outlet />}
+//   </>)
+// }
 
 const router = createBrowserRouter([
   {
@@ -50,7 +53,7 @@ const router = createBrowserRouter([
 
 function App() {
 
-  console.log("APP COMPONENT RAN");
+  // console.log("APP COMPONENT RAN");
   return <RouterProvider router={router} />;
 }
 

@@ -64,7 +64,7 @@ export const getReviewsByCurrent = (currentUserId) => async (dispatch) => {
 export const getReviewsBySpotId = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}/reviews`);
   const data = await response.json();
-  console.log('THUNK GET REVIEW BY SPOT ID RAN DATA: ', data );
+  console.log('THUNK GET REVIEW BY SPOT ID RAN DATA: ', data);
   dispatch(reviewsBySpotId(data));
   return data
 };
