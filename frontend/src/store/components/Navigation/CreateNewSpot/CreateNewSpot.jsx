@@ -74,14 +74,14 @@ function CreateNewSpot() {
             <h1>Sign Up</h1>
 
 
-                    <form id='signupForm' onSubmit={handleSubmit}>
+                    <form id='CreateNewSpotForm' onSubmit={handleSubmit}>
 
                         <div id='firstNameContainer'>
                                 <div className="errors">{errors.firstName}</div>
-                                    <label className='signUpFormLabel'>
+                                    <label className='CreateNewSpotFormLabel'>
                                         first name:
                                         <input
-                                        className='signUpFormInput'
+                                        className='CreateNewSpotFormInput'
                                         id="firstName"
                                         name="firstName"
                                         type="text"
@@ -95,10 +95,10 @@ function CreateNewSpot() {
 
                             <div id='lastNameContainer'>
                                 <div className="errors">{errors.lastName}</div>
-                                    <label className='signUpFormLabel'>
+                                    <label className='CreateNewSpotFormLabel'>
                                         last name:
                                         <input
-                                        className='signUpFormInput'
+                                        className='CreateNewSpotFormInput'
                                         id="lastName"
                                         name="lastName"
                                         value={lastName}
@@ -112,10 +112,10 @@ function CreateNewSpot() {
 
                             <div id='emailContainer'>
                                 <div className="errors">{errors.email}</div>
-                                    <label className='signUpFormLabel'>
+                                    <label className='CreateNewSpotFormLabel'>
                                             email:
                                         <input
-                                        className='signUpFormInput'
+                                        className='CreateNewSpotFormInput'
                                         id="email"
                                         name="email"
                                         value={email}
@@ -129,10 +129,10 @@ function CreateNewSpot() {
 
                             <div id='userNameContainer'>
                                 <div className="errors">{errors.username}</div>
-                                        <label className='signUpFormLabel'>
+                                        <label className='CreateNewSpotFormLabel'>
                                             username:
                                             <input
-                                            className='signUpFormInput'
+                                            className='CreateNewSpotFormInput'
                                             id="username"
                                             name="username"
                                             value={username}
@@ -147,10 +147,10 @@ function CreateNewSpot() {
 
                                 <div id='passwordContainer'>
                                     <div className="errors">{errors.password}</div>
-                                        <label className='signUpFormLabel'>
+                                        <label className='CreateNewSpotFormLabel'>
                                             password:
                                             <input
-                                            className='signUpFormInput'
+                                            className='CreateNewSpotFormInput'
                                             id="password"
                                             name="password"
                                             value={password}
@@ -165,10 +165,10 @@ function CreateNewSpot() {
 
                                 <div id='confirmPasswordContainer'>
                                     <div className="errors">{errors.password}</div>
-                                        <label className='signUpFormLabel'>
+                                        <label className='CreateNewSpotFormLabel'>
                                             confirm password:
                                             <input
-                                            className='signUpFormInput'
+                                            className='CreateNewSpotFormInput'
                                             id="confirmPassword"
                                             name="confirmPassword"
                                             value={confirmPassword}
