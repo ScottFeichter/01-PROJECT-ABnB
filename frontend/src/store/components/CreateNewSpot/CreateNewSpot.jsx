@@ -30,7 +30,7 @@ function CreateNewSpot() {
 
 // states form section 4----------------------------------------------------------
 
-        const [basePrice, setBasePrice] = useState(0)
+        const [basePrice, setBasePrice] = useState("")
 
 // states form section 5----------------------------------------------------------
 
@@ -98,12 +98,15 @@ function CreateNewSpot() {
                     <form id='CreateNewSpotForm' onSubmit={handleSubmit}>
 
 {/* form section 1---------------------------------------------------------- */}
-                        <section id="CreateNewSpotFormSection1">Where&apos;s your place located?
-                            <p id="CreateNewSpotFromSection1P">
-                                Guests will only get your exact address once they booked a reservation
+                        <section id="CreateNewSpotFormSection1">
+
+                            <h4 id="CreateNewSpotFormSection1H4">Where&apos;s your place located?</h4>
+
+                            <p id="CreateNewSpotFormSection1P">
+                                Guests will only get your exact address once they booked a reservation.
                             </p>
 
-                            <div id='countryContainer'>
+                            <div id='countryContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.country}</div>
                                         <label className='CreateNewSpotFormLabel'>
                                             Country:
@@ -121,7 +124,7 @@ function CreateNewSpot() {
                                     </div>
                                     {errors.country && <p>{errors.country}</p>}
 
-                                <div id='streetAddressContainer'>
+                                <div id='streetAddressContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.streetAddress}</div>
                                         <label className='CreateNewSpotFormLabel'>
                                             Street Address:
@@ -139,7 +142,7 @@ function CreateNewSpot() {
                                     </div>
                                     {errors.streetAddress && <p>{errors.streetAddress}</p>}
 
-                                <div id='cityContainer'>
+                                <div id='cityContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.city}</div>
                                         <label className='CreateNewSpotFormLabel'>
                                                 City:
@@ -157,7 +160,7 @@ function CreateNewSpot() {
                                     </div>
                                     {errors.city && <p>{errors.city}</p>}
 
-                                <div id='stateContainer'>
+                                <div id='stateContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.state}</div>
                                             <label className='CreateNewSpotFormLabel'>
                                                 State:
@@ -176,7 +179,7 @@ function CreateNewSpot() {
                                         {errors.state && <p>{errors.state}</p>}
 
 
-                                    <div id='latitudeContainer'>
+                                    <div id='latitudeContainer' className='CreateNewSpotFormLabelInputContainer'>
                                         <div className="errors">{errors.latitude}</div>
                                             <label className='CreateNewSpotFormLabel'>
                                                 Latitude:
@@ -195,7 +198,7 @@ function CreateNewSpot() {
                                         {errors.latitude && <p>{errors.latitude}</p>}
 
 
-                                    <div id='longitudeContainer'>
+                                    <div id='longitudeContainer' className='CreateNewSpotFormLabelInputContainer'>
                                         <div className="errors">{errors.latitude}</div>
                                             <label className='CreateNewSpotFormLabel'>
                                                 Longitude:
@@ -218,12 +221,15 @@ function CreateNewSpot() {
                         <hr className='CreateNewSpotHr'></hr>
 {/* form section 2---------------------------------------------------------- */}
 
-                        <section id="CreateNewSpotFormSection2">Describe your place to guests
-                            <p id="CreateNewSpotFromSection2P">
+                        <section id="CreateNewSpotFormSection2">
+
+                        <h4 id="CreateNewSpotFormSection2H4">Describe your place to guests</h4>
+
+                            <p id="CreateNewSpotFormSection2P">
                                 Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.
                             </p>
 
-                            <div id='descriptionContainer'>
+                            <div id='descriptionContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.country}</div>
                                         <label className='CreateNewSpotFormLabel'>
 
@@ -254,12 +260,15 @@ function CreateNewSpot() {
 
 {/* form section 3---------------------------------------------------------- */}
 
-                        <section id="CreateNewSpotFormSection3">Create a title for your spot
-                            <p id="CreateNewSpotFromSection3P">
+                        <section id="CreateNewSpotFormSection3">
+
+                        <h4 id="CreateNewSpotFormSection3H4">Create a title for your spot</h4>
+
+                            <p id="CreateNewSpotFormSection3P">
                                 Catch guests&apos; attention with a spot title that highlights what makes your place special.
                             </p>
 
-                            <div id='titleContainer'>
+                            <div id='titleContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.title}</div>
                                         <label className='CreateNewSpotFormLabel'>
 
@@ -286,15 +295,19 @@ function CreateNewSpot() {
 
 {/* form section 4---------------------------------------------------------- */}
 
-                        <section id="CreateNewSpotFormSection4">Set a base price for your spot
-                            <p id="CreateNewSpotFromSection4P">
+                        <section id="CreateNewSpotFormSection4">
+
+                        <h4 id="CreateNewSpotFormSection4H4">Set a base price for your spot</h4>
+
+                            <p id="CreateNewSpotFormSection4P">
                                 Competitive pricing can help your listing stand out and rank higher in search results.
                             </p>
 
-                            <div id='basePriceContainer'>
+                            <div id='basePriceContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.basePrice}</div>
-                                        <label className='CreateNewSpotFormLabel'>
-                                            $
+                                        <label className='CreateNewSpotFormLabel' id="basePriceLabel">
+
+                                            <p>$</p>
                                             <input
                                             className='CreateNewSpotFormInput'
                                             id="basePrice"
@@ -318,12 +331,15 @@ function CreateNewSpot() {
 
 {/* form section 5---------------------------------------------------------- */}
 
-                        <section id="CreateNewSpotFormSection5">Liven up your spot with photos
-                            <p id="CreateNewSpotFromSection5P">
+                        <section id="CreateNewSpotFormSection5">
+
+                            <h4 id="CreateNewSpotFormSection5H4">Liven up your spot with photos</h4>
+
+                            <p id="CreateNewSpotFormSection5P">
                                 Submit a link to at least one photo to publish your spot.
                             </p>
 
-                            <div id='previewImgContainer'>
+                            <div id='previewImgContainer' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.previewImg}</div>
                                         <label className='CreateNewSpotFormLabel'>
                                             <input
@@ -340,7 +356,7 @@ function CreateNewSpot() {
                             </div>
                             {errors.previewImg && <p>{errors.previewImg}</p>}
 
-                            <div id='img1Container'>
+                            <div id='img1Container' className='CreateNewSpotFormLabelInputContainer'>
                                     <div className="errors">{errors.img1}</div>
                                         <label className='CreateNewSpotFormLabel'>
 
@@ -351,63 +367,66 @@ function CreateNewSpot() {
                                             type="text"
                                             placeholder='Image URL'
                                             value={img1}
-                                            onChange={(e) => setCountry(e.target.value)}
-                                            required
+                                            onChange={(e) => setImg1(e.target.value)}
+
                                             />
                                         </label>
                             </div>
                             {errors.img1 && <p>{errors.img1}</p>}
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
+                            <div id='img2Container' className='CreateNewSpotFormLabelInputContainer'>
+                                    <div className="errors">{errors.img2}</div>
                                         <label className='CreateNewSpotFormLabel'>
-                                            Country:
-                                            <input
-                                            className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
-                                            type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
-                                            required
-                                            />
-                                        </label>
-                            </div>
-                            {errors.country && <p>{errors.country}</p>}
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
-                                        <label className='CreateNewSpotFormLabel'>
-                                            Country:
                                             <input
                                             className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
+                                            id="img2"
+                                            name="img2"
                                             type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
-                                            required
-                                            />
-                                        </label>
-                            </div>
-                            {errors.country && <p>{errors.country}</p>}
+                                            placeholder='Image URL'
+                                            value={img2}
+                                            onChange={(e) => setImg2(e.target.value)}
 
-                            <div id='countryContainer'>
-                                    <div className="errors">{errors.country}</div>
-                                        <label className='CreateNewSpotFormLabel'>
-                                            Country:
-                                            <input
-                                            className='CreateNewSpotFormInput'
-                                            id="country"
-                                            name="country"
-                                            type="text"
-                                            value={country}
-                                            onChange={(e) => setCountry(e.target.value)}
-                                            required
                                             />
                                         </label>
                             </div>
-                            {errors.country && <p>{errors.country}</p>}
+                            {errors.img2 && <p>{errors.img2}</p>}
+
+                            <div id='img3Container' className='CreateNewSpotFormLabelInputContainer'>
+                                    <div className="errors">{errors.img3}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="img3"
+                                            name="img3"
+                                            type="text"
+                                            placeholder='Image URL'
+                                            value={img3}
+                                            onChange={(e) => setImg3(e.target.value)}
+
+                                            />
+                                        </label>
+                            </div>
+                            {errors.img3 && <p>{errors.img3}</p>}
+
+                            <div id='img4Container' className='CreateNewSpotFormLabelInputContainer'>
+                                    <div className="errors">{errors.img4}</div>
+                                        <label className='CreateNewSpotFormLabel'>
+
+                                            <input
+                                            className='CreateNewSpotFormInput'
+                                            id="img4"
+                                            name="img4"
+                                            type="text"
+                                            placeholder='Image URL'
+                                            value={img4}
+                                            onChange={(e) => setImg4(e.target.value)}
+
+                                            />
+                                        </label>
+                            </div>
+                            {errors.img4 && <p>{errors.img4}</p>}
 
 
 

@@ -9,7 +9,7 @@ h1 {
 
 #CreateNewSpotForm{
     margin: 2rem 4rem 4rem 4rem;
-    padding: 4rem 0rem 0rem 0rem;
+    padding: 1rem 0rem 0rem 0rem;
     border: 1px #FF5A5F solid;
     border-radius: 25px;
     display: flex;
@@ -20,40 +20,63 @@ h1 {
 
 
 .CreateNewSpotFormLabel {
+    color: black;
     font-size: medium;
-    font-weight: 200;
+    font-weight: 600;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
+    justify-content: center;
+}
+
+.CreateNewSpotFormLabelInputContainer {
+    display: flex;
     justify-content: center;
 }
 
 .CreateNewSpotFormInput {
-    margin: 0 1rem 1rem 1rem;
-    width: 20rem;
+    margin-bottom: 1rem;
+    width: 442px;
 }
 
 .CreateNewSpotHr {
     border: 1px grey solid;
     width: 80%;
     margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 #CreateNewSpotFormSection1, #CreateNewSpotFormSection2, #CreateNewSpotFormSection3, #CreateNewSpotFormSection4, #CreateNewSpotFormSection5     {
+    width: 450px;
+}
+
+#CreateNewSpotFormSection1H4, #CreateNewSpotFormSection2H4, #CreateNewSpotFormSection3H4, #CreateNewSpotFormSection4H4, #CreateNewSpotFormSection5H4 {
     font-size: large;
     font-weight: bold;
     color: black;
 }
-#CreateNewSpotFromSection1P, #CreateNewSpotFromSection2P, #CreateNewSpotFromSection3P, #CreateNewSpotFromSection4P, #CreateNewSpotFromSection5P {
+
+#CreateNewSpotFormSection1P, #CreateNewSpotFormSection2P, #CreateNewSpotFormSection3P, #CreateNewSpotFormSection4P, #CreateNewSpotFormSection5P {
+    margin: -.5rem 0 1.5rem 0;
     font-size: medium;
     font-weight: 400;
     color: black;
 }
 
+#basePriceLabel{
+    display: flex;
+    flex-direction: row;
+    align-items: first baseline;
+    justify-content: space-between;
+    /* border: 2px blue dashed; */
+    width: 450px
 
+}
 
-
+#basePrice {
+    width: 424px;
+}
 
 
 
