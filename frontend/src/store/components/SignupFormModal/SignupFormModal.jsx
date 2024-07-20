@@ -31,7 +31,7 @@ const checkDisabled = () => {
     (password.length === 0 || !password) ||
     (confirmPassword.length === 0 || !confirmPassword) ||
     (username.length < 4) ||
-    (password.length < 6) 
+    (password.length < 6)
     )
     {setIsDisabled(true) } else {setIsDisabled(false)}
 
@@ -50,7 +50,7 @@ const checkDisabled = () => {
         if (confirmPassword === password) {
             setErrors({});
             // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
-            return dispatch(sessionActions.signup({firstName, lastName, email, username, password}))
+            return dispatch(sessionActions.Signup({firstName, lastName, email, username, password}))
             .then(closeModal)
             .catch(
                 async (res) => {
@@ -72,14 +72,14 @@ const checkDisabled = () => {
         <h1>Sign Up</h1>
 
 
-                <form id='signupForm' onSubmit={handleSubmit}>
+                <form id='SignupForm' onSubmit={handleSubmit}>
 
                     <div id='firstNameContainer'>
                             <div className="errors">{errors.firstName}</div>
-                                <label className='signUpFormLabel'>
+                                <label className='SignupFormLabel'>
                                     first name:
                                     <input
-                                    className='signUpFormInput'
+                                    className='SignupFormInput'
                                     id="firstName"
                                     name="firstName"
                                     type="text"
@@ -93,10 +93,10 @@ const checkDisabled = () => {
 
                         <div id='lastNameContainer'>
                             <div className="errors">{errors.lastName}</div>
-                                <label className='signUpFormLabel'>
+                                <label className='SignupFormLabel'>
                                     last name:
                                     <input
-                                    className='signUpFormInput'
+                                    className='SignupFormInput'
                                     id="lastName"
                                     name="lastName"
                                     value={lastName}
@@ -110,10 +110,10 @@ const checkDisabled = () => {
 
                         <div id='emailContainer'>
                             <div className="errors">{errors.email}</div>
-                                <label className='signUpFormLabel'>
+                                <label className='SignupFormLabel'>
                                         email:
                                     <input
-                                    className='signUpFormInput'
+                                    className='SignupFormInput'
                                     id="email"
                                     name="email"
                                     value={email}
@@ -127,10 +127,10 @@ const checkDisabled = () => {
 
                         <div id='userNameContainer'>
                             <div className="errors">{errors.username}</div>
-                                    <label className='signUpFormLabel'>
+                                    <label className='SignupFormLabel'>
                                         username:
                                         <input
-                                        className='signUpFormInput'
+                                        className='SignupFormInput'
                                         id="username"
                                         name="username"
                                         value={username}
@@ -145,10 +145,10 @@ const checkDisabled = () => {
 
                             <div id='passwordContainer'>
                                 <div className="errors">{errors.password}</div>
-                                    <label className='signUpFormLabel'>
+                                    <label className='SignupFormLabel'>
                                         password:
                                         <input
-                                        className='signUpFormInput'
+                                        className='SignupFormInput'
                                         id="password"
                                         name="password"
                                         value={password}
@@ -163,10 +163,10 @@ const checkDisabled = () => {
 
                             <div id='confirmPasswordContainer'>
                                 <div className="errors">{errors.password}</div>
-                                    <label className='signUpFormLabel'>
+                                    <label className='SignupFormLabel'>
                                         confirm password:
                                         <input
-                                        className='signUpFormInput'
+                                        className='SignupFormInput'
                                         id="confirmPassword"
                                         name="confirmPassword"
                                         value={confirmPassword}

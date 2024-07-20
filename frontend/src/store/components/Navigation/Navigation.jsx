@@ -27,7 +27,7 @@ const Navigation = ({isLoaded}) => {
         <ul>
             <li>
                 {sessionUser ?
-                <NavLink to="/newSpot" id="NavLinkToCreateNewSpot">Create a New Spot</NavLink>
+                <NavLink to="/spots/new" id="NavLinkToCreateNewSpot">Create a New Spot</NavLink>
                 : ""}
             </li>
             <li id="homeLi">

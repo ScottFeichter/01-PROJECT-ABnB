@@ -1,10 +1,4 @@
-* {
-    font-family: Figtree;
-}
-
-/* ======================MAIN========================== */
-
- #SignupFormModalMain {
+#CreateNewSpotMain {
     width: 20rem;
     height: 40rem;
 }
@@ -14,7 +8,7 @@ h1 {
 }
 
 
-#SignupForm{
+#signupForm{
     margin: 2rem 4rem 4rem 4rem;
     padding: 4rem 0rem 0rem 0rem;
     border: 1px #FF5A5F solid;
@@ -26,20 +20,20 @@ h1 {
 }
 
 
-.SignupFormLabel {
+.signUpFormLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.SignupFormInput {
+.signUpFormInput {
     margin: 0 1rem 1rem 1rem;
 }
 
 
 
-#SignupFormModalButton {
+#CreateNewSpotButton {
     margin: 2rem 0 4rem 0;
     width: 8rem;
     height: 2rem;
@@ -49,26 +43,26 @@ h1 {
     width: 100px;
 }
 
-#SignupFormModalButton:enabled {
+#CreateNewSpotButton:enabled {
     border: 1px solid #FE595D;
     color: white;
     background-color: #FE595D;
 
 }
 
-#SignupFormModalButton:disabled {
+#CreateNewSpotButton:disabled {
     border: 1px solid grey;
     color: grey;
     background-color: whitesmoke;
 
 }
 
-#SignupFormModalButton:enabled:hover {
+#CreateNewSpotButton:enabled:hover {
     color: white;
     background-color: rgba(0, 0, 0, 1);
 }
 
-#SignupFormModalButton:enabled:active{
+#CreateNewSpotButton:enabled:active{
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
 }
