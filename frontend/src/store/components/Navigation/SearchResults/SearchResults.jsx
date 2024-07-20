@@ -5,7 +5,7 @@ import './SearchResults.css';
 
 const SearchResults = () => {
 
-    const searchResults = useSelector(state => state.spots);
+    const searchResults = useSelector(state => state.spots.Spots);
     // const results = searchResults.spots;
     console.log("searchReasults=========", searchResults)
     // console.log("results=========", results)

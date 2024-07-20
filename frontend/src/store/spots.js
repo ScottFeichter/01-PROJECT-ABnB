@@ -67,6 +67,8 @@ export const getSpotDetailsById = (spotId) => async (dispatch) => {
   const data = await response.json();
   console.log('THUNK GETSPOTBYID RAN DATA: ', data );
   dispatch(spotById(data));
+  console.log("SPOTS DEBUGGER getSpotDetails...")
+  debugger
   return data
 };
 
@@ -141,10 +143,11 @@ const spotsReducer = (state = initialState, action) => {
       // console.log('STATE DESTRUCTRED TEST', {...state, test: "test"})
       console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
 
-      return action.payload;
+      return {...state, Spots: action.payload}
 
     case SPOT_BY_ID:
       console.log("SPOTSREDUCER RAN SPOT_BY_ID CASE RETURNING: ", {...state, spot: action.payload})
+      debugger;
       return {...state, spotDetail: action.payload};
 
     case CREATE_SPOT:

@@ -22,11 +22,13 @@ function Spot({spot}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        dispatch(getSpotDetailsById(spot.id))
+        const response = await dispatch(getSpotDetailsById(spot.id)).then(console.log('from the NavLink!!!!!!!!!!!!!!'))
+
         navigate(`/spots/${spot.id}`)
-        console.log('from the NavLink!!!!!!!!!!!!!!')
+
+
 
     }
 

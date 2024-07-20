@@ -1,60 +1,36 @@
 import './SpotDetails.css';
 import { FaStar } from "react-icons/fa";
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getReviewsBySpotId } from '../../reviews';
-import { getSpotDetailsById } from '../../spots';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useRef } from 'react';
+
 
 function SpotDetails() {
+    console.log("SPOTDETAILS DEBUGGER")
     const dispatch = useDispatch();
-    const {spotId} = useParams();
-    const spots = useSelector(state => state.spots.spots);
-    const spot = spots.find((spot) => spot.id === +spotId);
-    const tehspot = useSelector(state => state.spots.spot)
-    console.log('!!!!!!!!!!!!!!', tehspot)
-    console.log("spot!!!!!!!!!!!!!!!!", spot)
-    const [spotOwner, setSpotOwner] = useState();
+    const spot = useSelector(state => state.spots.spotDetail);
     const [reviewsShow, setReviewsShow] = useState();
-    let spotDetails = useRef(0);
 
-//get Spot Details----------------------------------
-   useEffect(()=>{
-    const getSpotDetails = async () => {
-        spotDetails = await dispatch(getSpotDetailsById(spotId));
-        const owner = spotDetails.Owner;
-        console.log(spotDetails);
-        setSpotOwner(spotDetails.Owner);
-        console.log(spotOwner)
-        const spotOwnerFirstName = owner.firstName;
-        console.log(spotOwnerFirstName)
-        const spotOwnerLastName = owner.lastName;
-        console.log(spotOwnerLastName)
-    }
-    getSpotDetails()
-   }, [])
-
-   console.log('SpotDetails', spotDetails);
 
 
 // getReviews---------------------------------------
+
     useEffect(() => {
         const getReviews = async () => {
-            const response = await dispatch(getReviewsBySpotId(spotId));
+            const response = await dispatch(getReviewsBySpotId(spot.id));
             console.log('response========', response)
 
             const reviews = response.Reviews.length;
             console.log('reviews============', reviews);
 
             if(response.Reviews.length === 1) {
-                setReviewsShow(`${spot.avgRating}  •  ${response.Reviews.length} Review`);
+                setReviewsShow(`${spot.avgStarRating}  •  ${response.Reviews.length} Review`);
             } else if (!response.Reviews.length) {
                 setReviewsShow(`\xa0\xa0\xa0 New`)
             } else {
-                setReviewsShow(`${spot.avgRating}  •  ${response.Reviews.length} Reviews`);
+                setReviewsShow(`${spot.avgStarRating}  •  ${response.Reviews.length} Reviews`);
             }
         }
         getReviews()
@@ -71,6 +47,7 @@ function SpotDetails() {
 
 // return---------------------------------------
 
+    console.log('SPOT DETAILS COMPONENT RAN');
     return (
         <main id="SpotDetailsMain">
 
@@ -78,7 +55,7 @@ function SpotDetails() {
             <h3 id="SpotDetailsH3">{spot.city}, {spot.state}, {spot.country}</h3>
 
             <section id="SpotDetailsImagesSection">
-                <img src={spot.previewImage} alt="img" id="SpotDetailsPreviewImage" />
+                <img src={spot.SpotImages[0].url} alt="img" id="SpotDetailsPreviewImage" />
                 <div id="SpotDetailsImageGrid">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-1" />
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/San_Diego_Zoo_Entrance_.jpg/1200px-San_Diego_Zoo_Entrance_.jpg" alt="img" id="SpotDetailsSpotImage-2" />
@@ -90,7 +67,7 @@ function SpotDetails() {
             <section id="SpotDetailsHostedBySection">
 
                 <div id="SpotDetailsHostedByTextContainer">
-                    <h2>Hosted by  lastName</h2>
+                    <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
                     <p>{spot.description}</p>
                 </div>
 
