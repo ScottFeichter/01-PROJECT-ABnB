@@ -51,7 +51,7 @@ const deletedSpot = (spot) => {
 /** =======THUNKS: =========*/
 
 /** GET SPOTS */
-export const search = (search) => async (dispatch) => {
+export const search = (/*search*/) => async (dispatch) => {
 
   const response = await fetch("/api/spots");
   const data = await response.json();

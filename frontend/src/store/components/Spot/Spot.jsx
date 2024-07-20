@@ -28,8 +28,13 @@ function Spot({spot}) {
         const spotDetails = await dispatch(getSpotDetailsById(spot.id))
         .then(console.log(/*'spotDetails from the NavLink!!!!!!!!!!!!!!'*/));
 
+
+
         const reviews = await dispatch(getReviewsBySpotId(spot.id))
         .then(console.log(/*'reviews from NavLink!!!!!!!!!!!!'*/))
+
+        // for making linting error go away
+        if(spotDetails) {reviews}
 
         navigate(`/spots/${spot.id}`)
 

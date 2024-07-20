@@ -27,7 +27,7 @@ function SpotDetails() {
             }
         }
         getReviews()
-    }, []);
+    },[]);
 
 
 
