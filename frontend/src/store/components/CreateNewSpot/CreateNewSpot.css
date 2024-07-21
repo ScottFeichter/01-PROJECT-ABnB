@@ -107,9 +107,11 @@ h1 {
 #CreateNewSpotButton:enabled:hover {
     color: white;
     background-color: rgba(0, 0, 0, 1);
+    cursor: pointer;
 }
 
 #CreateNewSpotButton:enabled:active{
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
+    cursor: pointer;
 }

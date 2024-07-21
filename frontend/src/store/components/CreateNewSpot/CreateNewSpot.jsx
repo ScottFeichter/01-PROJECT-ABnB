@@ -1,13 +1,17 @@
 import './CreateNewSpot.css';
 import {useState } from 'react';
 import {useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import * as spotsActions from '../../spots'
-import { useEffect } from 'react';
+import * as imagesActions from '../../images';
+
 
 
 function CreateNewSpot() {
 
         const dispatch = useDispatch();
+        const navigate = useNavigate();
+
 
         const [errors, setErrors] = useState({});
         const [isDisabled, setIsDisabled] = useState(false);
@@ -43,49 +47,115 @@ function CreateNewSpot() {
 // CreateNewSpot Button Disabled------------------------------------------------------------------------
 
 
-    const checkDisabled = () => {
-        if(
-        (country.length === 0 || !country) ||
-        (streetAddress.length === 0 || !streetAddress) ||
-        (city.length === 0 || !city) ||
-        (state.length === 0 || !state) ||
-        (latitude.length === 0 || !latitude) ||
-        (longitude.length === 0 || !longitude) ||
-        (state.length < 4) ||
-        (latitude.length < 6)
-        )
-        {setIsDisabled(true) } else {setIsDisabled(false)}
+    // const checkDisabled = () => {
+    //     if(
+    //     (country.length === 0 || !country) ||
+    //     (streetAddress.length === 0 || !streetAddress) ||
+    //     (city.length === 0 || !city) ||
+    //     (state.length === 0 || !state) ||
+    //     (latitude.length === 0 || !latitude) ||
+    //     (longitude.length === 0 || !longitude) ||
+    //     (state.length < 4) ||
+    //     (latitude.length < 6)
+    //     )
+    //     {setIsDisabled(true) } else {setIsDisabled(false)}
 
-       }
+    //    }
 
-       useEffect(()=> {
-        checkDisabled();
-       });
+    //    useEffect(()=> {
+    //     checkDisabled();
+    //    });
 
 
 
 // CreateNewSpot Button handler------------------------------------------------------------------------
 
-        const handleSubmit = (e) => {
-            e.preventDefault();
-            if (longitude === latitude) {
-                setErrors({});
-                // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', country, streetAddress, city, state, latitude);
-                return dispatch(spotsActions.signup({country, streetAddress, city, state, latitude}))
-                .then(closeModal)
-                .catch(
-                    async (res) => {
-                        const data = await res.json();
-                        if (data?.errors) setErrors(data.errors);
-                        // console.log('CATCH DISPATCH RAN', data);
-                    }
-                )
-            }
 
-            return setErrors({
-                longitude: "Confirm Password field must be the same as the Password field"
+
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            console.log('HANDLE SUBMIT NEW SPOT IS RUNNING');
+
+            const newSpot = await dispatch(spotsActions.createNewSpot(newSpot))
+            .then(response => {
+                console.log('CREATENEWSPOT RESPONSE: ', response)
+                return response.data
             })
-        };
+            .then(data => {
+                console.log(`NEW SPOT CREATED`, data);
+                return data;
+            })
+            .then(async data =>  {
+                const prevImageInfo = {spotId: data.spot.id, url: previewImg, preview: true};
+                const newSpotPreviewImg = await dispatch(imagesActions.addImageToSpot(prevImageInfo));
+                console.log('NEWSPOTPREVIEWIMG', newSpotPreviewImg)
+                return data;
+            }).then(async data =>  {
+                if(img1) {
+                const img1Info = {spotId: data.spot.id, url: img1, preview: false};
+                const newSpotImg1 = await dispatch(imagesActions.addImageToSpot(img1Info));
+                console.log('NEWSPOTIMG1', newSpotImg1)
+                }
+                return data;
+            }).then(async data =>  {
+                if(img2) {
+                const img2Info = {spotId: data.spot.id, url: img2, preview: false};
+                const newSpotImg2 = await dispatch(imagesActions.addImageToSpot(img2Info));
+                console.log('NEWSPOTIMG2', newSpotImg2)
+
+                }
+                return data;
+            }).then(async data =>  {
+                if(img3) {
+                const img3Info = {spotId: data.spot.id, url: img1, preview: false};
+                const newSpotImg3 = await dispatch(imagesActions.addImageToSpot(img3Info));
+                console.log('NEWSPOTIMG3', newSpotImg3)
+
+                }
+                return data;
+            }).then(async data =>  {
+                if(img4) {
+                (async () => {
+                    const img4Info = {spotId: data.spot.id, url: img1, preview: false};
+                    const newSpotImg4 = await dispatch(imagesActions.addImageToSpot(img4Info));
+                    console.log('NEWSPOTIMG4', newSpotImg4)
+                });
+                }
+                return data;
+            }).then(data => {
+                console.log(`NEW SPOT IMAGES ADDED`);
+                return data;
+            }).then(async data => {
+                const newSpotDetails = await spotsActions.getSpotDetailsById(data.spot.id);
+                return newSpotDetails.spot.id;
+            }).then(data => navigate(`/spots/${data.spot.id}`));
+
+
+            console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+
+        }
+
+
+        // const handleSubmit = (e) => {
+        //     e.preventDefault();
+        //     if (longitude === latitude) {
+        //         setErrors({});
+        //         // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', country, streetAddress, city, state, latitude);
+        //         return dispatch(spotsActions.signup({country, streetAddress, city, state, latitude}))
+        //         .then(closeModal)
+        //         .catch(
+        //             async (res) => {
+        //                 const data = await res.json();
+        //                 if (data?.errors) setErrors(data.errors);
+        //                 // console.log('CATCH DISPATCH RAN', data);
+        //             }
+        //         )
+        //     }
+
+        //     return setErrors({
+        //         longitude: "Confirm Password field must be the same as the Password field"
+        //     })
+        // };
 
 
 // return-----------------------------------
@@ -440,10 +510,12 @@ function CreateNewSpot() {
 
                         <div id="buttonContainer">
                             <button
-                            id="CreateNewSpotButton"
-                            type="submit" disabled={isDisabled}>
-                                Create Spot
-                                </button>
+                                id="CreateNewSpotButton"
+                                type="submit"
+                                disabled={isDisabled}
+                                onClick={handleSubmit}
+                                >Create Spot
+                            </button>
                         </div>
 
 

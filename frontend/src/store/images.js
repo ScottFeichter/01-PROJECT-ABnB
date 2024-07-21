@@ -72,17 +72,19 @@ export const getImageDetailsById = (imageId) => async (dispatch) => {
 
 /** POST IMAGES */
 
-export const createImage = (newImage) => async (dispatch) => {
-  const response = await fetch(`/api/images/`, {
+export const addImageToSpot = (imageInfo) => async (dispatch) => {
+  const {spotId, url, preview} = imageInfo
+
+  const response = await fetch(`/api/spots/${spotId}/images`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(newImage)
+    body: JSON.stringify({url, preview})
   });
 
   const data = await response.json();
-  console.log('THUNK CREATEIMAGE RAN DATA: ', data );
+  console.log('THUNK ADD IMAGE TO SPOT RAN DATA: ', data );
   dispatch(newCreatedImage(data));
   return data
 };

@@ -180,10 +180,11 @@ const checkDisabled = () => {
 
                             <div id="buttonContainer">
                                 <button
-                                id="SignupFormModalButton"
-                                type="submit" disabled={isDisabled}>
-                                    Sign Up
-                                    </button>
+                                    id="SignupFormModalButton"
+                                    type="submit"
+                                    disabled={isDisabled}
+                                    >Sign Up
+                                </button>
                             </div>
                 </form>
 
