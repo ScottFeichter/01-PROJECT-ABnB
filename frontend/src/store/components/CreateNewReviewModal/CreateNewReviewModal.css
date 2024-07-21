@@ -1,4 +1,4 @@
-#SignupFormModalMain {
+#CreateNewReviewModalMain {
     width: 20rem;
     height: 40rem;
 }
@@ -8,7 +8,7 @@ h1 {
 }
 
 
-#SignupForm{
+#CreateNewReview{
     margin: 2rem 4rem 4rem 4rem;
     padding: 4rem 0rem 0rem 0rem;
     border: 1px #FF5A5F solid;
@@ -20,20 +20,20 @@ h1 {
 }
 
 
-.SignupFormLabel {
+.CreateNewReviewLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.SignupFormInput {
+.CreateNewReviewInput {
     margin: 0 1rem 1rem 1rem;
 }
 
 
 
-#SignupFormModalButton {
+#CreateNewReviewModalButton {
     margin: 2rem 0 4rem 0;
     width: 8rem;
     height: 2rem;
@@ -43,26 +43,26 @@ h1 {
     width: 100px;
 }
 
-#SignupFormModalButton:enabled {
+#CreateNewReviewModalButton:enabled {
     border: 1px solid #FE595D;
     color: white;
     background-color: #FE595D;
 
 }
 
-#SignupFormModalButton:disabled {
+#CreateNewReviewModalButton:disabled {
     border: 1px solid grey;
     color: grey;
     background-color: whitesmoke;
 
 }
 
-#SignupFormModalButton:enabled:hover {
+#CreateNewReviewModalButton:enabled:hover {
     color: white;
     background-color: rgba(0, 0, 0, 1);
 }
 
-#SignupFormModalButton:enabled:active{
+#CreateNewReviewModalButton:enabled:active{
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
 }

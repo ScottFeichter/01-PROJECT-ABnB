@@ -133,7 +133,7 @@
    flex-direction: column;
 }
 
-#postReviewNavLinkButton {
+#postReviewModalButton {
     margin: 1rem 0 0 0;
     width: 8rem;
     height: 1.25rem;
@@ -150,12 +150,12 @@
 
 }
 
-#postReviewNavLinkButton:hover {
+#postReviewModalButton:hover {
     color: white;
     background-color: rgba(0, 0, 0, 1);
 }
 
-#postReviewNavLinkButton:active{
+#postReviewModalButton:active{
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
 }

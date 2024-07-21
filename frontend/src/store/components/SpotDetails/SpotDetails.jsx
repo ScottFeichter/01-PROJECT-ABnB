@@ -3,8 +3,9 @@ import { FaStar } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import Review from '../Review/Review';
+import CreateNewReviewModal from '../CreateNewReviewModal/CreateNewReviewModal';
+import OpenModalButton from '../OpenModalButton';
 
 
 function SpotDetails() {
@@ -129,7 +130,12 @@ function SpotDetails() {
                 <div id="SpotDetailsReviews">
 
                     {postReviewButton ?
-                      <NavLink spot={spot} to={`/spots/${spot.id}/reviews/new`} id="postReviewNavLinkButton">Post Your Review</NavLink>
+                      <OpenModalButton
+                        buttonClass="postReviewModalButton"
+                        buttonId="postReviewModalButton"
+                        buttonText="Post Your Review"
+                        modalComponent={<CreateNewReviewModal spot={spot} />}
+                        />
                       : ""
                     }
 

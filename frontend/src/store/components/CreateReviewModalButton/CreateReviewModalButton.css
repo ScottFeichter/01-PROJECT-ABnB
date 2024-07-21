@@ -1,0 +1,16 @@
+.createReviewModalButton {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #FE595D;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, .5);
+    width: 100px;
+}
+
+.createReviewModalButton:hover  {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+
+}

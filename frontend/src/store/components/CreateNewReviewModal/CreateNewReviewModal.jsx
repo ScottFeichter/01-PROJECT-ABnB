@@ -1,9 +1,46 @@
 import { useModal } from "../../../context/Modal";
+import {useState } from 'react';
+import {useDispatch } from 'react-redux'
+import * as sessionActions from '../../session'
+import { useEffect } from 'react';
 
 
 
 function CreateNewReviewModal({spot}) {
+    const dispatch = useDispatch();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState({});
+    const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
+
+
+
+// Log In Button Disabled------------------------------------------------------------------------
+
+
+const checkDisabled = () => {
+    if(
+    (firstName.length === 0 || !firstName) ||
+    (lastName.length === 0 || !lastName) ||
+    (email.length === 0 || !email) ||
+    (username.length === 0 || !username) ||
+    (password.length === 0 || !password) ||
+    (confirmPassword.length === 0 || !confirmPassword) ||
+    (username.length < 4) ||
+    (password.length < 6)
+    )
+    {setIsDisabled(true) } else {setIsDisabled(false)}
+
+   }
+
+   useEffect(()=> {
+    checkDisabled();
+   });
 
 
 

@@ -80,7 +80,7 @@ function ProfileButton({ user }) {
           <ul id="notLoggedIn">
             <li >
               <OpenModalButton
-                className="notLoggedInButton"
+                // className="notLoggedInButton"
                 buttonText="Log In"
                 onButtonClick={closeMenu}
                 modalComponent={<LoginFormModal />}
@@ -88,7 +88,7 @@ function ProfileButton({ user }) {
             </li>
             <li >
               <OpenModalButton
-                className="notLoggedInButton"
+                // className="notLoggedInButton"
                 buttonText="Sign Up"
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
