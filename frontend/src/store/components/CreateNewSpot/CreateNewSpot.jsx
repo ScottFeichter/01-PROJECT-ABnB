@@ -87,9 +87,9 @@ function CreateNewSpot() {
                 price: basePrice,
             }
 
-            const theNewSpot = await dispatch(spotsActions.createSpot(newSpot))
+            await dispatch(spotsActions.createSpot(newSpot))
             .then(response => {
-                console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ', theNewSpot) // 3rd 4th arg for disabling error msg
+                console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ')
                 return response.data
             })
             .then(data => {

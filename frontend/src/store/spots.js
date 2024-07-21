@@ -143,7 +143,7 @@ const spotsReducer = (state = initialState, action) => {
 
     case CREATE_SPOT:
       console.log("SPOTSREDUCER RAN CREATE_SPOT CASE RETURNING: ", {...state, spot: action.payload})
-      return {...state, spot: action.payload};
+      return {...state, NewSpot: action.payload};
 
 
     case UPDATE_SPOT:
