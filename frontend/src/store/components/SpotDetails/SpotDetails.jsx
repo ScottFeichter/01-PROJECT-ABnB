@@ -11,9 +11,6 @@ function SpotDetails() {
     const spot = useSelector(state => state.spots.spotDetail);
     const reviews = useSelector(state => state.reviews.reviews.Reviews);
     const reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
-    console.log(!!reviewsInOrder.length)
-
-
 
 // handleReserve---------------------------------------
 
@@ -47,11 +44,33 @@ function SpotDetails() {
 
     const [postReviewButton, setPostReviewButton] = useState(false);
     const session = useSelector(state => state.session.user);
-    const isSame = spot.ownerId !== session.id
-    const alreadyPosted = reviewsInOrder.some(review => review.userId === session.id);
+
+    let sessionBool;
+    if(session === null) {
+        sessionBool = false;
+    } else {
+        sessionBool = true;
+    }
+
+    let isSame;
+    if (session === null) {
+        isSame = false
+    } else {
+        isSame = spot.ownerId === session.id;
+    }
+
+    let alreadyPosted;
+    if(session === null) {
+        alreadyPosted = false;
+    } else {
+        alreadyPosted = reviewsInOrder.some(review => review.userId === session.id);
+    }
+
+    // console.log('THREE POS: ', sessionBool, isSame, alreadyPosted)
+
 
     useEffect(()=> {
-        setPostReviewButton(((session)&&(isSame)&&(!alreadyPosted)));
+        setPostReviewButton(((sessionBool)&&(!isSame)&&(!alreadyPosted)));
         console.log('POST REVIEW BUTTON', postReviewButton);
     }, [])
 
