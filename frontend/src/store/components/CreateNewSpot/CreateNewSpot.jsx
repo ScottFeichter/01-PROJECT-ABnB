@@ -4,13 +4,13 @@ import {useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import * as spotsActions from '../../spots'
 import * as imagesActions from '../../images';
+import * as reviewsActions from '../../reviews';
 
 
 // const testNewSpot = {
 
 //     description: "All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy."
 // }
-
 
 
 function CreateNewSpot() {
@@ -83,69 +83,72 @@ function CreateNewSpot() {
             console.log('HANDLE SUBMIT NEW SPOT IS RUNNING');
 
             const newSpot = {
-                address: streetAddress,
-                city: city,
-                state: state,
-                country: country,
-                lat: latitude,
-                lng: longitude,
-                description: description,
-                price: basePrice,
+                "address": streetAddress,
+                "city": city,
+                "state": state,
+                "country": country,
+                "lat": +latitude,
+                "lng": +longitude,
+                "name": title,
+                "description": description,
+                "price": +basePrice,
             }
 
             await dispatch(spotsActions.createSpot(newSpot))
             .then(response => {
                 console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ')
-                return response.data
+                return response
             })
-            .then(data => {
-                console.log(`NEW SPOT CREATED`, data);
-                return data;
+            .then(response => {
+                console.log(`NEW SPOT CREATED`, response);
+                return response;
             })
-            .then(async data =>  {
-                const prevImageInfo = {spotId: data.spot.id, url: previewImg, preview: true};
+            .then(async response =>  {
+                const prevImageInfo = {spotId: response.id, url: previewImg, preview: true};
                 const newSpotPreviewImg = await dispatch(imagesActions.addImageToSpot(prevImageInfo));
                 console.log('NEWSPOTPREVIEWIMG', newSpotPreviewImg)
-                return data;
-            }).then(async data =>  {
+                return response;
+            }).then(async response =>  {
                 if(img1) {
-                const img1Info = {spotId: data.spot.id, url: img1, preview: false};
-                const newSpotImg1 = await dispatch(imagesActions.addImageToSpot(img1Info));
-                console.log('NEWSPOTIMG1', newSpotImg1)
+                    const img1Info = {spotId: response.id, url: img1, preview: false};
+                    const newSpotImg1 = await dispatch(imagesActions.addImageToSpot(img1Info));
+                    console.log('NEWSPOTIMG1', newSpotImg1)
                 }
-                return data;
-            }).then(async data =>  {
+                return response;
+            }).then(async response =>  {
                 if(img2) {
-                const img2Info = {spotId: data.spot.id, url: img2, preview: false};
-                const newSpotImg2 = await dispatch(imagesActions.addImageToSpot(img2Info));
-                console.log('NEWSPOTIMG2', newSpotImg2)
-
+                    const img2Info = {spotId: response.id, url: img2, preview: false};
+                    const newSpotImg2 = await dispatch(imagesActions.addImageToSpot(img2Info));
+                    console.log('NEWSPOTIMG2', newSpotImg2)
                 }
-                return data;
-            }).then(async data =>  {
+                return response;
+            }).then(async response =>  {
                 if(img3) {
-                const img3Info = {spotId: data.spot.id, url: img1, preview: false};
-                const newSpotImg3 = await dispatch(imagesActions.addImageToSpot(img3Info));
-                console.log('NEWSPOTIMG3', newSpotImg3)
-
+                    const img3Info = {spotId: response.id, url: img1, preview: false};
+                    const newSpotImg3 = await dispatch(imagesActions.addImageToSpot(img3Info));
+                    console.log('NEWSPOTIMG3', newSpotImg3)
                 }
-                return data;
-            }).then(async data =>  {
+                return response;
+            }).then(async response =>  {
                 if(img4) {
-                (async () => {
-                    const img4Info = {spotId: data.spot.id, url: img1, preview: false};
+                    const img4Info = {spotId: response.id, url: img1, preview: false};
                     const newSpotImg4 = await dispatch(imagesActions.addImageToSpot(img4Info));
                     console.log('NEWSPOTIMG4', newSpotImg4)
-                });
                 }
-                return data;
-            }).then(data => {
+                return response;
+            }).then(response => {
                 console.log(`NEW SPOT IMAGES ADDED`);
-                return data;
-            }).then(async data => {
-                const newSpotDetails = await spotsActions.getSpotDetailsById(data.spot.id);
-                return newSpotDetails.spot.id;
-            }).then(data => navigate(`/spots/${data.spot.id}`));
+                return response;
+            }).then(response => {
+                dispatch(reviewsActions.getReviewsBySpotId(response.id));
+                return response;
+            }).then(response => {
+                dispatch(spotsActions.getSpotDetailsById(response.id)).then(newSpot => console.log('NEWSPOT: ', newSpot));
+                return response;
+            }).then(response => {
+                dispatch(spotsActions.search());
+                return response;
+            }).then(response => navigate(`/spots/${response.id}`));
 
 
             console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');

@@ -1,3 +1,4 @@
+import { csrfFetch } from "./csrf";
 
 /** =======ACTION TYPE CONSTANTS: =========*/
 const IMAGE_SEARCH = "image/search";
@@ -75,7 +76,7 @@ export const getImageDetailsById = (imageId) => async (dispatch) => {
 export const addImageToSpot = (imageInfo) => async (dispatch) => {
   const {spotId, url, preview} = imageInfo
 
-  const response = await fetch(`/api/spots/${spotId}/images`, {
+  const response = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

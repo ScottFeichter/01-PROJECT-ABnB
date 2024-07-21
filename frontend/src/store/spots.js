@@ -81,7 +81,7 @@ export const createSpot = (newSpot) => async (dispatch) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({newSpot})
+    body: JSON.stringify(newSpot)
   });
 
   const data = await response.json();
@@ -113,7 +113,7 @@ export const editSpot = (editedSpot) => async (dispatch) => {
 
 export const deleteSpot = (spotToDelete) => async (dispatch) => {
   const {spotId} = spotToDelete;
-  const response = await fetch(`/api/spots/${spotId}`, {
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
   });
 
