@@ -108,11 +108,13 @@
 
 
 #SpotDetailsReserveButton:enabled:hover {
+    cursor: pointer;
     color: white;
     background-color: rgba(0, 0, 0, 1);
 }
 
 #SpotDetailsReserveButton:enabled:active{
+    cursor: pointer;
     color: #FE595D;
     background-color: rgba(255, 255, 255, .5);
 }
@@ -120,6 +122,34 @@
 
 
 /* Reviews--------------------- */
+
+
 #SpotDetailsReviewsSection {
     margin: .5rem;
+}
+
+#SpotDetailsReviews {}
+
+#postReviewNavLinkButton {
+    margin: auto auto auto auto;
+    width: 8rem;
+    height: 1.5rem;
+    font-size: .5rem;
+    font-weight: 500;
+
+    border-radius: 25px;
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+
+}
+
+#postReviewNavLinkButton :hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#postReviewNavLinkButton:active{
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
 }

@@ -3,16 +3,27 @@ import { FaStar } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import Review from '../Review/Review';
 
 
 function SpotDetails() {
+    const session = useSelector(state => state.session.user);
+
     const spot = useSelector(state => state.spots.spotDetail);
     const reviews = useSelector(state => state.reviews.reviews.Reviews);
     const reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
-    console.log(reviewsInOrder)
+    // console.log(reviewsInOrder)
+
+    console.log('SESSION:', !!session, 'SPOT.ONWERID', spot.ownerId, session.id, (spot.ownerId !== session.id), (reviewsInOrder.some(review => review.userId === session.user.id)));
 
 
+// handleReserve---------------------------------------
+
+    const handleReserve = (e) => {
+        e.preventDefault();
+        window.alert("Feature coming soon");
+    }
 
 
 // prepare reviews for display---------------------------------------
@@ -34,13 +45,32 @@ function SpotDetails() {
     },[]);
 
 
+// check if post review button should show --------------------------------------
 
-// handleReserve---------------------------------------
 
-    const handleReserve = (e) => {
-        e.preventDefault();
-        window.alert("Feature coming soon");
-    }
+    const [postReviewButton, setPostReviewButton] = useState(false);
+
+    useEffect(() => {
+
+        async () => {
+
+            await reviewsInOrder.some(review => review.userId === session.user.id)
+            .then(someResult => {
+                console.log('someResult', someResult)
+
+                if(
+                    (session) &&
+                    (!someResult) &&
+                    (spot.ownerId !== session.id)
+                ){
+                   setPostReviewButton(true);
+                 }
+            });
+          }
+        }, [reviewsInOrder, session, spot]);
+
+
+
 
 // return---------------------------------------
 
@@ -89,6 +119,13 @@ function SpotDetails() {
                 </div>
 
                 <div id="SpotDetailsReviews">
+
+                    {postReviewButton ?
+                      <NavLink spot={spot} to={`/spots/${spot.id}/reviews/new`} id="postReviewNavLinkButton">Post Your Review</NavLink>
+                      : ""
+                    }
+
+
                     {reviewsInOrder ?
                      reviewsInOrder.map(review => <Review review={review} key={review.id} />) :
                      <p>Be the first to post a review!</p> }
