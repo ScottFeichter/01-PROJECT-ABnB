@@ -39,7 +39,7 @@ function SpotDetails() {
             }
         }
         getReviews()
-    },[]);
+    },[reviews, spot.avgStarRating]);
 
 
 // check if post review button should show --------------------------------------

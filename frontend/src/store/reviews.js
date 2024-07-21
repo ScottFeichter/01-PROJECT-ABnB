@@ -1,3 +1,4 @@
+import { csrfFetch } from "./csrf";
 
 /** =======ACTION TYPE CONSTANTS: =========*/
 const REVIEWS_CURRENT = "reviews/current";
@@ -72,12 +73,15 @@ export const getReviewsBySpotId = (spotId) => async (dispatch) => {
 /** POST REVIEWS */
 
 export const createReview = (newReview) => async (dispatch) => {
-  const response = await fetch(`/api/reviews/`, {
+  const {review, stars, spotId} = newReview;
+  console.log('SPOTID!!!!!!!!!', spotId);
+
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(newReview)
+    body: JSON.stringify({review, stars})
   });
 
   const data = await response.json();
@@ -140,8 +144,7 @@ const reviewsReducer = (state = initialState, action) => {
 
     case CREATE_REVIEW:
       console.log("REVIEWSREDUCER RAN CREATE_REVIEW CASE RETURNING: ", {...state, review: action.payload})
-      return {...state, review: action.payload};
-
+      return {...state, newReview: action.payload};
 
     case UPDATE_REVIEW:
       console.log("REVIEWSREDUCER RAN UPDATE_REVIEW CASE RETURNING: ", {...state, review: action.payload})

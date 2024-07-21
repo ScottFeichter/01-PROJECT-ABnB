@@ -1,7 +1,9 @@
 import { useModal } from "../../../context/Modal";
+import { useNavigate } from 'react-router-dom';
 import {useState } from 'react';
 import {useDispatch } from 'react-redux'
 import * as reviewsActions from '../../reviews'
+import * as spotsActions from '../../spots';
 import { useEffect } from 'react';
 import { CiStar } from "react-icons/ci";
 import "./CreateNewReviewModal.css"
@@ -9,8 +11,10 @@ import { FaStar } from "react-icons/fa";
 
 
 
-
 function CreateNewReviewModal({spot}) {
+
+
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [review, setReview] = useState("");
 
@@ -18,6 +22,8 @@ function CreateNewReviewModal({spot}) {
     const [errors, setErrors] = useState({});
     const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
+
+    // console.log('SPOT!!!!!!!!!!!!!!!!', spot.id)
 
 
 
@@ -29,12 +35,34 @@ function CreateNewReviewModal({spot}) {
         } else setFirstStar(true)
     }
 
-
     const [secondStar, setSecondStar] = useState(false)
     const handleStar2Click = () =>{
-        if(firstStar) {
+        if(secondStar) {
             setSecondStar(false)
         } else setSecondStar(true)
+    }
+
+    const [thirdStar, setThirdStar] = useState(false)
+    const handleStar3Click = () =>{
+        if(thirdStar) {
+            setThirdStar(false)
+        } else setThirdStar(true)
+    }
+
+
+    const [fourthStar, setFourthStar] = useState(false)
+    const handleStar4Click = () =>{
+        if(fourthStar) {
+            setFourthStar(false)
+        } else setFourthStar(true)
+    }
+
+
+    const [fifthStar, setFifthStar] = useState(false)
+    const handleStar5Click = () =>{
+        if(fifthStar) {
+            setFifthStar(false)
+        } else setFifthStar(true)
     }
 
 // Submit Review Button Disabled------------------------------------------------------------------------
@@ -42,7 +70,7 @@ function CreateNewReviewModal({spot}) {
 
 const checkDisabled = () => {
     if(
-    (review.length === 0 || !review || review.length < 30)
+    (review.length === 0 || !review || review.length < 10)
     )
     {setIsDisabled(true) } else {setIsDisabled(false)}
    }
@@ -54,20 +82,30 @@ const checkDisabled = () => {
 
 
 // Signup Button handler-------------------------------------------
-    const handleSubmit = (e) => {
+
+      const handleSubmit = (e) => {
         e.preventDefault();
         if (review) {
             setErrors({});
-            // console.log('HANDLE SUBMIT RAN - Create New Review);
-            return dispatch(reviewsActions.createReview({review: review, spotId: spot.id}))
+
+            let stars = 0;
+            firstStar === true ? stars++ : stars;
+            secondStar === true ? stars++ : stars;
+            thirdStar === true ? stars++ : stars;
+            fourthStar === true ? stars++ : stars;
+            fifthStar === true ? stars++ : stars;
+
+
+            return dispatch(reviewsActions.createReview({review: review, stars: stars, spotId: spot.id}))
             .then(closeModal)
             .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
                     // console.log('CATCH DISPATCH RAN', data);
-                }
-            )
+                })
+                .then(() => dispatch(spotsActions.getSpotDetailsById(spot.id)))
+                .then(() => navigate(`/spots/${spot.id}`));
         }
 
         return setErrors({
@@ -109,17 +147,18 @@ const checkDisabled = () => {
                     {firstStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar1Click}/> : <CiStar className="CreateNewReviewCiStar"
                     onClick={handleStar1Click}/>}
 
-{secondStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar2Click}/> : <CiStar className="CreateNewReviewCiStar"
+                    {secondStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar2Click}/> : <CiStar className="CreateNewReviewCiStar"
                     onClick={handleStar2Click}/>}
 
+                    {thirdStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar3Click}/> : <CiStar className="CreateNewReviewCiStar"
+                    onClick={handleStar3Click}/>}
 
+                    {fourthStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar4Click}/> : <CiStar className="CreateNewReviewCiStar"
+                    onClick={handleStar4Click}/>}
 
+                    {fifthStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar5Click}/> : <CiStar className="CreateNewReviewCiStar"
+                    onClick={handleStar5Click}/>}
 
-
-                    {/* <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar2"/>
-                    <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar3"/>
-                    <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar4"/>
-                    <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar5"/> */}
                 </div>
 
 
