@@ -6,6 +6,12 @@ import * as spotsActions from '../../spots'
 import * as imagesActions from '../../images';
 
 
+// const testNewSpot = {
+
+//     description: "All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy. All work and no play makes jack a dull boy."
+// }
+
+
 
 function CreateNewSpot() {
 

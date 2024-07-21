@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 
 /** =======ACTION TYPE CONSTANTS: =========*/
 const SPOT_SEARCH = "spot/search";
@@ -74,12 +76,12 @@ export const getSpotDetailsById = (spotId) => async (dispatch) => {
 /** POST SPOTS */
 
 export const createSpot = (newSpot) => async (dispatch) => {
-  const response = await fetch(`/api/spots/`, {
+  const response = await csrfFetch(`/api/spots/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(newSpot)
+    body: JSON.stringify({newSpot})
   });
 
   const data = await response.json();
