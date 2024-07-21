@@ -15,6 +15,7 @@ function CreateReviewModalButton({
     if (typeof onButtonClick === "function") onButtonClick();
   };
 
+
   return <button onClick={onClick} className='createReviewModalButton'>{buttonText}</button>;
 }
 

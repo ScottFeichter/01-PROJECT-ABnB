@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Review from '../Review/Review';
 import CreateNewReviewModal from '../CreateNewReviewModal/CreateNewReviewModal';
-import OpenModalButton from '../OpenModalButton';
+import CreateReviewModalButton from '../CreateReviewModalButton/CreateReviewModalButton';
 
 
 function SpotDetails() {
     const spot = useSelector(state => state.spots.spotDetail);
     const reviews = useSelector(state => state.reviews.reviews.Reviews);
     const reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
+
+
 
 // handleReserve---------------------------------------
 
@@ -76,6 +78,10 @@ function SpotDetails() {
     }, [])
 
 
+    let reviewsMessage = "";
+
+    postReviewButton ? reviewsMessage = "Be the first to post a review!" : reviewsMessage = "";
+
 
 
 
@@ -129,20 +135,20 @@ function SpotDetails() {
 
                 <div id="SpotDetailsReviews">
 
-                    {postReviewButton ?
-                      <OpenModalButton
-                        buttonClass="postReviewModalButton"
-                        buttonId="postReviewModalButton"
-                        buttonText="Post Your Review"
-                        modalComponent={<CreateNewReviewModal spot={spot} />}
-                        />
-                      : ""
+
+
+                    {postReviewButton &&
+                        <CreateReviewModalButton
+                          buttonText="Post Your Review"
+                          modalComponent={<CreateNewReviewModal spot={spot} />}
+                          />
                     }
 
 
                     {reviewsInOrder.length ?
                      reviewsInOrder.map(review => <Review review={review} key={review.id} />) :
-                     <p>Be the first to post a review!</p> }
+                     <p>{reviewsMessage}</p> }
+
                 </div>
 
             </section>

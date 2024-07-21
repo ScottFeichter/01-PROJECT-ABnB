@@ -1,41 +1,50 @@
 import { useModal } from "../../../context/Modal";
 import {useState } from 'react';
 import {useDispatch } from 'react-redux'
-import * as sessionActions from '../../session'
+import * as reviewsActions from '../../reviews'
 import { useEffect } from 'react';
+import { CiStar } from "react-icons/ci";
+import "./CreateNewReviewModal.css"
+import { FaStar } from "react-icons/fa";
+
 
 
 
 function CreateNewReviewModal({spot}) {
     const dispatch = useDispatch();
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [review, setReview] = useState("");
+
+
     const [errors, setErrors] = useState({});
     const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
 
 
 
-// Log In Button Disabled------------------------------------------------------------------------
+// Stars-----------
+    const [firstStar, setFirstStar] = useState(false)
+    const handleStar1Click = () =>{
+        if(firstStar) {
+            setFirstStar(false)
+        } else setFirstStar(true)
+    }
+
+
+    const [secondStar, setSecondStar] = useState(false)
+    const handleStar2Click = () =>{
+        if(firstStar) {
+            setSecondStar(false)
+        } else setSecondStar(true)
+    }
+
+// Submit Review Button Disabled------------------------------------------------------------------------
 
 
 const checkDisabled = () => {
     if(
-    (firstName.length === 0 || !firstName) ||
-    (lastName.length === 0 || !lastName) ||
-    (email.length === 0 || !email) ||
-    (username.length === 0 || !username) ||
-    (password.length === 0 || !password) ||
-    (confirmPassword.length === 0 || !confirmPassword) ||
-    (username.length < 4) ||
-    (password.length < 6)
+    (review.length === 0 || !review || review.length < 30)
     )
     {setIsDisabled(true) } else {setIsDisabled(false)}
-
    }
 
    useEffect(()=> {
@@ -47,10 +56,10 @@ const checkDisabled = () => {
 // Signup Button handler-------------------------------------------
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (confirmPassword === password) {
+        if (review) {
             setErrors({});
-            // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
-            return dispatch(sessionActions.Signup({firstName, lastName, email, username, password}))
+            // console.log('HANDLE SUBMIT RAN - Create New Review);
+            return dispatch(reviewsActions.createReview({review: review, spotId: spot.id}))
             .then(closeModal)
             .catch(
                 async (res) => {
@@ -62,133 +71,72 @@ const checkDisabled = () => {
         }
 
         return setErrors({
-            confirmPassword: "Confirm Password field must be the same as the Password field"
+            // confirmPassword: "Confirm Password field must be the same as the Password field"
         })
     };
 
 
-    return (<main id="SignupFormModalMain">
+    return (
+        <main id="CreateNewReviewModalMain">
 
-        <h1>Sign Up</h1>
-
-
-                <form id='SignupForm' onSubmit={handleSubmit}>
-
-                    <div id='firstNameContainer'>
-                            <div className="errors">{errors.firstName}</div>
-                                <label className='SignupFormLabel'>
-                                    first name:
-                                    <input
-                                    className='SignupFormInput'
-                                    id="firstName"
-                                    name="firstName"
-                                    type="text"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                    required
-                                    />
-                                </label>
-                            </div>
-                            {errors.firstName && <p>{errors.firstName}</p>}
-
-                        <div id='lastNameContainer'>
-                            <div className="errors">{errors.lastName}</div>
-                                <label className='SignupFormLabel'>
-                                    last name:
-                                    <input
-                                    className='SignupFormInput'
-                                    id="lastName"
-                                    name="lastName"
-                                    value={lastName}
-                                    type="text"
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    required
-                                    />
-                                </label>
-                            </div>
-                            {errors.lastName && <p>{errors.lastName}</p>}
-
-                        <div id='emailContainer'>
-                            <div className="errors">{errors.email}</div>
-                                <label className='SignupFormLabel'>
-                                        email:
-                                    <input
-                                    className='SignupFormInput'
-                                    id="email"
-                                    name="email"
-                                    value={email}
-                                    type="text"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    />
-                                </label>
-                            </div>
-                            {errors.email && <p>{errors.email}</p>}
-
-                        <div id='userNameContainer'>
-                            <div className="errors">{errors.username}</div>
-                                    <label className='SignupFormLabel'>
-                                        username:
-                                        <input
-                                        className='SignupFormInput'
-                                        id="username"
-                                        name="username"
-                                        value={username}
-                                        type="username"
-                                        onChange={(e) => setUserName(e.target.value)}
-                                        required
-                                        />
-                                    </label>
-                                </div>
-                                {errors.username && <p>{errors.username}</p>}
+            <h1 id="CreateNewReviewModalH1">How was your stay?</h1>
 
 
-                            <div id='passwordContainer'>
-                                <div className="errors">{errors.password}</div>
-                                    <label className='SignupFormLabel'>
-                                        password:
-                                        <input
-                                        className='SignupFormInput'
-                                        id="password"
-                                        name="password"
-                                        value={password}
-                                        type="password"
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        required
-                                        />
-                                    </label>
-                                </div>
-                                {errors.password && <p>{errors.password}</p>}
+            <form id='CreateNewReview' onSubmit={handleSubmit}>
+
+                <div id='CreateNewReviewTextBoxContainer'>
+                        <div className="errors">{errors.review}</div>
+                            <label className='CreateNewReviewLabel'>
+                                <textarea
+
+                                id="reviewTextArea"
+                                name="reviewTextArea"
+                                rows={8}
+                                cols={60}
+                                type="textarea"
+                                placeholder="Leave your review here"
+                                value={review}
+                                onChange={(e) => setReview(e.target.value)}
+                                required
+                                />
+                            </label>
+                </div>
+                {errors.review && <p>{errors.review}</p>}
 
 
-                            <div id='confirmPasswordContainer'>
-                                <div className="errors">{errors.password}</div>
-                                    <label className='SignupFormLabel'>
-                                        confirm password:
-                                        <input
-                                        className='SignupFormInput'
-                                        id="confirmPassword"
-                                        name="confirmPassword"
-                                        value={confirmPassword}
-                                        type="password"
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        required
-                                        />
-                                    </label>
-                                </div>
-                                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                <div id="CreateNewReviewStarContainer">
 
-                            <div id="buttonContainer">
-                                <button
-                                    id="SignupFormModalButton"
-                                    type="submit"
-                                    disabled={isDisabled}
-                                    >Sign Up
-                                </button>
-                            </div>
-                </form>
+                    {firstStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar1Click}/> : <CiStar className="CreateNewReviewCiStar"
+                    onClick={handleStar1Click}/>}
+
+{secondStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar2Click}/> : <CiStar className="CreateNewReviewCiStar"
+                    onClick={handleStar2Click}/>}
 
 
+
+
+
+                    {/* <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar2"/>
+                    <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar3"/>
+                    <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar4"/>
+                    <CiStar className="CreateNewReviewStar" id="CreateNewReviewStar5"/> */}
+                </div>
+
+
+
+
+
+
+                <div id="CreateNewReviewModalButtonContainer">
+                    <button
+                        id="CreateNewReviewModalButton"
+                        type="submit"
+                        disabled={isDisabled}
+                        >Submit Your Review
+                    </button>
+                </div>
+
+            </form>
       </main>
 
     )
