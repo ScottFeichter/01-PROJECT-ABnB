@@ -8,14 +8,11 @@ import Review from '../Review/Review';
 
 
 function SpotDetails() {
-    const session = useSelector(state => state.session.user);
-
     const spot = useSelector(state => state.spots.spotDetail);
     const reviews = useSelector(state => state.reviews.reviews.Reviews);
     const reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
-    // console.log(reviewsInOrder)
+    console.log(!!reviewsInOrder.length)
 
-    console.log('SESSION:', !!session, 'SPOT.ONWERID', spot.ownerId, session.id, (spot.ownerId !== session.id), (reviewsInOrder.some(review => review.userId === session.user.id)));
 
 
 // handleReserve---------------------------------------
@@ -49,25 +46,17 @@ function SpotDetails() {
 
 
     const [postReviewButton, setPostReviewButton] = useState(false);
+    const session = useSelector(state => state.session.user);
+    const isSame = spot.ownerId !== session.id
+    const alreadyPosted = reviewsInOrder.some(review => review.userId === session.id);
 
-    useEffect(() => {
+    useEffect(()=> {
+        setPostReviewButton(((session)&&(isSame)&&(!alreadyPosted)));
+        console.log('POST REVIEW BUTTON', postReviewButton);
+    }, [])
 
-        async () => {
 
-            await reviewsInOrder.some(review => review.userId === session.user.id)
-            .then(someResult => {
-                console.log('someResult', someResult)
 
-                if(
-                    (session) &&
-                    (!someResult) &&
-                    (spot.ownerId !== session.id)
-                ){
-                   setPostReviewButton(true);
-                 }
-            });
-          }
-        }, [reviewsInOrder, session, spot]);
 
 
 
@@ -126,7 +115,7 @@ function SpotDetails() {
                     }
 
 
-                    {reviewsInOrder ?
+                    {reviewsInOrder.length ?
                      reviewsInOrder.map(review => <Review review={review} key={review.id} />) :
                      <p>Be the first to post a review!</p> }
                 </div>
