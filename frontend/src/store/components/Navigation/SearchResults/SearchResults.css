@@ -1,6 +1,4 @@
 #searchResults {
-    display: flex;
-    flex-basis: 25%;
-    flex-wrap: nowrap;
-
+    display: inline-grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }

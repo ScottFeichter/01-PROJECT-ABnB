@@ -1,5 +1,4 @@
 import { useModal } from "../../../context/Modal";
-import { useNavigate } from 'react-router-dom';
 import {useState } from 'react';
 import {useDispatch } from 'react-redux'
 import * as reviewsActions from '../../reviews'
@@ -14,7 +13,7 @@ import { FaStar } from "react-icons/fa";
 function CreateNewReviewModal({spot}) {
 
 
-    const navigate = useNavigate();
+
     const dispatch = useDispatch();
     const [review, setReview] = useState("");
 
@@ -98,14 +97,16 @@ const checkDisabled = () => {
 
             return dispatch(reviewsActions.createReview({review: review, stars: stars, spotId: spot.id}))
             .then(closeModal)
+            .then(() => dispatch(reviewsActions.getReviewsBySpotId(spot.id)))
+            .then(() => dispatch(spotsActions.getSpotDetailsById(spot.id)))
+            .then(() => dispatch(spotsActions.search()))
             .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
                     // console.log('CATCH DISPATCH RAN', data);
                 })
-                .then(() => dispatch(spotsActions.getSpotDetailsById(spot.id)))
-                .then(() => navigate(`/spots/${spot.id}`));
+
         }
 
         return setErrors({

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SearchResults from './store/components/Navigation/SearchResults';
 import SpotDetails from './store/components/SpotDetails/SpotDetails';
 import CreateNewSpot from "./store/components/CreateNewSpot/CreateNewSpot";
-import CreateNewReview from "./store/components/CreateNewReviewModal/CreateNewReviewModal";
+import CreateNewReviewModal from "./store/components/CreateNewReviewModal/CreateNewReviewModal";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import * as sessionActions from './store/session.js';
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/:spotId/reviews/new',
-        element: <CreateNewReview  />
+        element: <CreateNewReviewModal  />
       }
     ]
   }

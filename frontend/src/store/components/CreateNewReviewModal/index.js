@@ -1,3 +1,3 @@
-import CreateNewReview from "./CreateNewReview"
+import CreateNewReviewModal from "./CreateNewReview"
 
-export default CreateNewReview;
+export default CreateNewReviewModal;
