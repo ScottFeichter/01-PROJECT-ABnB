@@ -1,0 +1,21 @@
+UserSpotManagementH1
+UserSpotManagementSpotsByCurrentUserContainer
+UserSpotManagementNoSpotsContainer
+UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot
+
+#searchResults {
+    display: inline-grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+#NavLinkToCreateNewSpot {
+    color: #FE595D;
+    font-weight: bold;
+    margin-right: 2rem;
+    text-wrap: nowrap;
+}
+
+#NavLinkToCreateNewSpot:hover {
+    cursor: pointer;
+    color: black;
+}
