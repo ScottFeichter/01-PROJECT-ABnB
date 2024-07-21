@@ -27,11 +27,11 @@ function CreateNewReviewModal({spot}) {
 
 
 // Stars-----------
-    const [firstStar, setFirstStar] = useState(false)
+    const [firstStar, setFirstStar] = useState(true)
     const handleStar1Click = () =>{
-        if(firstStar) {
-            setFirstStar(false)
-        } else setFirstStar(true)
+        // if(firstStar) {
+        //     setFirstStar(false)
+        // } else setFirstStar(true)
     }
 
     const [secondStar, setSecondStar] = useState(false)
@@ -159,6 +159,8 @@ const checkDisabled = () => {
 
                     {fifthStar ? <FaStar className="CreateNewReviewFaStar" onClick={handleStar5Click}/> : <CiStar className="CreateNewReviewCiStar"
                     onClick={handleStar5Click}/>}
+
+                    {/* <p>Stars</p> */}
 
                 </div>
 

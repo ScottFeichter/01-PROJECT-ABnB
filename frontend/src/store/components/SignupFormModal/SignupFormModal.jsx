@@ -50,7 +50,7 @@ const checkDisabled = () => {
         if (confirmPassword === password) {
             setErrors({});
             // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', firstName, lastName, email, username, password);
-            return dispatch(sessionActions.Signup({firstName, lastName, email, username, password}))
+            return dispatch(sessionActions.signup({firstName, lastName, email, username, password}))
             .then(closeModal)
             .catch(
                 async (res) => {

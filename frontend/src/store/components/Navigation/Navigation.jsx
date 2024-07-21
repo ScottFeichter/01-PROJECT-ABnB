@@ -1,9 +1,11 @@
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import logo from './Logo/scottbnb.png';
 import ProfileButton from './ProfileButton';
 import { IoHome } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import * as spotsActions from "../../spots"
 
 // import OpenModalButton from "../OpenModalButton/OpenModalButton";
 // import LoginFormModal from "../LoginFormModal/LoginFormModal";
@@ -14,6 +16,13 @@ import './Navigation.css';
 
 const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const runSearch = () => {
+        async () =>
+        await dispatch(spotsActions.search()).then(() => navigate(`/'`));
+    }
 
 
     // console.log("NAVIGATION COMPONENT RAN");
@@ -31,7 +40,7 @@ const Navigation = ({isLoaded}) => {
                 : ""}
             </li>
             <li id="homeLi">
-                <NavLink to="/" id="NavLinkToHome"><IoHome id="IoHome"/></NavLink>
+                <NavLink id="NavLinkToHome" ><IoHome onClick={runSearch} id="IoHome"/></NavLink>
             </li>
             {isLoaded && (
             <li>
