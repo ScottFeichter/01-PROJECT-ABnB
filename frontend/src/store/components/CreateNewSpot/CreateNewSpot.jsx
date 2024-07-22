@@ -94,6 +94,8 @@ function CreateNewSpot() {
                 "price": +basePrice,
             }
 
+            let spotId;
+
             await dispatch(spotsActions.createSpot(newSpot))
             .then(response => {
                 console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ')
@@ -101,54 +103,54 @@ function CreateNewSpot() {
             })
             .then(response => {
                 console.log(`NEW SPOT CREATED`, response);
+                spotId = response.id;
                 return response;
             })
-            .then(async response =>  {
+            .then(response =>  {
                 const prevImageInfo = {spotId: response.id, url: previewImg, preview: true};
-                const newSpotPreviewImg = await dispatch(imagesActions.addImageToSpot(prevImageInfo));
-                console.log('NEWSPOTPREVIEWIMG', newSpotPreviewImg)
-                return response;
-            }).then(async response =>  {
+                return dispatch(imagesActions.addImageToSpot(prevImageInfo));
+            }).then(response =>  {
+                console.log('RESPONSE++++++++++++++++++++++++++++110', response)
                 if(img1) {
-                    const img1Info = {spotId: response.id, url: img1, preview: false};
-                    const newSpotImg1 = await dispatch(imagesActions.addImageToSpot(img1Info));
-                    console.log('NEWSPOTIMG1', newSpotImg1)
+                    const img1Info = {spotId: spotId, url: img1, preview: false};
+                    return dispatch(imagesActions.addImageToSpot(img1Info));
                 }
                 return response;
-            }).then(async response =>  {
+            }).then(response =>  {
+                console.log('RESPONSE++++++++++++++++++++++++++++117', response)
                 if(img2) {
-                    const img2Info = {spotId: response.id, url: img2, preview: false};
-                    const newSpotImg2 = await dispatch(imagesActions.addImageToSpot(img2Info));
-                    console.log('NEWSPOTIMG2', newSpotImg2)
+                    const img2Info = {spotId: spotId, url: img2, preview: false};
+                    return dispatch(imagesActions.addImageToSpot(img2Info));
                 }
                 return response;
-            }).then(async response =>  {
+            }).then(response =>  {
+                console.log('RESPONSE++++++++++++++++++++++++++++124', response)
                 if(img3) {
-                    const img3Info = {spotId: response.id, url: img1, preview: false};
-                    const newSpotImg3 = await dispatch(imagesActions.addImageToSpot(img3Info));
-                    console.log('NEWSPOTIMG3', newSpotImg3)
+                    const img3Info = {spotId: spotId, url: img1, preview: false};
+                    return dispatch(imagesActions.addImageToSpot(img3Info));
                 }
                 return response;
             }).then(async response =>  {
+                console.log('RESPONSE++++++++++++++++++++++++++++131', response)
                 if(img4) {
-                    const img4Info = {spotId: response.id, url: img1, preview: false};
-                    const newSpotImg4 = await dispatch(imagesActions.addImageToSpot(img4Info));
-                    console.log('NEWSPOTIMG4', newSpotImg4)
+                    const img4Info = {spotId: spotId, url: img1, preview: false};
+                    return dispatch(imagesActions.addImageToSpot(img4Info));
                 }
                 return response;
             }).then(response => {
                 console.log(`NEW SPOT IMAGES ADDED`);
+                console.log('RESPONSE++++++++++++++++++++++++++++139', response)
                 return response;
             }).then(response => {
-                dispatch(reviewsActions.getReviewsBySpotId(response.id));
-                return response;
+                console.log('RESPONSE++++++++++++++++++++++++++++142', response)
+                return dispatch(reviewsActions.getReviewsBySpotId(spotId));
             }).then(response => {
-                dispatch(spotsActions.getSpotDetailsById(response.id)).then(newSpot => console.log('NEWSPOT: ', newSpot));
-                return response;
+                console.log('RESPONSE++++++++++++++++++++++++++++145', response)
+                return dispatch(spotsActions.getSpotDetailsById(spotId)).then(newSpot => console.log('NEWSPOT: ', newSpot));
             }).then(response => {
-                dispatch(spotsActions.search());
-                return response;
-            }).then(response => navigate(`/spots/${response.id}`));
+                console.log('RESPONSE++++++++++++++++++++++++++++148', response)
+                return dispatch(spotsActions.search());
+            }).then(response => navigate(`/spots/${spotId}`));
 
 
             console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
