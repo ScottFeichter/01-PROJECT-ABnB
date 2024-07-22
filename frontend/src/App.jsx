@@ -25,10 +25,15 @@ function Layout() {
       });
     }, [dispatch]);
 
+    dispatch(spotsActions.search());
 
-    useEffect(() => {
-       dispatch(spotsActions.search());
+    useEffect(()=> {
+
+      async () => {
        console.log("DISPATCH LINE 21 LAYOUT.jsx");
+       return dispatch(spotsActions.search());
+      }
+
      },[])
 
 
