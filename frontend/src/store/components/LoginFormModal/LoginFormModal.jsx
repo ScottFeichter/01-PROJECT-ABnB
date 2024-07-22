@@ -40,16 +40,17 @@ const LoginFormModal = () => {
         // console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
 
         await dispatch(sessionActions.login({credential, password}))
-
         .then(closeModal)
         .catch(
                 async (res) => {
+
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
-                    // console.log('CATCH DISPATCH RAN', data);
+                    console.log('CATCH DISPATCH RAN', data, data.errors);
+                    console.log('ERRORS', errors)
                 }
             );
-
+        console.log('ERRORS', errors)
          return
     };
 
