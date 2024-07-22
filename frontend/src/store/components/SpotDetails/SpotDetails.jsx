@@ -87,7 +87,7 @@ function SpotDetails() {
 
     useEffect(()=> {
         setPostReviewButton(((sessionBool)&&(!isSame)&&(!alreadyPosted)));
-        console.log('POST REVIEW BUTTON', postReviewButton);
+        // console.log('POST REVIEW BUTTON', postReviewButton);
     }, [])
 
 

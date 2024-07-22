@@ -6,7 +6,7 @@ import "./DeleteReviewModal.css"
 
 
 function DeleteReviewModal({review}) {
-    console.log('REVEIW FROM DELETE REVIEW MODAL 9', review);
+    // console.log('REVEIW FROM DELETE REVIEW MODAL 9', review);
 
     const dispatch = useDispatch();
     const { closeModal } = useModal();

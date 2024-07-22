@@ -114,11 +114,11 @@ export const editReview = (editedReview) => async (dispatch) => {
 export const deleteReview = (reviewToDelete) => async (dispatch) => {
   const reviewId = reviewToDelete.id;
   // console.log('REVIEWID FROM REVIEWS 117', reviewId)
-  const response = await fetch(`/api/reviews/${reviewId}`, {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
-  // const data = await response.json();
-  // console.log('THUNK DELETEREVIEW RAN: ', response );
+  const data = await response.json();
+  console.log('THUNK DELETEREVIEW RAN: ', response );
   return dispatch(deletedReview(reviewToDelete));
 };
 

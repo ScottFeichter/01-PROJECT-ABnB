@@ -63,7 +63,7 @@ function Review({review}) {
 
 const [deleteReviewButton, setDeleteReviewButton] = useState(false);
 const session = useSelector(state => state.session.user);
-console.log('SESSION', !!session, review.userId, session.id, review);
+// console.log('SESSION', !!session, review.userId, session.id, review);
 
 let sessionBool;
 if(session === null) {
@@ -79,7 +79,7 @@ if (session === null) {
     isSame = review.userId === session.id;
 }
 
-console.log(sessionBool, isSame);
+// console.log(sessionBool, isSame);
 
 useEffect(()=> {
     if(sessionBool === true && isSame === true) {
@@ -90,7 +90,7 @@ useEffect(()=> {
 
 }, [])
 
-console.log('DELETE REVIEW BUTTON', deleteReviewButton);
+// console.log('DELETE REVIEW BUTTON', deleteReviewButton);
 
 // return-------------------------------------------------------------
 
