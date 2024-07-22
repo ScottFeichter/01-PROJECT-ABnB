@@ -15,7 +15,7 @@ function SpotDetails() {
     let reviews;
     let reviewsInOrder;
 
-    console.log("previewReviews.Reviews!!!!!!!!!!!!!!!!!", preReviews.Reviews);
+    // console.log("previewReviews.Reviews!!!!!!!!!!!!!!!!!", preReviews.Reviews);
 
     if(!preReviews || !preReviews.Reviews) {
         reviews = [];
@@ -23,7 +23,7 @@ function SpotDetails() {
     } else if (preReviews.Reviews.length) {
         reviews = preReviews.Reviews;
         reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
-        console.log("Reviews in order", reviewsInOrder);
+        // console.log("Reviews in order", reviewsInOrder);
     }
 
 

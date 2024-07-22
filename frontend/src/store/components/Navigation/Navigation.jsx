@@ -47,7 +47,7 @@ const Navigation = ({isLoaded}) => {
 
 
 
-    console.log("NAVIGATION COMPONENT RAN");
+    // console.log("NAVIGATION COMPONENT RAN");
     return(
      <header>
         <a href="/">
