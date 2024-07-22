@@ -29,6 +29,17 @@ h1 {
     justify-content: center;
 }
 
+.SignUpFormErrors {
+    position: absolute;
+    color: red;
+    top: 4rem;
+    right: 0rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+
 .SignupFormInput {
     margin: 0 1rem 1rem 1rem;
 }

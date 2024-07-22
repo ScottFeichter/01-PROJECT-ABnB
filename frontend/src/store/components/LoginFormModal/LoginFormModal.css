@@ -9,7 +9,6 @@ h1 {
     text-align: center;
 }
 
-
 #loginForm {
     margin: 2rem 4rem 4rem 4rem;
     padding: 4rem 0rem 4rem 0rem;
@@ -22,8 +21,17 @@ h1 {
 }
 
 #loginContainer {}
-#passwordContainer {}
-#buttonContainer {}
+
+.LoginFormErrors {
+    position: absolute;
+    color: red;
+    top: 4rem;
+    right: 0rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: bold;
+}
+
 
 .LoginFormModalLabel {
     display: flex;
@@ -37,6 +45,11 @@ h1 {
     border: 1px solid #FF5A5F;
     box-shadow: none;
 }
+
+#passwordContainer {}
+
+
+#buttonContainer {}
 
 
 #LoginFormModalButton {

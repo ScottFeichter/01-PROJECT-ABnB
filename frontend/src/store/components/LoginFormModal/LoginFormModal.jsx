@@ -1,6 +1,5 @@
 import {useState } from 'react';
 import * as sessionActions from '../../session';
-import * as spotsActions from '../../spots';
 import {useDispatch } from 'react-redux'
 import { useModal } from '../../../context/Modal';
 import { useEffect } from 'react';
@@ -43,16 +42,15 @@ const LoginFormModal = () => {
         .then(closeModal)
         .catch(
                 async (res) => {
-
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                    console.log('CATCH DISPATCH RAN', data, data.errors);
-                    console.log('ERRORS', errors)
+                    // const data = await res.json();
+                    if(res.status === 401 || res.status === 400) setErrors({credential: "The provided credentials were invalid"});
                 }
             );
-        console.log('ERRORS', errors)
+
          return
     };
+
+
 
 
 // Demo User Login------------------------------------------------------------------------
@@ -73,7 +71,7 @@ const LoginFormModal = () => {
             <form id='loginForm' onSubmit={handleSubmit}>
 
                 <div id='loginContainer'>
-                    <div className="errors">{errors.credential}</div>
+                    <div className="LoginFormErrors">{errors.credential}</div>
                         <label className="LoginFormModalLabel">
                             email or username:
                             <input className="LoginFormModalInput"
@@ -103,7 +101,6 @@ const LoginFormModal = () => {
                             required
                             />
                         </label>
-                        {errors.credential && (<p>{errors.credential}</p>)}
                     </div>
 
                     <div id="buttonContainer">
