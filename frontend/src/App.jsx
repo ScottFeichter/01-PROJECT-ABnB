@@ -9,6 +9,7 @@ import * as sessionActions from './store/session.js';
 import * as spotsActions from './store/spots.js';
 import Navigation from './store/components/Navigation';
 import { Outlet } from "react-router-dom";
+import UserSpotManagement from "./store/components/UserSpotManagement";
 
 function Layout() {
     const dispatch = useDispatch();
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
         element: <SearchResults />,
       },
       {
+        path: '/spots/manage',
+        element: <UserSpotManagement  />
+      },
+      {
         path: '/spots/:spotId',
         element: <SpotDetails  />
       },
@@ -56,7 +61,9 @@ const router = createBrowserRouter([
       {
         path: '/spots/:spotId/reviews/new',
         element: <CreateNewReviewModal  />
-      }
+      },
+
+
     ]
   }
 ]);

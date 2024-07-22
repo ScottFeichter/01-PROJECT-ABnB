@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 
 /** =======ACTION TYPE CONSTANTS: =========*/
 const SPOT_SEARCH = "spot/search";
+const SPOT_CURRENT_USER = "spot/search";
 const SPOT_BY_ID = "spot/spotById";
 const CREATE_SPOT = "spot/createSpot";
 const UPDATE_SPOT = "spot/updateSpot";
@@ -13,6 +14,15 @@ const spotsSearch = (spots) => {
   // console.log('SPOTSSEARCH RAN - SPOTS', spots);
   return {
     type: SPOT_SEARCH,
+    payload: spots
+  };
+};
+
+
+const spotsCurrentUser = (spots) => {
+  console.log('SPOTSCURRENTUSER RAN - SPOTS', spots);
+  return {
+    type: SPOT_CURRENT_USER,
     payload: spots
   };
 };
@@ -63,14 +73,28 @@ export const search = (/*search*/) => async (dispatch) => {
   return dispatch(spotsSearch(spots))
 };
 
+
+/** GET CURRENT USER SPOTS*/
+export const getCurrentUserSpots = () => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/current`);
+  const data = await response.json();
+  console.log('THUNK GETCURRENTUSERSPOTS RAN DATA: ', data.Spots );
+  return dispatch(spotsCurrentUser(data.Spots));
+};
+
+
 /** GET DETAILS OF A SPOT FROM AN ID */
 export const getSpotDetailsById = (spotId) => async (dispatch) => {
   const response = await fetch(`/api/spots/${spotId}`);
   const data = await response.json();
   // console.log('THUNK GETSPOTBYID RAN DATA: ', data );
-  dispatch(spotById(data));
-  return data
+
+  return dispatch(spotById(data));
 };
+
+
+
+
 
 
 /** POST SPOTS */
@@ -137,7 +161,11 @@ const spotsReducer = (state = initialState, action) => {
 
     case SPOT_SEARCH:
       // console.log("SPOTSREDUCER RAN SPOT_SEARCH CASE RETURNING: ", {...state, spots: action.payload})
-      return {...state, Spots: action.payload}
+      return {...state, allSpots: action.payload}
+
+    case SPOT_CURRENT_USER:
+      console.log("SPOTSREDUCER RAN SPOTS_CURRENT_USER CASE RETURNING: ", {...state, spotsCurrentUser: action.payload})
+      return {...state, spotsCurrentUser: action.payload}
 
     case SPOT_BY_ID:
       // console.log("SPOTSREDUCER RAN SPOT_BY_ID CASE RETURNING: ", {...state, spot: action.payload})

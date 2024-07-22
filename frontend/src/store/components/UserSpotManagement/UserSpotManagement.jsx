@@ -1,15 +1,19 @@
-import {Spot} from "../../Spot"
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as spotsActions from "../../spots";
+import SpotForManage from "./SpotForManage/SpotForManage";
+
 
 function UserSpotManagement() {
-
     const dispatch = useDispatch();
-    let spotsByCurrent = dispatch(spotsActions.getSpotsByCurrent(session.user.id))
+    // const session = useSelector(state => state.session.user);
+    let spotsByCurrent = [];
+
+    let theSpotsCurrent = dispatch(spotsActions.getCurrentUserSpots())
+    console.log('SPOTSBYCURRENT', theSpotsCurrent);
 
 
-    const css = "UserSpotManagement";
+
 
 
 return (<>
@@ -21,7 +25,7 @@ return (<>
 
 
         {spotsByCurrent
-        ? spotsByCurrent.map(spot => <Spot key={spot.id} spot={spot} />)
+        ? spotsByCurrent.map(spot => <SpotForManage key={spot.id} spot={spot} />)
         : <div id="UserSpotManagementNoSpotsContainer">
                   <p>You have no spots.</p>
                   <NavLink to="/spots/new" id="UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot">Create a New Spot</NavLink>

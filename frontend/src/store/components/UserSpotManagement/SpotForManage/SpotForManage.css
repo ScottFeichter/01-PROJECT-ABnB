@@ -1,10 +1,10 @@
-#spotsMain {
+#spotManageMain {
     display: flex;
     /* flex-wrap: wrap; */
     margin-top: 1rem;
 }
 
-.spotNavLink {
+.spotToMannageNavLink {
     /* flex: 1 0 21%; */
     /* border: 2px dashed blue; */
 }

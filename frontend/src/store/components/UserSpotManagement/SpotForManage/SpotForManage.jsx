@@ -1,10 +1,10 @@
-import './Spot.css';
+import './SpotForManage.css';
 import { FaStar } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getReviewsBySpotId } from '../../reviews';
-import { getSpotDetailsById } from '../../spots';
+import { getReviewsBySpotId } from '../../../reviews';
+import { getSpotDetailsById } from '../../../spots';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -62,6 +62,7 @@ function SpotForManage({spot}) {
 
 
     return (
+
 
       <main id="spotManageMain">
 
