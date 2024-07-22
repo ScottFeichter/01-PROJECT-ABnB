@@ -56,14 +56,14 @@ const checkDisabled = () => {
                 async (res) => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
-                    // console.log('CATCH DISPATCH RAN', data);
+                    console.log('CATCH DISPATCH RAN', data, res);
                 }
             )
         }
 
         return setErrors({
             confirmPassword: "Confirm Password field must be the same as the Password field"
-        })
+        });
     };
 
     return (
@@ -75,7 +75,7 @@ const checkDisabled = () => {
                 <form id='SignupForm' onSubmit={handleSubmit}>
 
                     <div id='firstNameContainer'>
-                            <div className="errors">{errors.firstName}</div>
+                            <div className="SignUpFormErrors">{errors.firstName}</div>
                                 <label className='SignupFormLabel'>
                                     first name:
                                     <input
@@ -89,10 +89,10 @@ const checkDisabled = () => {
                                     />
                                 </label>
                             </div>
-                            {errors.firstName && <p>{errors.firstName}</p>}
+                            {/* {errors.firstName && <p>{errors.firstName}</p>} */}
 
                         <div id='lastNameContainer'>
-                            <div className="errors">{errors.lastName}</div>
+                            <div className="SignUpFormErrors">{errors.lastName}</div>
                                 <label className='SignupFormLabel'>
                                     last name:
                                     <input
@@ -106,10 +106,10 @@ const checkDisabled = () => {
                                     />
                                 </label>
                             </div>
-                            {errors.lastName && <p>{errors.lastName}</p>}
+                            {/* {errors.lastName && <p>{errors.lastName}</p>} */}
 
                         <div id='emailContainer'>
-                            <div className="errors">{errors.email}</div>
+                            <div className="SignUpFormErrors">{errors.email}</div>
                                 <label className='SignupFormLabel'>
                                         email:
                                     <input
@@ -123,10 +123,10 @@ const checkDisabled = () => {
                                     />
                                 </label>
                             </div>
-                            {errors.email && <p>{errors.email}</p>}
+                            {/* {errors.email && <p>{errors.email}</p>} */}
 
                         <div id='userNameContainer'>
-                            <div className="errors">{errors.username}</div>
+                            <div className="SignUpFormErrors">{errors.username}</div>
                                     <label className='SignupFormLabel'>
                                         username:
                                         <input
@@ -140,11 +140,11 @@ const checkDisabled = () => {
                                         />
                                     </label>
                                 </div>
-                                {errors.username && <p>{errors.username}</p>}
+                                {/* {errors.username && <p>{errors.username}</p>} */}
 
 
                             <div id='passwordContainer'>
-                                <div className="errors">{errors.password}</div>
+                                <div className="SignUpFormErrors">{errors.password}</div>
                                     <label className='SignupFormLabel'>
                                         password:
                                         <input
@@ -158,11 +158,11 @@ const checkDisabled = () => {
                                         />
                                     </label>
                                 </div>
-                                {errors.password && <p>{errors.password}</p>}
+                                {/* {errors.password && <p>{errors.password}</p>} */}
 
 
                             <div id='confirmPasswordContainer'>
-                                <div className="errors">{errors.password}</div>
+                                <div className="SignUpFormErrors">{errors.confirmPassword}</div>
                                     <label className='SignupFormLabel'>
                                         confirm password:
                                         <input
@@ -176,7 +176,7 @@ const checkDisabled = () => {
                                         />
                                     </label>
                                 </div>
-                                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                                {/* {errors.confirmPassword && <p>{errors.confirmPassword}</p>} */}
 
                             <div id="buttonContainer">
                                 <button

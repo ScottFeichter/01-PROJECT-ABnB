@@ -11,8 +11,8 @@ h1 {
 
 
 #SignupForm{
-    margin: 2rem 4rem 4rem 4rem;
-    padding: 4rem 0rem 0rem 0rem;
+    margin: 3rem 4rem 4rem 4rem;
+    padding: 2rem 0rem 0rem 0rem;
     border: 1px #FF5A5F solid;
     border-radius: 25px;
     display: flex;
@@ -41,13 +41,13 @@ h1 {
 
 
 .SignupFormInput {
-    margin: 0 1rem 1rem 1rem;
+    margin: 0 1rem 1.5rem 1rem;
 }
 
 
 
 #SignupFormModalButton {
-    margin: 2rem 0 4rem 0;
+    margin: 1rem 0 3rem 0;
     width: 8rem;
     height: 2rem;
     font-size: 1rem;
