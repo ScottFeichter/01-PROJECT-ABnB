@@ -9,7 +9,7 @@ const SearchResults = () => {
     // console.log("searchReasults=========", searchResults)
 
 
-    // console.log("SEARCH RESULTS COMPONENT RAN");
+    console.log("SEARCH RESULTS COMPONENT RAN");
     return (
     <>
     <div id="searchResults">

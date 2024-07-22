@@ -12,6 +12,7 @@ import * as spotsActions from "../../spots"
 // import SignupFormModal from "../SignupFormModal/SignupFormModal";
 
 import './Navigation.css';
+import { useEffect } from "react";
 
 
 const Navigation = ({isLoaded}) => {
@@ -24,8 +25,19 @@ const Navigation = ({isLoaded}) => {
         await dispatch(spotsActions.search()).then(() => navigate(`/'`));
     }
 
+    useEffect(() => {
 
-    // console.log("NAVIGATION COMPONENT RAN");
+        const runCurrentSpots = () => {
+              dispatch(spotsActions.getCurrentUserSpots())
+        }
+        
+        if(sessionUser) runCurrentSpots()
+    })
+
+
+
+
+    console.log("NAVIGATION COMPONENT RAN");
     return(
      <header>
         <a href="/">

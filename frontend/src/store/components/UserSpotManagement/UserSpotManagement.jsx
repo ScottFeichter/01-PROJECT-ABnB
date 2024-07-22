@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as spotsActions from "../../spots";
 import SpotForManage from "./SpotForManage/SpotForManage";
 
@@ -7,12 +7,8 @@ import SpotForManage from "./SpotForManage/SpotForManage";
 function UserSpotManagement() {
     const dispatch = useDispatch();
     // const session = useSelector(state => state.session.user);
-    let spotsByCurrent = [];
 
-    let theSpotsCurrent = dispatch(spotsActions.getCurrentUserSpots())
-    console.log('SPOTSBYCURRENT', theSpotsCurrent);
-
-
+    const spotsByCurrent = useSelector(state => state.spots.spotsCurrentUser);
 
 
 
@@ -24,7 +20,7 @@ return (<>
     <div id="UserSpotManagementSpotsByCurrentUserContainer">
 
 
-        {spotsByCurrent
+        {spotsByCurrent.length
         ? spotsByCurrent.map(spot => <SpotForManage key={spot.id} spot={spot} />)
         : <div id="UserSpotManagementNoSpotsContainer">
                   <p>You have no spots.</p>

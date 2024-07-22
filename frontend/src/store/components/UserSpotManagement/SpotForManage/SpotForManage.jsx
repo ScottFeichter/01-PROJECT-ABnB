@@ -3,10 +3,12 @@ import { FaStar } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { getReviewsBySpotId } from '../../../reviews';
-import { getSpotDetailsById } from '../../../spots';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getReviewsBySpotId } from '../../../reviews';
+import { getSpotDetailsById } from '../../../spots';
+import DeleteSpotModal from "../../DeleteSpot";
+import DeleteSpotModalButton from '../../DeleteSpotModalButton';
 
 function SpotForManage({spot}) {
 
@@ -44,6 +46,8 @@ function SpotForManage({spot}) {
 
         const handleSpotUpdate = (e) => {
             e.preventDefault();
+            e.stopPropagation();
+            navigate('/spots/update')
 
         }
 
@@ -52,7 +56,8 @@ function SpotForManage({spot}) {
 
         const handleSpotDelete = (e) => {
             e.preventDefault();
-
+            e.stopPropagation();
+            navigate('/spots/delete')
         }
 
 
@@ -87,7 +92,14 @@ function SpotForManage({spot}) {
                     </div>
 
                     <button id="spotUpdateButton" onClick={handleSpotUpdate}>Update</button>
-                    <button id="spotDeleteButton" onClick={handleSpotDelete}>Update</button>
+
+
+                    <button id="spotDeleteButton" onClick={handleSpotDelete}>Delete</button>
+
+                    <DeleteSpotModalButton
+                          buttonText="Delete"
+                          modalComponent={<DeleteSpotModal spot={spot} />}
+                          />
 
                     <p className='spotPrice'>${spot.price}/night</p>
                 </div>

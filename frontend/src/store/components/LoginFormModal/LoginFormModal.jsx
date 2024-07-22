@@ -1,5 +1,6 @@
 import {useState } from 'react';
-import * as sessionActions from '../../session'
+import * as sessionActions from '../../session';
+import * as spotsActions from '../../spots';
 import {useDispatch } from 'react-redux'
 import { useModal } from '../../../context/Modal';
 import { useEffect } from 'react';
@@ -33,19 +34,23 @@ const LoginFormModal = () => {
 
 // Login Button handler------------------------------------------------------------------------
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
         // console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
-        return dispatch(sessionActions.login({credential, password}))
-            .then(closeModal)
-            .catch(
+
+        await dispatch(sessionActions.login({credential, password}))
+
+        .then(closeModal)
+        .catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                     // console.log('CATCH DISPATCH RAN', data);
                 }
             );
+
+         return
     };
 
 

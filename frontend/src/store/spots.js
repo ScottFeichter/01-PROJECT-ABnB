@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 
 /** =======ACTION TYPE CONSTANTS: =========*/
 const SPOT_SEARCH = "spot/search";
-const SPOT_CURRENT_USER = "spot/search";
+const SPOT_CURRENT_USER = "spot/currentUser";
 const SPOT_BY_ID = "spot/spotById";
 const CREATE_SPOT = "spot/createSpot";
 const UPDATE_SPOT = "spot/updateSpot";
@@ -11,7 +11,7 @@ const DELETED_SPOT = "spot/deletedSpot";
 
 /** =======ACTION CREATORS: =========*/
 const spotsSearch = (spots) => {
-  // console.log('SPOTSSEARCH RAN - SPOTS', spots);
+  console.log('SPOTSSEARCH RAN - SPOTS', spots);
   return {
     type: SPOT_SEARCH,
     payload: spots
@@ -19,11 +19,11 @@ const spotsSearch = (spots) => {
 };
 
 
-const spotsCurrentUser = (spots) => {
-  console.log('SPOTSCURRENTUSER RAN - SPOTS', spots);
+const spotsCurrentUser = (currentUserSpots) => {
+  console.log('SPOTSCURRENTUSER RAN - SPOTS', currentUserSpots);
   return {
     type: SPOT_CURRENT_USER,
-    payload: spots
+    payload: currentUserSpots
   };
 };
 
@@ -78,8 +78,9 @@ export const search = (/*search*/) => async (dispatch) => {
 export const getCurrentUserSpots = () => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/current`);
   const data = await response.json();
-  console.log('THUNK GETCURRENTUSERSPOTS RAN DATA: ', data.Spots );
-  return dispatch(spotsCurrentUser(data.Spots));
+  const currentUserSpots = data.Spots;
+  console.log('THUNK GETCURRENTUSERSPOTS RAN DATA: ', currentUserSpots);
+  return dispatch(spotsCurrentUser(currentUserSpots));
 };
 
 
