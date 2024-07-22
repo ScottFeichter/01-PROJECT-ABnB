@@ -1,9 +1,10 @@
 import './UpdateSpot.css';
 import {useState } from 'react';
-import {useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom';
+import {useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import * as spotsActions from '../../spots'
-import * as imagesActions from '../../images';
+// import * as imagesActions from '../../images';
 import * as reviewsActions from '../../reviews';
 
 
@@ -13,9 +14,15 @@ import * as reviewsActions from '../../reviews';
 // }
 
 
-function UpdateSpot({spot}) {
+function UpdateSpot() {
 
-        console.log("SPOT FROM UPDATE SPOT", spot);
+        //getting the spot to update for pre fill
+        let { spotId } = useParams();
+        const spotsCurrentUser = useSelector(state => state.spots.spotsCurrentUser);
+        const spot = spotsCurrentUser.find(spot => spot.id === +spotId)
+
+
+
 
         const dispatch = useDispatch();
         const navigate = useNavigate();
@@ -25,32 +32,32 @@ function UpdateSpot({spot}) {
         const [isDisabled, setIsDisabled] = useState(false);
 
 // states form section 1----------------------------------------------------------
-        const [country, setCountry] = useState("");
-        const [streetAddress, setStreetAddress] = useState("");
-        const [city, setCity] = useState("");
-        const [state, setState] = useState("");
-        const [latitude, setLatitude] = useState("");
-        const [longitude, setLongitude] = useState("");
+        const [country, setCountry] = useState(spot.country);
+        const [streetAddress, setStreetAddress] = useState(spot.address);
+        const [city, setCity] = useState(spot.city);
+        const [state, setState] = useState(spot.state);
+        const [latitude, setLatitude] = useState(spot.lat);
+        const [longitude, setLongitude] = useState(spot.lng);
 
 // states form section 2----------------------------------------------------------
 
-        const [description, setDescription] = useState("")
+        const [description, setDescription] = useState(spot.description)
 
 // states form section 3----------------------------------------------------------
 
-        const [title, setTitle] = useState("")
+        const [title, setTitle] = useState(spot.name)
 
 // states form section 4----------------------------------------------------------
 
-        const [basePrice, setBasePrice] = useState("")
+        const [basePrice, setBasePrice] = useState(spot.price)
 
 // states form section 5----------------------------------------------------------
 
-        const [previewImg, setPreviewImg] = useState("")
-        const [img1, setImg1] = useState("")
-        const [img2, setImg2] = useState("")
-        const [img3, setImg3] = useState("")
-        const [img4, setImg4] = useState("")
+        // const [previewImg, setPreviewImg] = useState(spot.previewImage)
+        // const [img1, setImg1] = useState("")
+        // const [img2, setImg2] = useState("")
+        // const [img3, setImg3] = useState("")
+        // const [img4, setImg4] = useState("")
 
 // UpdateSpot Button Disabled------------------------------------------------------------------------
 
@@ -82,9 +89,9 @@ function UpdateSpot({spot}) {
 
         const handleSubmit = async (e) => {
             e.preventDefault();
-            console.log('HANDLE SUBMIT NEW SPOT IS RUNNING');
+            console.log('HANDLE SUBMIT UPDATED SPOT IS RUNNING');
 
-            const newSpot = {
+            const updatedSpot = {
                 "address": streetAddress,
                 "city": city,
                 "state": state,
@@ -96,64 +103,27 @@ function UpdateSpot({spot}) {
                 "price": +basePrice,
             }
 
-            await dispatch(spotsActions.createSpot(newSpot))
+            const editedSpot = {spotId: spot.id, updatedSpot: updatedSpot}
+
+            await dispatch(spotsActions.editSpot(editedSpot))
             .then(response => {
-                console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ')
-                return response
-            })
-            .then(response => {
-                console.log(`NEW SPOT CREATED`, response);
-                return response;
-            })
-            .then(async response =>  {
-                const prevImageInfo = {spotId: response.id, url: previewImg, preview: true};
-                const newSpotPreviewImg = await dispatch(imagesActions.addImageToSpot(prevImageInfo));
-                console.log('NEWSPOTPREVIEWIMG', newSpotPreviewImg)
-                return response;
-            }).then(async response =>  {
-                if(img1) {
-                    const img1Info = {spotId: response.id, url: img1, preview: false};
-                    const newSpotImg1 = await dispatch(imagesActions.addImageToSpot(img1Info));
-                    console.log('NEWSPOTIMG1', newSpotImg1)
-                }
-                return response;
-            }).then(async response =>  {
-                if(img2) {
-                    const img2Info = {spotId: response.id, url: img2, preview: false};
-                    const newSpotImg2 = await dispatch(imagesActions.addImageToSpot(img2Info));
-                    console.log('NEWSPOTIMG2', newSpotImg2)
-                }
-                return response;
-            }).then(async response =>  {
-                if(img3) {
-                    const img3Info = {spotId: response.id, url: img1, preview: false};
-                    const newSpotImg3 = await dispatch(imagesActions.addImageToSpot(img3Info));
-                    console.log('NEWSPOTIMG3', newSpotImg3)
-                }
-                return response;
-            }).then(async response =>  {
-                if(img4) {
-                    const img4Info = {spotId: response.id, url: img1, preview: false};
-                    const newSpotImg4 = await dispatch(imagesActions.addImageToSpot(img4Info));
-                    console.log('NEWSPOTIMG4', newSpotImg4)
-                }
+                console.log(`UPDATED SPOT CREATED`, response);
                 return response;
             }).then(response => {
-                console.log(`NEW SPOT IMAGES ADDED`);
-                return response;
+                console.log('RESPOMSE.ID INSIDE 117 UPDATESPOT', response.id, response)
+                return dispatch(reviewsActions.getReviewsBySpotId(response.payload.id));
+
             }).then(response => {
-                dispatch(reviewsActions.getReviewsBySpotId(response.id));
-                return response;
+                console.log('RESPOMSE.ID INSIDE 120 UPDATESPOT', response.payload.id, response);
+                return dispatch(spotsActions.getSpotDetailsById(spot.id));
             }).then(response => {
-                dispatch(spotsActions.getSpotDetailsById(response.id)).then(newSpot => console.log('NEWSPOT: ', newSpot));
-                return response;
-            }).then(response => {
+                console.log('RESPONSE 120', response)
                 dispatch(spotsActions.search());
                 return response;
-            }).then(response => navigate(`/spots/${response.id}`));
+            }).then(response => navigate(`/spots/${response.payload.id}`));
 
 
-            console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            console.log('HANDLE SUBMIT UPDATED SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
         }
 
@@ -207,7 +177,7 @@ function UpdateSpot({spot}) {
                                             id="country"
                                             name="country"
                                             type="text"
-                                            placeholder='Country'
+
                                             value={country}
                                             onChange={(e) => setCountry(e.target.value)}
                                             required
@@ -423,7 +393,7 @@ function UpdateSpot({spot}) {
 
 {/* form section 5---------------------------------------------------------- */}
 
-                        <section id="UpdateSpotFormSection5">
+                        {/* <section id="UpdateSpotFormSection5">
 
                             <h4 id="UpdateSpotFormSection5H4">Liven up your spot with photos</h4>
 
@@ -524,7 +494,7 @@ function UpdateSpot({spot}) {
 
                         </section>
 
-                        <hr className='UpdateSpotHr'></hr>
+                        <hr className='UpdateSpotHr'></hr> */}
 
 
 

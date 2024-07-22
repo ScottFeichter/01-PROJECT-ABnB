@@ -43,15 +43,17 @@ function SpotForManage({spot}) {
 
     }
 
-    //handleUpdate-------------------
-    // Using this via the SpotToManageUpdateButton
+    // handleUpdate-------------------
 
-        // const handleSpotUpdate = (e) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     navigate('/spots/update')
 
-        // }
+        const handleSpotUpdate = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('SPOT.ID FROM HANDLE SPOTS UPDATE', spot.id)
+            navigate(`/spots/${spot.id}/update`)
+
+
+        }
 
 
     //handleDelete-------------------
@@ -91,8 +93,8 @@ function SpotForManage({spot}) {
 
                     </div>
 
-                    {/* <button id="spotToManageUpdateButton" onClick={handleSpotUpdate}>Update</button> */}
-                    <SpotToManageUpdateButton key={spot.id} spot={spot}>Update</SpotToManageUpdateButton>
+                    <button id="spotToManageUpdateButton" onClick={handleSpotUpdate}>Update</button>
+                    {/* <SpotToManageUpdateButton spot={spot} key={spot.id} >Update</SpotToManageUpdateButton> */}
 
 
 

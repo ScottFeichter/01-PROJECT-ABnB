@@ -43,7 +43,7 @@ const newCreatedSpot = (spot) => {
   };
 };
 
-const updatedSpot = (spot) => {
+const updateSpot = (spot) => {
   console.log('UPDATEDSPOT RAN - SPOTS', spot);
   return {
     type: UPDATE_SPOT,
@@ -79,23 +79,20 @@ export const getCurrentUserSpots = () => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/current`);
   const data = await response.json();
   const currentUserSpots = data.Spots;
-  console.log('THUNK GETCURRENTUSERSPOTS RAN DATA: ', currentUserSpots);
+  // console.log('THUNK GETCURRENTUSERSPOTS RAN DATA: ', currentUserSpots);
   return dispatch(spotsCurrentUser(currentUserSpots));
 };
 
 
 /** GET DETAILS OF A SPOT FROM AN ID */
 export const getSpotDetailsById = (spotId) => async (dispatch) => {
+  console.log('SPOTID FORM SPOTDETAILS SPOTS 89', spotId)
   const response = await fetch(`/api/spots/${spotId}`);
   const data = await response.json();
-  // console.log('THUNK GETSPOTBYID RAN DATA: ', data );
+  console.log('THUNK GETSPOTBYID RAN DATA: ', data );
 
   return dispatch(spotById(data));
 };
-
-
-
-
 
 
 /** POST SPOTS */
@@ -119,19 +116,21 @@ export const createSpot = (newSpot) => async (dispatch) => {
 /** PUT SPOTS */
 
 export const editSpot = (editedSpot) => async (dispatch) => {
-  const { spotId } = editedSpot;
-  const response = await fetch(`/api/spots/${spotId}`, {
+  const { spotId, updatedSpot } = editedSpot;
+  console.log('UPDATED SPOT FROM SPOTS EDIT SPOT', updatedSpot);
+
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(editedSpot)
+    body: JSON.stringify(updatedSpot)
   });
 
   const data = await response.json();
   console.log('THUNK EDITSPOT RAN DATA: ', data );
-  dispatch(updatedSpot(data));
-  return data
+
+  return dispatch(updateSpot(data));
 };
 
 /** DELETE SPOTS */
@@ -179,7 +178,7 @@ const spotsReducer = (state = initialState, action) => {
 
     case UPDATE_SPOT:
       console.log("SPOTSREDUCER RAN UPDATE_SPOT CASE RETURNING: ", {...state, spot: action.payload})
-      return {...state, spot: action.payload};
+      return {...state, EditedSpot: action.payload};
 
     case DELETED_SPOT:
       console.log("SPOTSREDUCER RAN DELETED_SPOT CASE RETURNING: ", {...state, spot: action.payload})

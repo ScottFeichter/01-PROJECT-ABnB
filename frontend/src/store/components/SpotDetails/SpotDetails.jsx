@@ -10,20 +10,20 @@ import CreateReviewModalButton from '../CreateReviewModalButton/CreateReviewModa
 
 function SpotDetails() {
     const spot = useSelector(state => state.spots.spotDetail);
+
+    console.log('SPOT FROM SPOT DETAILS 12', spot);
     const preReviews = useSelector(state => state.reviews.reviews);
     let reviews;
     let reviewsInOrder;
-    if (preReviews.Reviews.length) {
+    // console.log("previewReviews.Reviews!!!!!!!!!!!!!!!!!", preReviews.Reviews);
+    if(!preReviews || !preReviews.Reviews) {
+        reviews = [];
+        reviewsInOrder = false;
+    } else if (preReviews.Reviews.length) {
         reviews = preReviews.Reviews;
         reviewsInOrder = reviews.sort((a, b) => a.createdAt - b.createdAt);
         console.log("Reviews in order", reviewsInOrder);
-    } else {
-        reviews = [];
-        reviewsInOrder = false;
     }
-
-
-
 
 
 // handleReserve---------------------------------------
