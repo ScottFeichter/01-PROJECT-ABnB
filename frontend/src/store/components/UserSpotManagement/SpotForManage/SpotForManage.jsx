@@ -9,7 +9,7 @@ import { getReviewsBySpotId } from '../../../reviews';
 import { getSpotDetailsById } from '../../../spots';
 import DeleteSpotModal from "../../DeleteSpotModal";
 import DeleteSpotModalButton from '../../DeleteSpotModalButton';
-import SpotToManageUpdateButton from './SpotToManageUpdateButton';
+
 
 function SpotForManage({spot}) {
 
