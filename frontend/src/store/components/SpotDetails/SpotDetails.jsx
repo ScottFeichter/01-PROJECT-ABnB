@@ -8,6 +8,7 @@ import CreateNewReviewModal from '../CreateNewReviewModal/CreateNewReviewModal';
 import CreateReviewModalButton from '../CreateReviewModalButton/CreateReviewModalButton';
 
 
+
 function SpotDetails() {
     const spot = useSelector(state => state.spots.spotDetail);
     const preReviews = useSelector(state => state.reviews.reviews);
@@ -15,7 +16,7 @@ function SpotDetails() {
     let reviewsInOrder;
 
     console.log("previewReviews.Reviews!!!!!!!!!!!!!!!!!", preReviews.Reviews);
-    
+
     if(!preReviews || !preReviews.Reviews) {
         reviews = [];
         reviewsInOrder = false;
@@ -40,8 +41,9 @@ function SpotDetails() {
 
     useEffect(() => {
         const getReviews = () => {
-
-            if (!reviews.length) {
+            if(reviews === undefined){
+                setReviewsShow(`\xa0\xa0\xa0 New`)
+            } else if(!reviews.length) {
                 setReviewsShow(`\xa0\xa0\xa0 New`)
             } else if(reviews.length === 1) {
                 setReviewsShow(`${spot.avgStarRating}  •  ${reviews.length} Review`);
@@ -92,6 +94,8 @@ function SpotDetails() {
     let reviewsMessage = "";
 
     postReviewButton ? reviewsMessage = "Be the first to post a review!" : reviewsMessage = "";
+
+
 
 
 

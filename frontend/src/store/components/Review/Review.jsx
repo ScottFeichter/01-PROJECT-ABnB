@@ -1,4 +1,8 @@
 import './Review.css';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import DeleteReviewModalButton from "../DeleteReviewModalButton"
+import DeleteReviewModal from '../DeleteReviewModal';
 
 function Review({review}) {
 
@@ -54,6 +58,33 @@ function Review({review}) {
     const date = {month: month, year: year};
     // console.log('date===================== ', date);
 
+
+// check if delete review button should show --------------------------------------
+
+const [deleteReviewButton, setDeleteReviewButton] = useState(false);
+const session = useSelector(state => state.session.user);
+
+let sessionBool;
+if(session === null) {
+    sessionBool = false;
+} else {
+    sessionBool = true;
+}
+
+let isSame;
+if (session === null) {
+    isSame = false
+} else {
+    isSame = review.id === session.id;
+}
+
+useEffect(()=> {
+    setDeleteReviewButton((sessionBool)&&(isSame));
+    console.log(((sessionBool)&&(isSame)));
+    console.log('DELETE REVIEW BUTTON', deleteReviewButton);
+}, [])
+
+
 // return-------------------------------------------------------------
 
     return (
@@ -64,6 +95,13 @@ function Review({review}) {
                 <h4 id="reviewDate">{date.month} {date.year}</h4>
             </div>
             <p id="reviewReview">{`"${review.review}"`}</p>
+            {deleteReviewButton ?
+             <DeleteReviewModalButton
+             buttonText={'Delete'}
+             modalComponent= {<DeleteReviewModal />}
+             /> : ""
+            }
+
         </main>
 
     )

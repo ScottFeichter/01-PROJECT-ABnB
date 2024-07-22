@@ -103,11 +103,11 @@ function CreateNewSpot() {
             })
             .then(response => {
                 console.log(`NEW SPOT CREATED`, response);
-                spotId = response.id;
+                spotId = response.payload.id;
                 return response;
             })
             .then(response =>  {
-                const prevImageInfo = {spotId: response.id, url: previewImg, preview: true};
+                const prevImageInfo = {spotId: response.payload.id, url: previewImg, preview: true};
                 return dispatch(imagesActions.addImageToSpot(prevImageInfo));
             }).then(response =>  {
                 console.log('RESPONSE++++++++++++++++++++++++++++110', response)
