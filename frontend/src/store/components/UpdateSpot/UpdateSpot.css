@@ -6,6 +6,13 @@
     text-align: center;
 }
 
+.UpdateSpotErrors {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+
 
 #UpdateSpotForm{
     margin: 2rem 4rem 4rem 4rem;

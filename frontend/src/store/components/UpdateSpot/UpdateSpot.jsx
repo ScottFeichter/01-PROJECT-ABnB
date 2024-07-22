@@ -91,6 +91,36 @@ function UpdateSpot() {
             e.preventDefault();
             console.log('HANDLE SUBMIT UPDATED SPOT IS RUNNING');
 
+            if(!country) {
+                setErrors({country: "Country is required"})
+                return;
+            }
+
+            if(!description) {
+                setErrors({description: "You must provide a description"})
+                return;
+            }
+
+            if(description.length < 10){
+                setErrors({description: "Please provide a longer description"})
+                return;
+            }
+
+            if(!title){
+                setErrors({title: "Please provide a title"})
+                return;
+            }
+
+            if(!basePrice){
+                setErrors({price: "Please provide a price"})
+                return;
+            }
+
+            // if(!previewImg) {
+            //     setErrors({previewImg: "A preview image is required"});
+            //     return;
+            // }
+
             const updatedSpot = {
                 "address": streetAddress,
                 "city": city,
@@ -169,7 +199,7 @@ function UpdateSpot() {
                             </p>
 
                             <div id='countryContainer' className='UpdateSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.country}</div>
+
                                         <label className='UpdateSpotFormLabel'>
                                             Country:
                                             <input
@@ -184,10 +214,10 @@ function UpdateSpot() {
                                             />
                                         </label>
                                     </div>
-                                    {errors.country && <p>{errors.country}</p>}
+                                    {errors.country && <p className='UpdateSpotErrors'>{errors.country}</p>}
 
                                 <div id='streetAddressContainer' className='UpdateSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.streetAddress}</div>
+
                                         <label className='UpdateSpotFormLabel'>
                                             Street Address:
                                             <input
@@ -202,10 +232,10 @@ function UpdateSpot() {
                                             />
                                         </label>
                                     </div>
-                                    {errors.streetAddress && <p>{errors.streetAddress}</p>}
+                                    {errors.address && <p className='UpdateSpotErrors'>{errors.address}</p>}
 
                                 <div id='cityContainer' className='UpdateSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.city}</div>
+
                                         <label className='UpdateSpotFormLabel'>
                                                 City:
                                             <input
@@ -220,10 +250,10 @@ function UpdateSpot() {
                                             />
                                         </label>
                                     </div>
-                                    {errors.city && <p>{errors.city}</p>}
+                                    {errors.city && <p className='UpdateSpotErrors'>{errors.city}</p>}
 
                                 <div id='stateContainer' className='UpdateSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.state}</div>
+
                                             <label className='UpdateSpotFormLabel'>
                                                 State:
                                                 <input
@@ -238,11 +268,11 @@ function UpdateSpot() {
                                                 />
                                             </label>
                                         </div>
-                                        {errors.state && <p>{errors.state}</p>}
+                                        {errors.state && <p className='UpdateSpotErrors'>{errors.state}</p>}
 
 
                                     <div id='latitudeContainer' className='UpdateSpotFormLabelInputContainer'>
-                                        <div className="errors">{errors.latitude}</div>
+
                                             <label className='UpdateSpotFormLabel'>
                                                 Latitude:
                                                 <input
@@ -257,11 +287,11 @@ function UpdateSpot() {
                                                 />
                                             </label>
                                         </div>
-                                        {errors.latitude && <p>{errors.latitude}</p>}
+
 
 
                                     <div id='longitudeContainer' className='UpdateSpotFormLabelInputContainer'>
-                                        <div className="errors">{errors.latitude}</div>
+
                                             <label className='UpdateSpotFormLabel'>
                                                 Longitude:
                                                 <input
@@ -276,7 +306,7 @@ function UpdateSpot() {
                                                 />
                                             </label>
                                         </div>
-                                        {errors.longitude && <p>{errors.longitude}</p>}
+
 
                         </section>
 
@@ -292,7 +322,7 @@ function UpdateSpot() {
                             </p>
 
                             <div id='descriptionContainer' className='UpdateSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.country}</div>
+
                                         <label className='UpdateSpotFormLabel'>
 
                                             <textarea
@@ -310,7 +340,7 @@ function UpdateSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.description && <p>{errors.description}</p>}
+                            {errors.description && <p className='UpdateSpotErrors'>{errors.description}</p>}
 
 
 
@@ -331,7 +361,7 @@ function UpdateSpot() {
                             </p>
 
                             <div id='titleContainer' className='UpdateSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.title}</div>
+
                                         <label className='UpdateSpotFormLabel'>
 
                                             <input
@@ -346,7 +376,7 @@ function UpdateSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.title && <p>{errors.title}</p>}
+                            {errors.title && <p className='UpdateSpotErrors'>{errors.title}</p>}
 
 
 
@@ -382,7 +412,7 @@ function UpdateSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.basePrice && <p>{errors.basePrice}</p>}
+                            {errors.price && <p className='UpdateSpotErrors'>{errors.price}</p>}
 
 
 
