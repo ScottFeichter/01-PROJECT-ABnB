@@ -82,6 +82,28 @@ function CreateNewSpot() {
             e.preventDefault();
             console.log('HANDLE SUBMIT NEW SPOT IS RUNNING');
 
+            if(!country) {
+                setErrors({country: "Country is required"})
+                return;
+            }
+
+            if(!description) {
+                setErrors({description: "You must provide a description"})
+            }
+
+            if(description.length < 10){
+                setErrors({description: "Please provide a longer description"})
+            }
+
+            if(!title){
+                setErrors({title: "Please provide a title"})
+            }
+
+            if(!previewImg) {
+                setErrors({previewImg: "A preview image is required"});
+                return;
+            }
+
             const newSpot = {
                 "address": streetAddress,
                 "city": city,
@@ -153,12 +175,20 @@ function CreateNewSpot() {
             }).then(response => {
                 console.log('RESPONSE++++++++++++++++++++++++++++154', response, response.payload)
                 navigate(`/spots/${spotId}`)
-            });
+            }).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data.errors) setErrors(data.errors);
+                    console.log('CATCH DISPATCH RAN DATA:', data, 'DATA.ERRORS: ', data.errors, 'RES: ', res);
+                }
+            )
 
 
             console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
         }
+
+
 
 
         // const handleSubmit = (e) => {
@@ -202,7 +232,7 @@ function CreateNewSpot() {
                             </p>
 
                             <div id='countryContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.country}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
                                             Country:
                                             <input
@@ -217,10 +247,9 @@ function CreateNewSpot() {
                                             />
                                         </label>
                                     </div>
-                                    {errors.country && <p>{errors.country}</p>}
+                                    {errors.country && <p className='CreateNewSpotErrors'>{errors.country}</p>}
 
                                 <div id='streetAddressContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.streetAddress}</div>
                                         <label className='CreateNewSpotFormLabel'>
                                             Street Address:
                                             <input
@@ -235,10 +264,10 @@ function CreateNewSpot() {
                                             />
                                         </label>
                                     </div>
-                                    {errors.streetAddress && <p>{errors.streetAddress}</p>}
+                                    {errors.address && <p className='CreateNewSpotErrors'>{errors.address}</p>}
 
                                 <div id='cityContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.city}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
                                                 City:
                                             <input
@@ -253,10 +282,10 @@ function CreateNewSpot() {
                                             />
                                         </label>
                                     </div>
-                                    {errors.city && <p>{errors.city}</p>}
+                                    {errors.city && <p className='CreateNewSpotErrors'>{errors.city}</p>}
 
                                 <div id='stateContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.state}</div>
+
                                             <label className='CreateNewSpotFormLabel'>
                                                 State:
                                                 <input
@@ -271,11 +300,11 @@ function CreateNewSpot() {
                                                 />
                                             </label>
                                         </div>
-                                        {errors.state && <p>{errors.state}</p>}
+                                        {errors.state && <p className='CreateNewSpotErrors'>{errors.state}</p>}
 
 
                                     <div id='latitudeContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                        <div className="errors">{errors.latitude}</div>
+
                                             <label className='CreateNewSpotFormLabel'>
                                                 Latitude:
                                                 <input
@@ -294,7 +323,7 @@ function CreateNewSpot() {
 
 
                                     <div id='longitudeContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                        <div className="errors">{errors.latitude}</div>
+
                                             <label className='CreateNewSpotFormLabel'>
                                                 Longitude:
                                                 <input
@@ -325,7 +354,7 @@ function CreateNewSpot() {
                             </p>
 
                             <div id='descriptionContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.country}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
 
                                             <textarea
@@ -337,13 +366,12 @@ function CreateNewSpot() {
                                             type="text-area"
                                             placeholder="Please write at least 30 characters"
                                             value={description}
-
                                             onChange={(e) => setDescription(e.target.value)}
                                             required
                                             />
                                         </label>
                             </div>
-                            {errors.description && <p>{errors.description}</p>}
+                            {errors.description && <p className='CreateNewSpotErrors'>{errors.description}</p>}
 
 
 
@@ -364,7 +392,7 @@ function CreateNewSpot() {
                             </p>
 
                             <div id='titleContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.title}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
 
                                             <input
@@ -379,7 +407,7 @@ function CreateNewSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.title && <p>{errors.title}</p>}
+                            {errors.title && <p className='CreateNewSpotErrors'>{errors.title}</p>}
 
 
 
@@ -399,7 +427,7 @@ function CreateNewSpot() {
                             </p>
 
                             <div id='basePriceContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.basePrice}</div>
+
                                         <label className='CreateNewSpotFormLabel' id="basePriceLabel">
 
                                             <p>$</p>
@@ -415,7 +443,7 @@ function CreateNewSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.basePrice && <p>{errors.basePrice}</p>}
+                            {errors.price && <p className='CreateNewSpotErrors'>{errors.price}</p>}
 
 
 
@@ -435,7 +463,7 @@ function CreateNewSpot() {
                             </p>
 
                             <div id='previewImgContainer' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.previewImg}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
                                             <input
                                             className='CreateNewSpotFormInput'
@@ -449,10 +477,10 @@ function CreateNewSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.previewImg && <p>{errors.previewImg}</p>}
+                            {errors.previewImg && <p className='CreateNewSpotErrors'>{errors.previewImg}</p>}
 
                             <div id='img1Container' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.img1}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
 
                                             <input
@@ -467,10 +495,10 @@ function CreateNewSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.img1 && <p>{errors.img1}</p>}
+                            {errors.img1 && <p className='CreateNewSpotErrors'>{errors.img1}</p>}
 
                             <div id='img2Container' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.img2}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
 
                                             <input
@@ -485,10 +513,10 @@ function CreateNewSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.img2 && <p>{errors.img2}</p>}
+                            {errors.img2 && <p className='CreateNewSpotErrors'>{errors.img2}</p>}
 
                             <div id='img3Container' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.img3}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
 
                                             <input
@@ -506,7 +534,7 @@ function CreateNewSpot() {
                             {errors.img3 && <p>{errors.img3}</p>}
 
                             <div id='img4Container' className='CreateNewSpotFormLabelInputContainer'>
-                                    <div className="errors">{errors.img4}</div>
+
                                         <label className='CreateNewSpotFormLabel'>
 
                                             <input
@@ -521,7 +549,7 @@ function CreateNewSpot() {
                                             />
                                         </label>
                             </div>
-                            {errors.img4 && <p>{errors.img4}</p>}
+                            {errors.img4 && <p className='CreateNewSpotErrors'>{errors.img4}</p>}
 
 
 

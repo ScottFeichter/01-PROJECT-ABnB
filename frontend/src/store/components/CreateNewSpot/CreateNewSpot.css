@@ -6,6 +6,13 @@ h1 {
     text-align: center;
 }
 
+.CreateNewSpotErrors {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+
 
 #CreateNewSpotForm{
     margin: 2rem 4rem 4rem 4rem;
