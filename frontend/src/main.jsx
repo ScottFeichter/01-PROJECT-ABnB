@@ -18,11 +18,6 @@ if (import.meta.env.MODE !== 'production') {
   window.sessionActions = sessionActions;
 }
 
-// this was from the end of Method 1
-// if (process.env.NODE_ENV !== 'production') {
-//   window.store = store;
-// }
-
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

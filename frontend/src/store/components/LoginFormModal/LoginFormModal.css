@@ -1,36 +1,18 @@
-* {
-    font-family: Figtree;
+/* ======================MAIN========================== */
+
+#LoginFormModalMain {
+    width: 20rem;
+    height: 36rem;
 }
-
-
-
-
-
 
 h1 {
     text-align: center;
 }
 
-
-/* ======================MAIN========================== */
-
-main {}
-
-#formContainer {
-    margin: 0 16rem 0 16rem;
-    /* padding: 10rem; */
-    /* padding: 100px, 100px, 100px, 100px; */
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    border: 3px orange solid;
-    /* border-radius: 25px;
-}
-
-#loginForm{
-    margin: auto;
-    /* padding: 4rem 0rem 4rem 0rem; */
-    border: 1px red solid;
+#loginForm {
+    margin: 2rem 4rem 4rem 4rem;
+    padding: 4rem 0rem 4rem 0rem;
+    border: 1px #FF5A5F solid;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -38,33 +20,82 @@ main {}
     justify-content: center;
 }
 
-#loginContainer {
-    margin: 2rem auto;
-    /* border: 2px blue dashed; */
-}
-#passwordContainer {}
-#buttonContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#loginContainer {}
+
+.LoginFormErrors {
+    position: absolute;
+    color: red;
+    top: 4rem;
+    right: 0rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: bold;
 }
 
-label {
-    /* padding: 1rem; */
+
+.LoginFormModalLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* border: 2px green solid; */
 }
 
-input {
-    margin: 1rem;
-    /* border: 2px purple solid; */
+.LoginFormModalInput {
+    margin: 0.5rem 1rem 2rem 1rem;
+    border: 1px solid #FF5A5F;
+    box-shadow: none;
 }
 
-button {
-    margin: 4rem 0 4rem 0;
+#passwordContainer {}
+
+
+#buttonContainer {}
+
+
+#LoginFormModalButton {
+    margin: 1.5rem 0 3rem 0;
     width: 8rem;
     height: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100px;
+    border-radius: 25px;
+}
+
+#LoginFormModalButton:enabled {
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+}
+
+
+#LoginFormModalButton:disabled {
+    border: 1px solid grey;
+    color: grey;
+    background-color: whitesmoke;
+}
+
+#LoginFormModalButton:enabled:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#LoginFormModalButton:enabled:active{
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+#LoginDemoUserButton {
+    background-color: white;
+    color: #FF5A5F;
+    border: none;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+#LoginDemoUserButton:hover {
+    cursor: pointer;
+    color: black;
 }

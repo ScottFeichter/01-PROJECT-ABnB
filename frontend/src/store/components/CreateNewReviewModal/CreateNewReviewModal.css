@@ -1,0 +1,120 @@
+#CreateNewReviewModalMain {
+    width: 40rem;
+    height: 30rem;
+}
+
+#CreateNewReviewModalH1 {
+    text-align: center;
+}
+
+
+#CreateNewReview{
+    margin: 2rem 4rem 4rem 4rem;
+    padding: 2rem 0rem 0rem 0rem;
+    border: 1px #FF5A5F solid;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* textarea----------------------------- */
+#CreateNewReviewTextBoxContainer{}
+
+.CreateReviewErrors {
+    position: absolute;
+    color: red;
+    top: 4rem;
+    right: 0rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+#reviewTextArea {
+    margin: 0 1rem .5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* stars--------------------------------- */
+
+#CreateNewReviewStarContainer{}
+
+.CreateNewReviewCiStar {
+    margin: 1rem 0 0 0;
+    height: 2rem;
+    width: 3rem;
+    fill: grey;
+}
+
+.CreateNewReviewCiStar:hover {
+    cursor: pointer;
+    fill: red;
+}
+
+.CreateNewReviewCiStar:active {
+    fill: black;
+}
+
+.CreateNewReviewFaStar {
+    margin: 1rem 0 0 0;
+    height: 2rem;
+    width: 3rem;
+    fill:#FE595D;
+}
+
+.CreateNewReviewFaStar:hover {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+/* buton------------------------------------- */
+
+#CreateNewReviewModalButtonContainer {
+}
+
+#CreateNewReviewModalButton {
+    margin: 1rem 0 2rem 0;
+    width: 16rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px;
+}
+
+#CreateNewReviewModalButton:enabled {
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+
+}
+
+#CreateNewReviewModalButton:disabled {
+    border: 1px solid grey;
+    color: grey;
+    background-color: whitesmoke;
+
+}
+
+#CreateNewReviewModalButton:enabled:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#CreateNewReviewModalButton:enabled:active{
+    cursor: pointer;
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+}

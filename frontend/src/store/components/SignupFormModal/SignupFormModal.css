@@ -1,29 +1,19 @@
-* {
-    font-family: Figtree;
-}
-
 /* ======================MAIN========================== */
 
-main {}
+ #SignupFormModalMain {
+    width: 20rem;
+    height: 40rem;
+}
 
 h1 {
     text-align: center;
 }
-#formContainer {
-    margin: 0 16rem 0 16rem;
-    padding: 4rem 0 0 0;
-    /* padding: 100px, 100px, 100px, 100px; */
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    border: 3px orange solid;
-    /* border-radius: 25px;
-}
 
-#loginForm{
-    margin: auto;
-    /* padding: 4rem 0rem 4rem 0rem; */
-    border: 1px red solid;
+
+#SignupForm{
+    margin: 3rem 4rem 4rem 4rem;
+    padding: 2rem 0rem 0rem 0rem;
+    border: 1px #FF5A5F solid;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -31,33 +21,61 @@ h1 {
     justify-content: center;
 }
 
-#loginContainer {
-    margin: 2rem auto;
-    /* border: 2px blue dashed; */
-}
-#passwordContainer {}
-#buttonContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-label {
-    /* padding: 1rem; */
+.SignupFormLabel {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* border: 2px green solid; */
 }
 
-input {
-    margin: 1rem;
-    /* border: 2px purple solid; */
+.SignUpFormErrors {
+    position: absolute;
+    color: red;
+    top: 4rem;
+    right: 0rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: bold;
 }
 
-button {
-    margin: 4rem 0 4rem 0;
+
+.SignupFormInput {
+    margin: 0 1rem 1.5rem 1rem;
+}
+
+
+
+#SignupFormModalButton {
+    margin: 1rem 0 3rem 0;
     width: 8rem;
     height: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px;
+    width: 100px;
+}
+
+#SignupFormModalButton:enabled {
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+
+}
+
+#SignupFormModalButton:disabled {
+    border: 1px solid grey;
+    color: grey;
+    background-color: whitesmoke;
+
+}
+
+#SignupFormModalButton:enabled:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#SignupFormModalButton:enabled:active{
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
 }

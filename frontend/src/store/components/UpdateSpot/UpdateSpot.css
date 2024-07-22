@@ -1,0 +1,126 @@
+#UpdateSpotMain {
+
+}
+
+#UpdateSpotH1 {
+    text-align: center;
+}
+
+.UpdateSpotErrors {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+#UpdateSpotForm{
+    margin: 2rem 4rem 4rem 4rem;
+    padding: 1rem 0rem 0rem 0rem;
+    border: 1px #FF5A5F solid;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.UpdateSpotFormLabel {
+    color: black;
+    font-size: medium;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+}
+
+.UpdateSpotFormLabelInputContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.UpdateSpotFormInput {
+    margin-bottom: 1rem;
+    width: 442px;
+}
+
+.UpdateSpotHr {
+    border: 1px grey solid;
+    width: 80%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#UpdateSpotFormSection1, #UpdateSpotFormSection2, #UpdateSpotFormSection3, #UpdateSpotFormSection4, #UpdateSpotFormSection5     {
+    width: 450px;
+}
+
+#UpdateSpotFormSection1H4, #UpdateSpotFormSection2H4, #UpdateSpotFormSection3H4, #UpdateSpotFormSection4H4, #UpdateSpotFormSection5H4 {
+    font-size: large;
+    font-weight: bold;
+    color: black;
+}
+
+#UpdateSpotFormSection1P, #UpdateSpotFormSection2P, #UpdateSpotFormSection3P, #UpdateSpotFormSection4P, #UpdateSpotFormSection5P {
+    margin: -.5rem 0 1.5rem 0;
+    font-size: medium;
+    font-weight: 400;
+    color: black;
+}
+
+#UpdateSpotBasePriceContainer{}
+
+#UpdateSpotBasePriceLabel{
+    display: flex;
+    flex-direction: row;
+    align-items: first baseline;
+    justify-content: space-between;
+    /* border: 2px blue dashed; */
+    width: 450px
+
+}
+
+#UpdateSpotBasePrice {
+    width: 424px;
+}
+
+
+
+
+
+#UpdateSpotButton {
+    margin: 2rem 0 4rem 0;
+    width: 16rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    border-radius: 25px;
+}
+
+#UpdateSpotButton:enabled {
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+
+}
+
+#UpdateSpotButton:disabled {
+    border: 1px solid grey;
+    color: grey;
+    background-color: whitesmoke;
+}
+
+#UpdateSpotButton:enabled:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+    cursor: pointer;
+}
+
+#UpdateSpotButton:enabled:active{
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+    cursor: pointer;
+}

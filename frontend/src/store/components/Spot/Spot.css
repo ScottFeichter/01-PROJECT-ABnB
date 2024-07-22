@@ -1,0 +1,99 @@
+#spotsMain {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.spotNavLink {
+    /* flex: 1 0 21%; */
+    /* border: 2px dashed blue; */
+}
+
+/* tooltiptext-------------------------------------- */
+
+.spotContainer .tooltiptext {
+    visibility: visible;
+    width: 120px;
+    background-color: #FF5A5F;
+    color: #fff;
+    font-weight: bold;
+    font-size:medium;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: relative;
+    z-index: 1;
+    top: .65rem;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+  }
+
+
+ .spotContainer:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .tooltiptext:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+  }
+
+  .tooltiptext:active {
+    cursor: pointer;
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+
+/* spotContainer-------------------------------------- */
+.spotContainer {
+    font-size: small;
+    border: 1px #FF5A5F solid;
+    margin: 1rem .25rem;
+    padding: 1rem;
+    padding-top: 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+/* previewImage */
+.spotPreviewImage {
+    width: 180px;
+    height: 180px;
+}
+
+
+/* data --------------------------------------------------*/
+.data {}
+
+.dataLevelOne {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.spotCityState {
+    margin: .25rem 0 0 0;
+    font-size: smaller;
+}
+
+.spotRatingContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.spotFaStar {
+    margin: 0 .25rem 0 0;
+}
+
+.spotAvgRating {
+    margin: 0;
+}
+
+.spotPrice {
+    margin: .5rem 0 0 0 ;
+}

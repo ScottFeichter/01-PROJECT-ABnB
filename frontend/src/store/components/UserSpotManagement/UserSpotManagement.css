@@ -1,0 +1,43 @@
+#UserSpotManagementH1 {
+    margin: 0;
+    padding: 0;
+}
+
+#UserSpotManagementSpotsByCurrentUserContainer {
+    display: inline-grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    /* border: 2px purple dashed; */
+    width: 900px;
+
+}
+
+
+
+/* noSpotsContainter===================================== */
+#UserSpotManagementNoSpotsContainer {
+    text-align: center;
+    width: 900px;
+    /* border: 2px black solid; */
+
+}
+
+#UserSpotManagementNoSpotsP {
+    font-size: large;
+    text-align: center;
+}
+
+
+/* createNewSpotLink------------------------------------------ */
+#UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot {
+
+    color: #FE595D;
+    font-weight: bold;
+    font-size: x-large;
+    text-wrap: nowrap;
+
+}
+
+#UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot:hover {
+    cursor: pointer;
+    color: black;
+}

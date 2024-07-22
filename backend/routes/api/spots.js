@@ -567,7 +567,7 @@ router.get("/", async (req, res) => {
       { model: SpotImage, attributes: ["url"] },
       { model: Review, attributes: ["stars"] },
     ],
-    ...pagination,
+    // ...pagination,
   });
 
   let Spots = [];
@@ -578,7 +578,7 @@ router.get("/", async (req, res) => {
     Spots.push(nuSpot(spot));
   }
 
-  return res.json({ Spots, page, size });
+  return res.json({ Spots, /* page, size */ });
 });
 
 // ==================CREATE A SPOT=========================================

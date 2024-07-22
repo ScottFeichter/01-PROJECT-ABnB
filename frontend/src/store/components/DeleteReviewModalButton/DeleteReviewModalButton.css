@@ -1,0 +1,29 @@
+.deleteReviewModalButton {
+
+    margin-left: 0rem;
+    width: 4.25rem;
+    height: 1.5rem;
+    font-size: .90rem;
+    font-weight: 400;
+    text-decoration: none;
+    text-align: center;
+
+    border-radius: 5px;
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+
+}
+
+.deleteReviewModalButton:hover  {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+
+}
+
+.deleteReviewModalButton:active  {
+    cursor: pointer;
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+}

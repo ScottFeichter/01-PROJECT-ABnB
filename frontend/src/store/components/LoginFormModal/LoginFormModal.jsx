@@ -1,11 +1,10 @@
 import {useState } from 'react';
-import * as sessionActions from '../../session'
+import * as sessionActions from '../../session';
 import {useDispatch } from 'react-redux'
 import { useModal } from '../../../context/Modal';
-// import {Navigate} from 'react-router-dom'
+import { useEffect } from 'react';
 
 import './LoginFormModal.css';
-
 
 const LoginFormModal = () => {
     const dispatch = useDispatch();
@@ -13,36 +12,69 @@ const LoginFormModal = () => {
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
 
-    // if(sessionUser) return <Navigate to="/" replace={true} />
+    // console.log('CREDENTIAL', credential, 'PASSWORD', password)
 
-    const handleSubmit = (e) => {
+// Log In Button Disabled------------------------------------------------------------------------
+
+
+    const checkDisabled = () => {
+    ((credential.length > 3) && (password.length > 5)) ?
+    setIsDisabled(false) :
+    setIsDisabled(true)
+   }
+
+   useEffect(()=> {
+    checkDisabled();
+   });
+
+
+// Login Button handler------------------------------------------------------------------------
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors({});
         // console.log('HANDLE SUBMIT RAN - LOGIN INFO', credential, password);
-        return dispatch(sessionActions.login({credential, password}))
-            .then(closeModal)
-            .catch(
+
+        await dispatch(sessionActions.login({credential, password}))
+        .then(closeModal)
+        .catch(
                 async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                    // console.log('CATCH DISPATCH RAN', data);
+                    // const data = await res.json();
+                    if(res.status === 401 || res.status === 400) setErrors({credential: "The provided credentials were invalid"});
                 }
             );
+
+         return
     };
 
+
+
+
+// Demo User Login------------------------------------------------------------------------
+
+    const handleDemoUser = async () => {
+        dispatch(sessionActions.login({credential: 'Demo-lition', password: 'password'})).then(closeModal);
+        return console.log('LOGGED IN AS DEMO-LITION');
+    };
+
+// Return -------------------------------------------------------------------------------
+
+
     return (
-    <>
-      <main>
+
+    <main id="LoginFormModalMain">
       <h1>Log In</h1>
-        <div id='formContainer'>
+
             <form id='loginForm' onSubmit={handleSubmit}>
+
                 <div id='loginContainer'>
-                    <div className="errors">{errors.credential}</div>
-                        <label>
+                    <div className="LoginFormErrors">{errors.credential}</div>
+                        <label className="LoginFormModalLabel">
                             email or username:
-                            <input
+                            <input className="LoginFormModalInput"
                             id="credential"
                             name="credential"
                             type="text"
@@ -52,27 +84,37 @@ const LoginFormModal = () => {
                             />
                         </label>
                     </div>
+
                     <div id='passwordContainer'>
                         <div className="errors">{errors.password}</div>
-                        <label>
+                        <label className="LoginFormModalLabel">
                             password:
-                            <input
+                            <input className="LoginFormModalInput"
                             name="password"
                             type="password"
                             // value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                                checkDisabled()
+                                }
+                            }
                             required
                             />
                         </label>
-                        {errors.credential && (<p>{errors.credential}</p>)}
                     </div>
+
                     <div id="buttonContainer">
-                        <button type="submit">Log In</button>
+                        <button type="submit" id="LoginFormModalButton" disabled={isDisabled}>Log In</button>
                     </div>
+
+                    <button type="button" id="LoginDemoUserButton" onClick={handleDemoUser}>
+                        Demo User</button>
+
+
             </form>
-        </div>
-      </main>
-    </>
+    </main>
+
+
   )
 }
 

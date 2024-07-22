@@ -1,0 +1,76 @@
+#DeleteReviewModalMain {
+    width: 30rem;
+    height: 22rem;
+}
+
+#DeleteReviewModalH1 {
+    text-align: center;
+}
+
+#DeleteReviewModalP {
+    text-align: center;
+}
+
+
+#DeleteReviewModalButtonContainer{
+    margin: 2rem 4rem 4rem 4rem;
+    padding: 2rem 0rem 1rem 0rem;
+    border: 1px #FF5A5F solid;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* delete spot button------------------------------------- */
+#YesDeleteReviewButton {
+    margin: 1rem 0 2rem 0;
+    width: 16rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 1px solid #FE595D;
+    color: white;
+    background-color: #FE595D;
+}
+
+#YesDeleteReviewButton:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#YesDeleteReviewButton:active{
+    cursor: pointer;
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+
+/* keep spot button------------------------------------- */
+
+#NoKeepReviewButton {
+    margin: 1rem 0 2rem 0;
+    width: 16rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 25px;
+    border: 1px solid darkgrey;
+    color: white;
+    background-color: darkgrey;
+}
+
+#NoKeepReviewButton:hover {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+#NoKeepReviewButton:active{
+    cursor: pointer;
+    color: #FE595D;
+    background-color: rgba(255, 255, 255, .5);
+}
