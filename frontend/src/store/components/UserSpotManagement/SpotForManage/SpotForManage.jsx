@@ -9,6 +9,7 @@ import { getReviewsBySpotId } from '../../../reviews';
 import { getSpotDetailsById } from '../../../spots';
 import DeleteSpotModal from "../../DeleteSpotModal";
 import DeleteSpotModalButton from '../../DeleteSpotModalButton';
+import SpotToManageUpdateButton from './SpotToManageUpdateButton';
 
 function SpotForManage({spot}) {
 
@@ -43,13 +44,14 @@ function SpotForManage({spot}) {
     }
 
     //handleUpdate-------------------
+    // Using this via the SpotToManageUpdateButton
 
-        const handleSpotUpdate = (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            navigate('/spots/update')
+        // const handleSpotUpdate = (e) => {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //     navigate('/spots/update')
 
-        }
+        // }
 
 
     //handleDelete-------------------
@@ -89,7 +91,9 @@ function SpotForManage({spot}) {
 
                     </div>
 
-                    <button id="spotToManageUpdateButton" onClick={handleSpotUpdate}>Update</button>
+                    {/* <button id="spotToManageUpdateButton" onClick={handleSpotUpdate}>Update</button> */}
+                    <SpotToManageUpdateButton key={spot.id} spot={spot}>Update</SpotToManageUpdateButton>
+
 
 
                         <button id="spotToManageUpdateHiddenButton" onClick={handleSpotDelete}>

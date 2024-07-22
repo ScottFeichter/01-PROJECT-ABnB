@@ -13,7 +13,9 @@ import * as reviewsActions from '../../reviews';
 // }
 
 
-function UpdateSpot() {
+function UpdateSpot({spot}) {
+
+        console.log("SPOT FROM UPDATE SPOT", spot);
 
         const dispatch = useDispatch();
         const navigate = useNavigate();

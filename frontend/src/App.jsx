@@ -13,6 +13,8 @@ import Navigation from './store/components/Navigation';
 import { Outlet } from "react-router-dom";
 import UserSpotManagement from "./store/components/UserSpotManagement";
 
+
+
 function Layout() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
@@ -50,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/manage',
-        element: <UserSpotManagement  />
+        element: <UserSpotManagement  />,
       },
       {
         path: '/spots/:spotId',
@@ -62,7 +64,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/update',
-        element: <UpdateSpot  />
+        element: <UpdateSpot />
       },
       {
         path: '/spots/delete',
@@ -72,8 +74,6 @@ const router = createBrowserRouter([
         path: '/spots/:spotId/reviews/new',
         element: <CreateNewReviewModal  />
       },
-
-
     ]
   }
 ]);
