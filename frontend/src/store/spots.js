@@ -68,8 +68,8 @@ export const search = (/*search*/) => async (dispatch) => {
   const response = await fetch("/api/spots");
   const data = await response.json();
   const spots = data.Spots;
-  // console.log('THUNK SEARCH RAN DATA: ', spots);
-  // dispatch(spotsSearch(data.Spots));
+  console.log('THUNK SEARCH RAN DATA: ', spots);
+
   return dispatch(spotsSearch(spots))
 };
 

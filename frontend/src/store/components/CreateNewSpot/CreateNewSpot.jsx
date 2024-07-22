@@ -150,7 +150,10 @@ function CreateNewSpot() {
             }).then(response => {
                 console.log('RESPONSE++++++++++++++++++++++++++++148', response)
                 return dispatch(spotsActions.search());
-            }).then(response => navigate(`/spots/${spotId}`));
+            }).then(response => {
+                console.log('RESPONSE++++++++++++++++++++++++++++154', response, response.payload)
+                navigate(`/spots/${spotId}`)
+            });
 
 
             console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');

@@ -6,7 +6,7 @@ import './SearchResults.css';
 const SearchResults = () => {
 
     const searchResults = useSelector(state => state.spots.allSpots);
-    // console.log("searchReasults=========", searchResults)
+    console.log("searchReasults=========", searchResults)
 
 
     console.log("SEARCH RESULTS COMPONENT RAN");

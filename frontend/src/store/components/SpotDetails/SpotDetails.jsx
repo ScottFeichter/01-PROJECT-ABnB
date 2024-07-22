@@ -10,12 +10,12 @@ import CreateReviewModalButton from '../CreateReviewModalButton/CreateReviewModa
 
 function SpotDetails() {
     const spot = useSelector(state => state.spots.spotDetail);
-
-    console.log('SPOT FROM SPOT DETAILS 12', spot);
     const preReviews = useSelector(state => state.reviews.reviews);
     let reviews;
     let reviewsInOrder;
-    // console.log("previewReviews.Reviews!!!!!!!!!!!!!!!!!", preReviews.Reviews);
+
+    console.log("previewReviews.Reviews!!!!!!!!!!!!!!!!!", preReviews.Reviews);
+    
     if(!preReviews || !preReviews.Reviews) {
         reviews = [];
         reviewsInOrder = false;
@@ -39,12 +39,12 @@ function SpotDetails() {
     const [reviewsShow, setReviewsShow] = useState();
 
     useEffect(() => {
-        const getReviews = async () => {
+        const getReviews = () => {
 
-            if(reviews.length === 1) {
-                setReviewsShow(`${spot.avgStarRating}  •  ${reviews.length} Review`);
-            } else if (!reviews.length) {
+            if (!reviews.length) {
                 setReviewsShow(`\xa0\xa0\xa0 New`)
+            } else if(reviews.length === 1) {
+                setReviewsShow(`${spot.avgStarRating}  •  ${reviews.length} Review`);
             } else {
                 setReviewsShow(`${spot.avgStarRating}  •  ${reviews.length} Reviews`);
             }
@@ -77,7 +77,7 @@ function SpotDetails() {
     if(session === null) {
         alreadyPosted = false;
     } else {
-        alreadyPosted = reviewsInOrder.some(review => review.userId === session.id);
+        if(reviewsInOrder) {alreadyPosted = reviewsInOrder.some(review => review.userId === session.id);} else {alreadyPosted = false}
     }
 
     // console.log('THREE POS: ', sessionBool, isSame, alreadyPosted)
@@ -156,7 +156,7 @@ function SpotDetails() {
                     }
 
 
-                    {reviewsInOrder.length ?
+                    {reviewsInOrder ?
                      reviewsInOrder.map(review => <Review review={review} key={review.id} />) :
                      <p>{reviewsMessage}</p> }
 
