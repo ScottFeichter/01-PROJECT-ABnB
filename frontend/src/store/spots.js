@@ -140,6 +140,7 @@ export const deleteSpot = (spot) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
   });
+  response 
   // const data = await response.json();
   // console.log('THUNK DELETESPOT RAN: ', response );
   return dispatch(deletedSpot(spot));

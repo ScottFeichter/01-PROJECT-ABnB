@@ -29,9 +29,9 @@ function CreateNewReviewModal({spot}) {
 // Stars-----------
     const [firstStar, setFirstStar] = useState(true)
     const handleStar1Click = () =>{
-        // if(firstStar) {
-        //     setFirstStar(false)
-        // } else setFirstStar(true)
+        if(firstStar) {
+            setFirstStar(true)
+        } else setFirstStar(true)
     }
 
     const [secondStar, setSecondStar] = useState(false)

@@ -144,6 +144,7 @@ function UpdateSpot() {
                 return dispatch(reviewsActions.getReviewsBySpotId(response.payload.id));
 
             }).then(response => {
+                response
                 // console.log('RESPOMSE.ID INSIDE 120 UPDATESPOT', response.payload.id, response);
                 return dispatch(spotsActions.getSpotDetailsById(spot.id));
             }).then(response => {
