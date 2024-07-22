@@ -23,6 +23,16 @@
 /* textarea----------------------------- */
 #CreateNewReviewTextBoxContainer{}
 
+.CreateReviewErrors {
+    position: absolute;
+    color: red;
+    top: 4rem;
+    right: 0rem;
+    width: 20rem;
+    text-align: center;
+    font-weight: bold;
+}
+
 #reviewTextArea {
     margin: 0 1rem .5rem 1rem;
     display: flex;

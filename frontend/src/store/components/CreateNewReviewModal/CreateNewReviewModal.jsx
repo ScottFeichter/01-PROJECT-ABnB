@@ -105,6 +105,11 @@ const checkDisabled = () => {
                     const data = await res.json();
                     if (data?.errors) setErrors(data.errors);
                     // console.log('CATCH DISPATCH RAN', data);
+                    if(res.status === 500) {
+                        setErrors({message: "User already has a review for this spot"})
+                    } else if (res.status === 404) {
+                        setErrors({messsage: "Spot couldn't be found"})
+                    }
                 })
 
         }
@@ -119,15 +124,16 @@ const checkDisabled = () => {
         <main id="CreateNewReviewModalMain">
 
             <h1 id="CreateNewReviewModalH1">How was your stay?</h1>
+            <div className="CreateReviewErrors">{errors.review}</div>
+            <div className="CreateReviewErrors">{errors.message}</div>
 
 
             <form id='CreateNewReview' onSubmit={handleSubmit}>
 
                 <div id='CreateNewReviewTextBoxContainer'>
-                        <div className="errors">{errors.review}</div>
+
                             <label className='CreateNewReviewLabel'>
                                 <textarea
-
                                 id="reviewTextArea"
                                 name="reviewTextArea"
                                 rows={8}
@@ -140,7 +146,7 @@ const checkDisabled = () => {
                                 />
                             </label>
                 </div>
-                {errors.review && <p>{errors.review}</p>}
+
 
 
                 <div id="CreateNewReviewStarContainer">
