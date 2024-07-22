@@ -1,7 +1,6 @@
 import { useModal } from "../../../context/Modal";
 import {useDispatch } from 'react-redux'
 import * as spotsActions from '../../spots';
-import { useNavigate } from "react-router-dom";
 import "./DeleteSpotModal.css"
 
 

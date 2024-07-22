@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as spotsActions from "../../spots";
+import { useSelector } from "react-redux";
+// import * as spotsActions from "../../spots";
 import SpotForManage from "./SpotForManage/SpotForManage";
 import './UserSpotManagement.css'
 
 
 function UserSpotManagement() {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // const session = useSelector(state => state.session.user);
 
     const spotsByCurrent = useSelector(state => state.spots.spotsCurrentUser);

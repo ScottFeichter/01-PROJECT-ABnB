@@ -29,7 +29,7 @@ function UpdateSpot() {
 
 
         const [errors, setErrors] = useState({});
-        const [isDisabled, setIsDisabled] = useState(false);
+        // const [isDisabled, setIsDisabled] = useState(false);
 
 // states form section 1----------------------------------------------------------
         const [country, setCountry] = useState(spot.country);
@@ -534,7 +534,6 @@ function UpdateSpot() {
                             <button
                                 id="UpdateSpotButton"
                                 type="submit"
-                                disabled={isDisabled}
                                 onClick={handleSubmit}
                                 >Update Spot
                             </button>
