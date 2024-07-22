@@ -7,6 +7,7 @@ import { IoHome } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import * as spotsActions from "../../spots"
 
+
 // import OpenModalButton from "../OpenModalButton/OpenModalButton";
 // import LoginFormModal from "../LoginFormModal/LoginFormModal";
 // import SignupFormModal from "../SignupFormModal/SignupFormModal";
@@ -30,7 +31,7 @@ const Navigation = ({isLoaded}) => {
         const runCurrentSpots = () => {
               dispatch(spotsActions.getCurrentUserSpots())
         }
-        
+
         if(sessionUser) runCurrentSpots()
     })
 

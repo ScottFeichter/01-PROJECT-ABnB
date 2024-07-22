@@ -14,11 +14,12 @@ const SearchResults = () => {
     <>
     <h1 id="searchResultsH1">All Spots</h1>
     <div id="searchResults">
+
         {searchResults ?
         searchResults.map(result => <Spot key={result.id} spot={result} />) :
         <p>sorry, no results</p> }
-    </div>
 
+    </div>
     </>
     );
 }

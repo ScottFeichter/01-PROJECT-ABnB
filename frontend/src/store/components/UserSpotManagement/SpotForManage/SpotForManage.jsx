@@ -67,43 +67,40 @@ function SpotForManage({spot}) {
 
     return (
 
-
       <main id="spotManageMain">
 
-        <NavLink to={`/spots/${spot.id}`} className="spotManageNavLink" onClick={handleClick}>
+        <NavLink to={`/spots/${spot.id}`} className="spotToManageNavLink" onClick={handleClick}>
 
 
 
-            <span className="spotToMagageContainer">
-                <span className='tooltiptext'>{spot.name}</span>
+            <span className="spotToManageContainer">
+                <span className='spotToManageToolTipText'>{spot.name}</span>
 
-                <img className="spotPreviewImage" src={spot.previewImage} alt="preview"></img>
+                <img className="spotToManagePreviewImage" src={spot.previewImage} alt="preview"></img>
 
 
-                <div className='data'>
-                    <div className='dataLevelOne'>
-                        <p className='spotCityState'>{spot.city}, {spot.state}</p>
-                        <div className='spotRatingContainer'>
-                            <FaStar className='spotFaStar'></FaStar>
-                            <p className='spotAvgRating'>{rating}</p>
+                <div className='spotToManageData'>
+                    <div className='spotToManageDataLevelOne'>
+                        <p className='spotToManageCityState'>{spot.city}, {spot.state}</p>
+                        <div className='spotToManageRatingContainer'>
+                            <FaStar className='spotToManageFaStar'></FaStar>
+                            <p className='spotToManageAvgRating'>{rating}</p>
                         </div>
 
                     </div>
 
-                    <button id="spotUpdateButton" onClick={handleSpotUpdate}>Update</button>
+                    <button id="spotToManageUpdateButton" onClick={handleSpotUpdate}>Update</button>
 
 
-                    <div id="deleteButtonContainer">
-                        <button id="hiddenButton" onClick={handleSpotDelete}>
+                        <button id="spotToManageUpdateHiddenButton" onClick={handleSpotDelete}>
                         <DeleteSpotModalButton
                             id="deleteSpotModalButton"
                             buttonText="Delete"
                             modalComponent={<DeleteSpotModal spot={spot} />}
                             />
                             </button>
-                    </div>
 
-                    <p className='spotPrice'>${spot.price}/night</p>
+                    <p className='spotToManagePrice'>${spot.price}/night</p>
                 </div>
 
             </span>

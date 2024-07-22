@@ -1,4 +1,7 @@
-#UserSpotManagementH1 {}
+#UserSpotManagementH1 {
+    margin: 0;
+    padding: 0;
+}
 
 #UserSpotManagementSpotsByCurrentUserContainer {
     display: inline-grid;
@@ -7,6 +10,10 @@
     width: 900px;
 
 }
+
+
+
+/* noSpotsContainter===================================== */
 #UserSpotManagementNoSpotsContainer {
     text-align: center;
     width: 900px;
@@ -20,6 +27,7 @@
 }
 
 
+/* createNewSpotLink------------------------------------------ */
 #UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot {
 
     color: #FE595D;

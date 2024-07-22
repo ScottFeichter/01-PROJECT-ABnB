@@ -56,6 +56,14 @@ function ProfileButton({ user }) {
 // ----hidden changes the visibility to none but im not sure this is doing anything
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+
+ //handle Manage Spots - this is hidden button for more action on NavLink to close menue
+ const handleManageSpots = (e) => {
+  e.preventDefault()
+  // e.stopPropagation()
+  closeMenu();
+ }
+
   // console.log('PROFILE BUTTON COMPONENT RAN')
   return (
     <>
@@ -70,7 +78,9 @@ function ProfileButton({ user }) {
             <li >{user.username}</li>
             <li >{user.email}</li>
             <li >
+              <button id="manageSpotHiddenButton" onClick={handleManageSpots}>
               <NavLink to="/spots/manage" id='manageSpotsNavLink'>Manage Spots</NavLink>
+              </button>
             </li>
             <li >
               <button onClick={logout} id="userLogoutButton">Log Out</button>
