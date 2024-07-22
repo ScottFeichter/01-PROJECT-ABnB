@@ -135,16 +135,14 @@ export const editSpot = (editedSpot) => async (dispatch) => {
 
 /** DELETE SPOTS */
 
-export const deleteSpot = (spotToDelete) => async (dispatch) => {
-  const {spotId} = spotToDelete;
+export const deleteSpot = (spot) => async (dispatch) => {
+  const spotId = spot.id;
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "DELETE",
   });
-
   // const data = await response.json();
-  console.log('THUNK EDITSPOT RAN: ', response );
-  dispatch(deletedSpot(spotToDelete));
-  return
+  console.log('THUNK DELETESPOT RAN: ', response );
+  return dispatch(deletedSpot(spot));
 };
 
 
@@ -172,17 +170,17 @@ const spotsReducer = (state = initialState, action) => {
       return {...state, spotDetail: action.payload};
 
     case CREATE_SPOT:
-      console.log("SPOTSREDUCER RAN CREATE_SPOT CASE RETURNING: ", {...state, spot: action.payload})
+      console.log("SPOTSREDUCER RAN CREATE_SPOT CASE RETURNING: ")
       return {...state, NewSpot: action.payload};
 
 
     case UPDATE_SPOT:
-      console.log("SPOTSREDUCER RAN UPDATE_SPOT CASE RETURNING: ", {...state, spot: action.payload})
+      console.log("SPOTSREDUCER RAN UPDATE_SPOT CASE RETURNING: ")
       return {...state, EditedSpot: action.payload};
 
     case DELETED_SPOT:
-      console.log("SPOTSREDUCER RAN DELETED_SPOT CASE RETURNING: ", {...state, spot: action.payload})
-      return {...state, spot: action.payload};
+      console.log("SPOTSREDUCER RAN DELETED_SPOT CASE RETURNING: ")
+      return {...state, DeletedSpot: action.payload};
 
     default:
       // console.log('SPOTSREDUCER RAN DEFAULT')

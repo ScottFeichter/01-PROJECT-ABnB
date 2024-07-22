@@ -1,6 +1,7 @@
 import { useModal } from "../../../context/Modal";
 import {useDispatch } from 'react-redux'
 import * as spotsActions from '../../spots';
+import { useNavigate } from "react-router-dom";
 import "./DeleteSpotModal.css"
 
 
@@ -18,9 +19,10 @@ function DeleteSpotModal({spot}) {
     const handleDelete = (e) => {
         e.preventDefault();
 
-        return dispatch(spotsActions.deleteSpot(spot.id))
-            .then(() => dispatch(spotsActions.search()))
-            .then(()=> closeModal)
+        return dispatch(spotsActions.deleteSpot(spot))
+            .then(() => {return dispatch(spotsActions.search())})
+            .then(() => {return dispatch(spotsActions.getCurrentUserSpots())})
+            .then(()=> closeModal())
     };
 
 
