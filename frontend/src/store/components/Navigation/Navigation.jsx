@@ -35,6 +35,15 @@ const Navigation = ({isLoaded}) => {
         if(sessionUser) runCurrentSpots()
     })
 
+    useEffect(()=> {
+
+        async () => {
+         console.log("DISPATCH LINE 21 LAYOUT.jsx");
+         return dispatch(spotsActions.search());
+        }
+
+       },[dispatch])
+
 
 
 

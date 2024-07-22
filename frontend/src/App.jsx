@@ -34,7 +34,7 @@ function Layout() {
        return dispatch(spotsActions.search());
       }
 
-     },[])
+     },[dispatch])
 
 
 

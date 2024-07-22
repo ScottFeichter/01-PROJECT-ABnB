@@ -108,8 +108,8 @@ export const createSpot = (newSpot) => async (dispatch) => {
 
   const data = await response.json();
   console.log('THUNK CREATESPOT RAN DATA: ', data );
-  dispatch(newCreatedSpot(data));
-  return data
+
+  return dispatch(newCreatedSpot(data));
 };
 
 
