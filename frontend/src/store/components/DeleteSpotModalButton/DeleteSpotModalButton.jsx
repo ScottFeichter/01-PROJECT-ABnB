@@ -9,8 +9,7 @@ function DeleteSpotModalButton({
 }) {
   const { setModalContent, setOnModalClose } = useModal();
 
-  const onClick = (e) => {
-    e.stopPropagation();
+  const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
     if (typeof onButtonClick === "function") onButtonClick();

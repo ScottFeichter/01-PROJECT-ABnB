@@ -4,7 +4,7 @@ import SpotDetails from './store/components/SpotDetails/SpotDetails';
 import CreateNewSpot from "./store/components/CreateNewSpot/CreateNewSpot";
 import CreateNewReviewModal from "./store/components/CreateNewReviewModal/CreateNewReviewModal";
 import UpdateSpot from "./store/components/UpdateSpot/UpdateSpot";
-import DeleteSpot from "./store/components/DeleteSpot/DeleteSpot.jsx";
+import DeleteSpotModal from "./store/components/DeleteSpotModal/DeleteSpotModal.jsx";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import * as sessionActions from './store/session.js';
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/delete',
-        element: <DeleteSpot  />
+        element: <DeleteSpotModal  />
       },
       {
         path: '/spots/:spotId/reviews/new',

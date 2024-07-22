@@ -1,5 +1,6 @@
 .deleteSpotModalButton {
-    margin: 1rem 0 0 0;
+    position: absolute;
+    /* margin: 1rem 0 0 0; */
     width: 12rem;
     height: 1.75rem;
     font-size: 1rem;

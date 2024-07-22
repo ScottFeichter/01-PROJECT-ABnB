@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getReviewsBySpotId } from '../../../reviews';
 import { getSpotDetailsById } from '../../../spots';
-import DeleteSpotModal from "../../DeleteSpot";
+import DeleteSpotModal from "../../DeleteSpotModal";
 import DeleteSpotModalButton from '../../DeleteSpotModalButton';
 
 function SpotForManage({spot}) {
@@ -57,7 +57,6 @@ function SpotForManage({spot}) {
         const handleSpotDelete = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            navigate('/spots/delete')
         }
 
 
@@ -94,12 +93,15 @@ function SpotForManage({spot}) {
                     <button id="spotUpdateButton" onClick={handleSpotUpdate}>Update</button>
 
 
-                    <button id="spotDeleteButton" onClick={handleSpotDelete}>Delete</button>
-
-                    <DeleteSpotModalButton
-                          buttonText="Delete"
-                          modalComponent={<DeleteSpotModal spot={spot} />}
-                          />
+                    <div id="deleteButtonContainer">
+                        <button id="hiddenButton" onClick={handleSpotDelete}>
+                        <DeleteSpotModalButton
+                            id="deleteSpotModalButton"
+                            buttonText="Delete"
+                            modalComponent={<DeleteSpotModal spot={spot} />}
+                            />
+                            </button>
+                    </div>
 
                     <p className='spotPrice'>${spot.price}/night</p>
                 </div>

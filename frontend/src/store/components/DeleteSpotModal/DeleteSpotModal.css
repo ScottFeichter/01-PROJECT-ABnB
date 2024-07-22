@@ -1,6 +1,6 @@
 #DeleteSpotModalMain {
-    width: 40rem;
-    height: 30rem;
+    width: 30rem;
+    height: 22rem;
 }
 
 #DeleteSpotModalH1 {
@@ -14,7 +14,7 @@
 
 #DeleteSpotModalButtonContainer{
     margin: 2rem 4rem 4rem 4rem;
-    padding: 2rem 0rem 0rem 0rem;
+    padding: 2rem 0rem 1rem 0rem;
     border: 1px #FF5A5F solid;
     border-radius: 25px;
     display: flex;
@@ -58,9 +58,9 @@
     font-size: 1rem;
     font-weight: 500;
     border-radius: 25px;
-    border: 1px solid #FE595D;
+    border: 1px solid darkgrey;
     color: white;
-    background-color: #FE595D;
+    background-color: darkgrey;
 }
 
 #NoKeepSpotButton:hover {

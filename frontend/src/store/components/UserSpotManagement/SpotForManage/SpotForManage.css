@@ -1,3 +1,22 @@
+#deleteButtonContainer {
+
+    border: 2px dotted black;
+
+}
+
+
+
+#hiddenButton {
+    /* position:absolute; */
+    z-index: -1;
+    color: none;
+    background-color: none;
+    border: 2px dashed blue;
+    width:fit-content;
+    height:.5rem;
+
+}
+
 #spotManageMain {
     display: flex;
     /* flex-wrap: wrap; */
@@ -38,7 +57,7 @@
 
 
 /* spotContainer-------------------------------------- */
-.spotContainer {
+.spotToManageContainer {
     font-size: small;
     border: 1px #FF5A5F solid;
     margin: 1rem .25rem;
@@ -46,6 +65,7 @@
     padding-top: 0;
     display: inline-flex;
     flex-direction: column;
+    border: 2px blue dashed;
 }
 
 /* previewImage */

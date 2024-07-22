@@ -1,21 +1,35 @@
-UserSpotManagementH1
-UserSpotManagementSpotsByCurrentUserContainer
-UserSpotManagementNoSpotsContainer
-UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot
+#UserSpotManagementH1 {}
 
-#searchResults {
+#UserSpotManagementSpotsByCurrentUserContainer {
     display: inline-grid;
     grid-template-columns: 25% 25% 25% 25%;
+    /* border: 2px purple dashed; */
+    width: 900px;
+
+}
+#UserSpotManagementNoSpotsContainer {
+    text-align: center;
+    width: 900px;
+    /* border: 2px black solid; */
+
 }
 
-#NavLinkToCreateNewSpot {
+#UserSpotManagementNoSpotsP {
+    font-size: large;
+    text-align: center;
+}
+
+
+#UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot {
+
     color: #FE595D;
     font-weight: bold;
-    margin-right: 2rem;
+    font-size: x-large;
     text-wrap: nowrap;
+
 }
 
-#NavLinkToCreateNewSpot:hover {
+#UserSpotManagementNoSpotsContainerNavLinkToCreateNewSpot:hover {
     cursor: pointer;
     color: black;
 }

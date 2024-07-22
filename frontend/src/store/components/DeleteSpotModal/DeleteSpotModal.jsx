@@ -1,5 +1,4 @@
 import { useModal } from "../../../context/Modal";
-import {useState } from 'react';
 import {useDispatch } from 'react-redux'
 import * as spotsActions from '../../spots';
 import "./DeleteSpotModal.css"
@@ -9,8 +8,6 @@ import "./DeleteSpotModal.css"
 function DeleteSpotModal({spot}) {
 
     const dispatch = useDispatch();
-    const [errors, setErrors] = useState({});
-    const [isDisabled, setIsDisabled] = useState(true);
     const { closeModal } = useModal();
 
     // console.log('SPOT!!!!!!!!!!!!!!!!', spot.id)
@@ -20,15 +17,10 @@ function DeleteSpotModal({spot}) {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        setErrors({});
+
         return dispatch(spotsActions.deleteSpot(spot.id))
             .then(() => dispatch(spotsActions.search()))
             .then(()=> closeModal)
-            .catch(
-                    async (res) => {
-                        const data = await res.json();
-                        if (data?.errors) setErrors(data.errors);
-                    })
     };
 
 
@@ -68,7 +60,7 @@ function DeleteSpotModal({spot}) {
                 >{"No (Keep Spot)"}</button>
 
             </div>
-            
+
       </main>
 
     )
