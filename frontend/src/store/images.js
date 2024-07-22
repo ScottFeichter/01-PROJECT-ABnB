@@ -9,7 +9,7 @@ const DELETED_IMAGE = "image/deletedImage";
 
 /** =======ACTION CREATORS: =========*/
 const imagesSearch = (images) => {
-  console.log('IMAGESSEARCH RAN - IMAGES', images);
+  // console.log('IMAGESSEARCH RAN - IMAGES', images);
   return {
     type: IMAGE_SEARCH,
     payload: images
@@ -17,7 +17,7 @@ const imagesSearch = (images) => {
 };
 
 const imageById = (image) => {
-  console.log('IMAGEBYID RAN - IMAGES', image);
+  // console.log('IMAGEBYID RAN - IMAGES', image);
   return {
     type: IMAGE_BY_ID,
     payload: image
@@ -25,7 +25,7 @@ const imageById = (image) => {
 };
 
 const newCreatedImage = (image) => {
-  console.log('NEWCREATEDIMAGE RAN - IMAGES', image);
+  // console.log('NEWCREATEDIMAGE RAN - IMAGES', image);
   return {
     type: CREATE_IMAGE,
     payload: image
@@ -33,7 +33,7 @@ const newCreatedImage = (image) => {
 };
 
 const updatedImage = (image) => {
-  console.log('UPDATEDIMAGE RAN - IMAGES', image);
+  // console.log('UPDATEDIMAGE RAN - IMAGES', image);
   return {
     type: UPDATE_IMAGE,
     payload: image
@@ -41,7 +41,7 @@ const updatedImage = (image) => {
 };
 
 const deletedImage = (image) => {
-  console.log('DELETEDIMAGE RAN - IMAGES', image);
+  // console.log('DELETEDIMAGE RAN - IMAGES', image);
   return {
     type: DELETED_IMAGE,
     payload: image
@@ -56,7 +56,7 @@ export const getImages = () => async (dispatch) => {
 
   const response = await fetch("/api/images");
   const data = await response.json();
-  console.log('THUNK GETIMAGES RAN DATA: ', data );
+  // console.log('THUNK GETIMAGES RAN DATA: ', data );
   dispatch(imagesSearch(data.Images));
   return data
 };
@@ -65,7 +65,7 @@ export const getImages = () => async (dispatch) => {
 export const getImageDetailsById = (imageId) => async (dispatch) => {
   const response = await fetch(`/api/images/${imageId}`);
   const data = await response.json();
-  console.log('THUNK GET IMAGE BY ID RAN DATA: ', data );
+  // console.log('THUNK GET IMAGE BY ID RAN DATA: ', data );
   dispatch(imageById(data));
   return data
 };
@@ -85,7 +85,7 @@ export const addImageToSpot = (imageInfo) => async (dispatch) => {
   });
 
   const data = await response.json();
-  console.log('THUNK ADD IMAGE TO SPOT RAN DATA: ', data );
+  // console.log('THUNK ADD IMAGE TO SPOT RAN DATA: ', data );
   dispatch(newCreatedImage(data));
   return data
 };
@@ -104,7 +104,7 @@ export const editImage = (editedImage) => async (dispatch) => {
   });
 
   const data = await response.json();
-  console.log('THUNK EDITIMAGE RAN DATA: ', data );
+  // console.log('THUNK EDITIMAGE RAN DATA: ', data );
   dispatch(updatedImage(data));
   return data
 };
@@ -118,7 +118,7 @@ export const deleteImage = (imageToDelete) => async (dispatch) => {
   });
 
   // const data = await response.json();
-  console.log('THUNK DELETEIMAGE RAN: ', response );
+  // console.log('THUNK DELETEIMAGE RAN: ', response );
   dispatch(deletedImage(imageToDelete));
   return
 };
@@ -131,28 +131,28 @@ const initialState = {}
 
 /** =======REDUCER: =========*/
 const imagesReducer = (state = initialState, action) => {
-  console.log('IMAGES REDUCER RAN - STATE AND ACTION', state, action)
+  // console.log('IMAGES REDUCER RAN - STATE AND ACTION', state, action)
   switch (action.type) {
 
     case IMAGE_SEARCH:
-      console.log("IMAGESREDUCER RAN IMAGE_SEARCH CASE RETURNING: ", {...state, images: action.payload})
+      // console.log("IMAGESREDUCER RAN IMAGE_SEARCH CASE RETURNING: ", {...state, images: action.payload})
       return {...state, images: action.payload};
 
     case IMAGE_BY_ID:
-      console.log("IMAGESREDUCER RAN IMAGE_BY_ID CASE RETURNING: ", {...state, image: action.payload})
+      // console.log("IMAGESREDUCER RAN IMAGE_BY_ID CASE RETURNING: ", {...state, image: action.payload})
       return {...state, image: action.payload};
 
     case CREATE_IMAGE:
-      console.log("IMAGESREDUCER RAN CREATE_IMAGE CASE RETURNING: ", {...state, image: action.payload})
+      // console.log("IMAGESREDUCER RAN CREATE_IMAGE CASE RETURNING: ", {...state, image: action.payload})
       return {...state, image: action.payload};
 
 
     case UPDATE_IMAGE:
-      console.log("IMAGESREDUCER RAN UPDATE_IMAGE CASE RETURNING: ", {...state, image: action.payload})
+      // console.log("IMAGESREDUCER RAN UPDATE_IMAGE CASE RETURNING: ", {...state, image: action.payload})
       return {...state, image: action.payload};
 
     case DELETED_IMAGE:
-      console.log("IMAGESREDUCER RAN DELETED_IMAGE CASE RETURNING: ", {...state, image: action.payload})
+      // console.log("IMAGESREDUCER RAN DELETED_IMAGE CASE RETURNING: ", {...state, image: action.payload})
       return {...state, image: action.payload};
 
     default:

@@ -38,7 +38,7 @@ const Navigation = ({isLoaded}) => {
     useEffect(()=> {
 
         async () => {
-         console.log("DISPATCH LINE 21 LAYOUT.jsx");
+     //    console.log("DISPATCH LINE 21 LAYOUT.jsx");
          return dispatch(spotsActions.search());
         }
 

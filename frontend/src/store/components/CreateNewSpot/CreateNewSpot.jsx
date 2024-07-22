@@ -80,7 +80,7 @@ function CreateNewSpot() {
 
         const handleSubmit = async (e) => {
             e.preventDefault();
-            console.log('HANDLE SUBMIT NEW SPOT IS RUNNING');
+            // console.log('HANDLE SUBMIT NEW SPOT IS RUNNING');
 
             if(!country) {
                 setErrors({country: "Country is required"})
@@ -128,11 +128,11 @@ function CreateNewSpot() {
 
             await dispatch(spotsActions.createSpot(newSpot))
             .then(response => {
-                console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ')
+                // console.log('CREATENEWSPOT RESPONSE: ', response, 'CREATENEWSPOT THENEWSPOT: ')
                 return response
             })
             .then(response => {
-                console.log(`NEW SPOT CREATED`, response);
+                // console.log(`NEW SPOT CREATED`, response);
                 spotId = response.payload.id;
                 return response;
             })
@@ -140,59 +140,59 @@ function CreateNewSpot() {
                 const prevImageInfo = {spotId: response.payload.id, url: previewImg, preview: true};
                 return dispatch(imagesActions.addImageToSpot(prevImageInfo));
             }).then(response =>  {
-                console.log('RESPONSE++++++++++++++++++++++++++++110', response)
+                // console.log('RESPONSE++++++++++++++++++++++++++++110', response)
                 if(img1) {
                     const img1Info = {spotId: spotId, url: img1, preview: false};
                     return dispatch(imagesActions.addImageToSpot(img1Info));
                 }
                 return response;
             }).then(response =>  {
-                console.log('RESPONSE++++++++++++++++++++++++++++117', response)
+                // console.log('RESPONSE++++++++++++++++++++++++++++117', response)
                 if(img2) {
                     const img2Info = {spotId: spotId, url: img2, preview: false};
                     return dispatch(imagesActions.addImageToSpot(img2Info));
                 }
                 return response;
             }).then(response =>  {
-                console.log('RESPONSE++++++++++++++++++++++++++++124', response)
+                // console.log('RESPONSE++++++++++++++++++++++++++++124', response)
                 if(img3) {
                     const img3Info = {spotId: spotId, url: img1, preview: false};
                     return dispatch(imagesActions.addImageToSpot(img3Info));
                 }
                 return response;
             }).then(async response =>  {
-                console.log('RESPONSE++++++++++++++++++++++++++++131', response)
+                // console.log('RESPONSE++++++++++++++++++++++++++++131', response)
                 if(img4) {
                     const img4Info = {spotId: spotId, url: img1, preview: false};
                     return dispatch(imagesActions.addImageToSpot(img4Info));
                 }
                 return response;
             }).then(response => {
-                console.log(`NEW SPOT IMAGES ADDED`);
-                console.log('RESPONSE++++++++++++++++++++++++++++139', response)
+                // console.log(`NEW SPOT IMAGES ADDED`);
+                // console.log('RESPONSE++++++++++++++++++++++++++++139', response)
                 return response;
             }).then(response => {
-                console.log('RESPONSE++++++++++++++++++++++++++++142', response)
+                // console.log('RESPONSE++++++++++++++++++++++++++++142', response)
                 return dispatch(reviewsActions.getReviewsBySpotId(spotId));
             }).then(response => {
-                console.log('RESPONSE++++++++++++++++++++++++++++145', response)
-                return dispatch(spotsActions.getSpotDetailsById(spotId)).then(newSpot => console.log('NEWSPOT: ', newSpot));
+                // console.log('RESPONSE++++++++++++++++++++++++++++145', response)
+                return dispatch(spotsActions.getSpotDetailsById(spotId))
             }).then(response => {
-                console.log('RESPONSE++++++++++++++++++++++++++++148', response)
+                // console.log('RESPONSE++++++++++++++++++++++++++++148', response)
                 return dispatch(spotsActions.search());
             }).then(response => {
-                console.log('RESPONSE++++++++++++++++++++++++++++154', response, response.payload)
+                // console.log('RESPONSE++++++++++++++++++++++++++++154', response, response.payload)
                 navigate(`/spots/${spotId}`)
             }).catch(
                 async (res) => {
                     const data = await res.json();
                     if (data.errors) setErrors(data.errors);
-                    console.log('CATCH DISPATCH RAN DATA:', data, 'DATA.ERRORS: ', data.errors, 'RES: ', res);
+                    // console.log('CATCH DISPATCH RAN DATA:', data, 'DATA.ERRORS: ', data.errors, 'RES: ', res);
                 }
             )
 
 
-            console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            // console.log('HANDLE SUBMIT NEW SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
         }
 
@@ -203,14 +203,14 @@ function CreateNewSpot() {
         //     e.preventDefault();
         //     if (longitude === latitude) {
         //         setErrors({});
-        //         // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', country, streetAddress, city, state, latitude);
+        //         // // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', country, streetAddress, city, state, latitude);
         //         return dispatch(spotsActions.signup({country, streetAddress, city, state, latitude}))
         //         .then(closeModal)
         //         .catch(
         //             async (res) => {
         //                 const data = await res.json();
         //                 if (data?.errors) setErrors(data.errors);
-        //                 // console.log('CATCH DISPATCH RAN', data);
+        //                 // // console.log('CATCH DISPATCH RAN', data);
         //             }
         //         )
         //     }

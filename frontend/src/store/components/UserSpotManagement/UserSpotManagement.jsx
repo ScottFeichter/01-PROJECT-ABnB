@@ -12,7 +12,7 @@ function UserSpotManagement() {
     const spotsByCurrent = useSelector(state => state.spots.spotsCurrentUser);
 
 
-    console.log("USERSPOTMANAGEMENT COMPONENT RAN");
+   // console.log("USERSPOTMANAGEMENT COMPONENT RAN");
     return (
         <>
         <h1 id="UserSpotManagementH1">Manage Spots</h1>

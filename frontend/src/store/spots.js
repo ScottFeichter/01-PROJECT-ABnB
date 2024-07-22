@@ -117,7 +117,7 @@ export const createSpot = (newSpot) => async (dispatch) => {
 
 export const editSpot = (editedSpot) => async (dispatch) => {
   const { spotId, updatedSpot } = editedSpot;
-  console.log('UPDATED SPOT FROM SPOTS EDIT SPOT', updatedSpot);
+//  console.log('UPDATED SPOT FROM SPOTS EDIT SPOT', updatedSpot);
 
   const response = await csrfFetch(`/api/spots/${spotId}`, {
     method: "PUT",

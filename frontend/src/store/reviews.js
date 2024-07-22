@@ -118,7 +118,7 @@ export const deleteReview = (reviewToDelete) => async (dispatch) => {
     method: "DELETE",
   });
   const data = await response.json();
-  console.log('THUNK DELETEREVIEW RAN: ', response );
+ // console.log('THUNK DELETEREVIEW RAN: ', response );
   return dispatch(deletedReview(reviewToDelete));
 };
 

@@ -89,7 +89,7 @@ function UpdateSpot() {
 
         const handleSubmit = async (e) => {
             e.preventDefault();
-            console.log('HANDLE SUBMIT UPDATED SPOT IS RUNNING');
+            // console.log('HANDLE SUBMIT UPDATED SPOT IS RUNNING');
 
             if(!country) {
                 setErrors({country: "Country is required"})
@@ -137,23 +137,23 @@ function UpdateSpot() {
 
             await dispatch(spotsActions.editSpot(editedSpot))
             .then(response => {
-                console.log(`UPDATED SPOT CREATED`, response);
+                // console.log(`UPDATED SPOT CREATED`, response);
                 return response;
             }).then(response => {
-                console.log('RESPOMSE.ID INSIDE 117 UPDATESPOT', response.id, response)
+                // console.log('RESPOMSE.ID INSIDE 117 UPDATESPOT', response.id, response)
                 return dispatch(reviewsActions.getReviewsBySpotId(response.payload.id));
 
             }).then(response => {
-                console.log('RESPOMSE.ID INSIDE 120 UPDATESPOT', response.payload.id, response);
+                // console.log('RESPOMSE.ID INSIDE 120 UPDATESPOT', response.payload.id, response);
                 return dispatch(spotsActions.getSpotDetailsById(spot.id));
             }).then(response => {
-                console.log('RESPONSE 120', response)
+                // console.log('RESPONSE 120', response)
                 dispatch(spotsActions.search());
                 return response;
             }).then(response => navigate(`/spots/${response.payload.id}`));
 
 
-            console.log('HANDLE SUBMIT UPDATED SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            // console.log('HANDLE SUBMIT UPDATED SPOT HAS FINISHED RUNNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
         }
 
@@ -162,14 +162,14 @@ function UpdateSpot() {
         //     e.preventDefault();
         //     if (longitude === latitude) {
         //         setErrors({});
-        //         // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', country, streetAddress, city, state, latitude);
+        //         // // console.log('HANDLE SUBMIT RAN - SIGNUP INFO', country, streetAddress, city, state, latitude);
         //         return dispatch(spotsActions.signup({country, streetAddress, city, state, latitude}))
         //         .then(closeModal)
         //         .catch(
         //             async (res) => {
         //                 const data = await res.json();
         //                 if (data?.errors) setErrors(data.errors);
-        //                 // console.log('CATCH DISPATCH RAN', data);
+        //                 // // console.log('CATCH DISPATCH RAN', data);
         //             }
         //         )
         //     }

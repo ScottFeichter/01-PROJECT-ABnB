@@ -29,12 +29,12 @@ function SpotForManage({spot}) {
     const handleClick = async (e) => {
         e.preventDefault();
         const spotDetails = await dispatch(getSpotDetailsById(spot.id))
-        .then(console.log(/*'spotDetails from the NavLink!!!!!!!!!!!!!!'*/));
+
 
 
 
         const reviews = await dispatch(getReviewsBySpotId(spot.id))
-        .then(console.log(/*'reviews from NavLink!!!!!!!!!!!!'*/))
+
 
         // for making linting error go away
         if(spotDetails) {reviews}
@@ -49,7 +49,7 @@ function SpotForManage({spot}) {
         const handleSpotUpdate = (e) => {
             e.preventDefault();
             e.stopPropagation();
-            console.log('SPOT.ID FROM HANDLE SPOTS UPDATE', spot.id)
+          //  console.log('SPOT.ID FROM HANDLE SPOTS UPDATE', spot.id)
             navigate(`/spots/${spot.id}/update`)
 
 

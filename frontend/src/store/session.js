@@ -46,7 +46,7 @@ export const login = (user) => async (dispatch) => {
     })
   });
   const data = await response.json();
-  console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
+ // console.log('THUNK LOGIN RAN - USER: ', user, 'RESPONSE:', response, 'DATA: ', data);
   dispatch(setUser(data.user));
   return response;
 };
