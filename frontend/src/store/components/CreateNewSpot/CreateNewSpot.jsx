@@ -89,14 +89,22 @@ function CreateNewSpot() {
 
             if(!description) {
                 setErrors({description: "You must provide a description"})
+                return;
             }
 
             if(description.length < 10){
                 setErrors({description: "Please provide a longer description"})
+                return;
             }
 
             if(!title){
                 setErrors({title: "Please provide a title"})
+                return;
+            }
+
+            if(!basePrice){
+                setErrors({price: "Please provide a price"})
+                return;
             }
 
             if(!previewImg) {
