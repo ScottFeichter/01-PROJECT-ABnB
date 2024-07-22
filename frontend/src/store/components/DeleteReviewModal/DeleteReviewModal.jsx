@@ -1,12 +1,12 @@
 import { useModal } from "../../../context/Modal";
 import {useDispatch } from 'react-redux'
-import * as spotsActions from '../../spots';
-import { useNavigate } from "react-router-dom";
+import * as reviewsActions from '../../reviews';
 import "./DeleteReviewModal.css"
 
 
 
-function DeleteReviewModal({spot}) {
+function DeleteReviewModal({review}) {
+    console.log('REVEIW FROM DELETE REVIEW MODAL 9', review);
 
     const dispatch = useDispatch();
     const { closeModal } = useModal();
@@ -19,9 +19,9 @@ function DeleteReviewModal({spot}) {
     const handleDelete = (e) => {
         e.preventDefault();
 
-        return dispatch(spotsActions.deleteReview(spot))
-            .then(() => {return dispatch(spotsActions.search())})
-            .then(() => {return dispatch(spotsActions.getCurrentUserReviews())})
+        return dispatch(reviewsActions.deleteReview(review))
+            .then(() => {return dispatch(reviewsActions.getReviewsByCurrent(review.userId))})
+            .then(() => {return dispatch(reviewsActions.getReviewsBySpotId(review.spotId))})
             .then(()=> closeModal())
     };
 
@@ -42,7 +42,7 @@ function DeleteReviewModal({spot}) {
         <main id="DeleteReviewModalMain">
 
             <h1 id="DeleteReviewModalH1">Confirm Delete</h1>
-            <p id="DeleteReviewModalP">Are you sure you want to remove this spot?</p>
+            <p id="DeleteReviewModalP">Are you sure you want to remove this review?</p>
 
             <div id="DeleteReviewModalButtonContainer">
 

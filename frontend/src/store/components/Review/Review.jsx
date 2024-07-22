@@ -98,7 +98,7 @@ useEffect(()=> {
             {deleteReviewButton ?
              <DeleteReviewModalButton
              buttonText={'Delete'}
-             modalComponent= {<DeleteReviewModal />}
+             modalComponent= {<DeleteReviewModal review={review}/>}
              /> : ""
             }
 

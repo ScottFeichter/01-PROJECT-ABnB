@@ -57,8 +57,7 @@ export const getReviewsByCurrent = (currentUserId) => async (dispatch) => {
   const response = await fetch(`/api/reviews/${currentUserId}`);
   const data = await response.json();
   console.log('THUNK GET REVIEWS BY CURRENT RAN DATA: ', data );
-  dispatch(reviewsByCurrent(data.Reviews));
-  return data
+  return dispatch(reviewsByCurrent(data.Reviews));
 };
 
 /** GET DETAILS OF A REVIEW FROM AN ID */
@@ -113,15 +112,14 @@ export const editReview = (editedReview) => async (dispatch) => {
 /** DELETE REVIEWS */
 
 export const deleteReview = (reviewToDelete) => async (dispatch) => {
-  const {reviewId} = reviewToDelete;
+  const reviewId = reviewToDelete.id;
+  console.log('REVIEWID FROM REVIEWS 117', reviewId)
   const response = await fetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
-
   // const data = await response.json();
   console.log('THUNK DELETEREVIEW RAN: ', response );
-  dispatch(deletedReview(reviewToDelete));
-  return
+  return dispatch(deletedReview(reviewToDelete));
 };
 
 
@@ -137,7 +135,7 @@ const reviewsReducer = (state = initialState, action) => {
 
     case REVIEWS_CURRENT:
       console.log("REVIEWSREDUCER RAN REVIEWS_CURRENT CASE RETURNING: ", {...state, reviews: action.payload})
-      return {...state, reviews: action.payload};
+      return {...state, currentUserReviews: action.payload};
 
     case REVIEWS_BY_SPOTID:
       // console.log("REVIEWSREDUCER RAN REVIEWS_BY_SPOTID CASE RETURNING: ", {...state, reviews: action.payload})
@@ -153,7 +151,7 @@ const reviewsReducer = (state = initialState, action) => {
 
     case DELETED_REVIEW:
       console.log("REVIEWSREDUCER RAN DELETED_REVIEW CASE RETURNING: ", {...state, review: action.payload})
-      return {...state, review: action.payload};
+      return {...state, deletedReview: action.payload};
 
     default:
       return state;
