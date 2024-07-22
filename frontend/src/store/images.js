@@ -116,7 +116,7 @@ export const deleteImage = (imageToDelete) => async (dispatch) => {
   const response = await fetch(`/api/images/${imageId}`, {
     method: "DELETE",
   });
-
+  response
   // const data = await response.json();
   // console.log('THUNK DELETEIMAGE RAN: ', response );
   dispatch(deletedImage(imageToDelete));

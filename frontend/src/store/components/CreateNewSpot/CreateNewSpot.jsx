@@ -173,15 +173,19 @@ function CreateNewSpot() {
                 return response;
             }).then(response => {
                 // console.log('RESPONSE++++++++++++++++++++++++++++142', response)
+                response
                 return dispatch(reviewsActions.getReviewsBySpotId(spotId));
             }).then(response => {
                 // console.log('RESPONSE++++++++++++++++++++++++++++145', response)
+                response
                 return dispatch(spotsActions.getSpotDetailsById(spotId))
             }).then(response => {
                 // console.log('RESPONSE++++++++++++++++++++++++++++148', response)
+                response
                 return dispatch(spotsActions.search());
             }).then(response => {
                 // console.log('RESPONSE++++++++++++++++++++++++++++154', response, response.payload)
+                response
                 navigate(`/spots/${spotId}`)
             }).catch(
                 async (res) => {

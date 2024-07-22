@@ -112,6 +112,7 @@ export const deleteBooking = (bookingToDelete) => async (dispatch) => {
   const response = await fetch(`/api/bookings/${bookingId}`, {
     method: "DELETE",
   });
+  response
 
   // const data = await response.json();
   // console.log('THUNK DELETEBOOKING RAN: ', response );
