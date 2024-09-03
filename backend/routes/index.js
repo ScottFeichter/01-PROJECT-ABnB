@@ -47,6 +47,8 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+
+
 // Add a XSRF-TOKEN cookie
 router.get("/api/csrf/restore", (req, res) => {
   const csrfToken = req.csrfToken();
